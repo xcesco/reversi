@@ -16,8 +16,7 @@
     <name>Reversi Core</name>
     <description>Reversi Core - core project</description>
 
-    <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
+    <url>http://github.com/xcesco/reversi</url>
 
     <build>
 
