@@ -9,54 +9,57 @@ import static org.hamcrest.Matchers.is;
 public class CoordinatesTest {
 
     @Test
-    public void invalidCoordinates() {
-        Coordinates coords = Coordinates.of(99, 99);
-
-        assertThat(coords.isValid(), is(false));
+    public void checkRow_1Col_1() {
+        checkCoordinateValidity(-1, -1, false);
     }
 
     @Test
-    public void testEquals() {
-        Coordinates coords1 = Coordinates.of("A1");
-        Coordinates coords2 = Coordinates.of(0, 0);
-
-        assertThat(coords1, equalTo(coords2));
-        assertThat(coords1.isValid(), is(true));
+    public void checkRow_0Col_0() {
+        checkCoordinateValidity(0, 0, true);
     }
 
     @Test
-    public void testDirectionUp() {
-        Coordinates coords1 = Coordinates.of("A1");
-        coords1 = coords1.translate(Direction.UP);
-
-        Coordinates coords2 = Coordinates.of(-1, 0);
-
-        assertThat(coords1, equalTo(coords2));
-        assertThat(coords1.isValid(), is(false));
+    public void checkRow_4Col_10() {
+        checkCoordinateValidity(4, 10, false);
     }
 
     @Test
-    public void testDirectionDown() {
-        Coordinates coords1 = Coordinates.of("A1");
-        coords1 = coords1.translate(Direction.DOWN);
-
-        Coordinates coords2 = Coordinates.of(1, 0);
-
-        assertThat(coords1, equalTo(coords2));
-        assertThat(coords1.isValid(), is(true));
+    public void checkRow99Col99() {
+        checkCoordinateValidity(99, 99, false);
     }
 
     @Test
-    public void testDirectionLeft() {
-        Coordinates coords1 = Coordinates.of("A1");
-        coords1 = coords1.translate(Direction.LEFT);
-
-        Coordinates coords2 = Coordinates.of(0, 1);
-
-        assertThat(coords1, equalTo(coords2));
-        assertThat(coords1.isValid(), is(true));
+    public void checkRow0Col0() {
+        checkCoordinateValidity(0, 0, true);
     }
 
+    @Test
+    public void checkRow3Col3() {
+        checkCoordinateValidity(3, 3, true);
+    }
+
+    @Test
+    public void checkRow7Col7() {
+        checkCoordinateValidity(7, 7, true);
+    }
+
+    @Test
+    public void checkCase() {
+        Coordinates coords1 = Coordinates.of("A1");
+        Coordinates coords2 = Coordinates.of("a1");
+
+        assertThat(coords1, equalTo(coords2));
+    }
+
+    @Test
+    public void testConversionA1() {
+        checkValidConversion("A1", 0, 0);
+    }
+
+    @Test
+    public void testConversionAz() {
+        checkInvalidConversion("Az");
+    }
 
     @Test
     public void validCoordinates() {
@@ -66,5 +69,22 @@ public class CoordinatesTest {
         assertThat(coords.toString(), is("A1"));
     }
 
+    private void checkValidConversion(String label, int row, int col) {
+        Coordinates coords1 = Coordinates.of(label);
+        Coordinates coords2 = Coordinates.of(col, col);
+
+        assertThat(coords1, equalTo(coords2));
+        assertThat(coords1.isValid(), is(true));
+    }
+
+    private void checkInvalidConversion(String label) {
+        Coordinates coords1 = Coordinates.of(label);
+        assertThat(coords1.isValid(), is(false));
+    }
+
+    private void checkCoordinateValidity(int row, int col, boolean valid) {
+        Coordinates coords = Coordinates.of(row, col);
+        assertThat(coords.isValid(), is(valid));
+    }
 
 }
