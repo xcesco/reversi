@@ -10,26 +10,64 @@ public class DirectionTest {
 
     @Test
     public void testDirectionUp() {
-        checkTranslation("A1", Direction.UP, -1, 0, false);
+        checkValidTranslation("B2", Direction.UP, "B1");
     }
 
-    private void checkTranslation(String intialPosition, Direction direction, int destinationRow, int destinationCol, boolean validCoordinate) {
-        Coordinates coords1 = Coordinates.of(intialPosition);
-        coords1 = coords1.translate(direction);
+    @Test
+    public void testDirectionUpLeft() {
+        checkValidTranslation("B2", Direction.UP_LEFT, "A1");
+    }
 
-        Coordinates coords2 = Coordinates.of(destinationRow, destinationCol);
-
-        assertThat(coords1, equalTo(coords2));
-        assertThat(coords1.isValid(), is(validCoordinate));
+    @Test
+    public void testDirectionUpRight() {
+        checkValidTranslation("B2", Direction.UP_RIGHT, "C1");
     }
 
     @Test
     public void testA1DirectionDown() {
-        checkTranslation("A1", Direction.DOWN, 1, 0, true);
+        checkValidTranslation("A1", Direction.DOWN, "A2");
     }
 
     @Test
     public void testDirectionLeft() {
-        checkTranslation("A1", Direction.LEFT, 0, 1, true);
+        checkValidTranslation("B2", Direction.LEFT, "A2");
+    }
+
+    @Test
+    public void testDirectionDown() {
+        checkValidTranslation("B2", Direction.DOWN, "B3");
+    }
+
+    @Test
+    public void testDirectionDownLeft() {
+        checkValidTranslation("B2", Direction.DOWN_LEFT, "a3");
+    }
+
+    @Test
+    public void testDirectionDownRight() {
+        checkValidTranslation("B2", Direction.DOWN_RIGHT, "C3");
+    }
+
+    @Test
+    public void checkInvalidTranslation() {
+        checkInvalidTranslation("a1", Direction.UP);
+    }
+
+
+    private void checkValidTranslation(String intialPosition, Direction direction, String finalPosition) {
+        Coordinates coords1 = Coordinates.of(intialPosition);
+        coords1 = coords1.translate(direction);
+
+        Coordinates coords2 = Coordinates.of(finalPosition);
+
+        assertThat(coords1, equalTo(coords2));
+        assertThat(coords1.isValid(), is(true));
+    }
+
+    private void checkInvalidTranslation(String intialPosition, Direction direction) {
+        Coordinates coords1 = Coordinates.of(intialPosition);
+        coords1 = coords1.translate(direction);
+
+        assertThat(coords1.isValid(), is(false));
     }
 }

@@ -47,6 +47,14 @@ public class CoordinatesTest {
     }
 
     @Test
+    public void checkProperties() {
+        Coordinates coords1 = Coordinates.of("G3");
+
+        assertThat(coords1.getColumn(), equalTo(6));
+        assertThat(coords1.getRow(), equalTo(2));
+    }
+
+    @Test
     public void testConversionA1() {
         checkValidConversion("A1", 0, 0);
     }
@@ -71,7 +79,7 @@ public class CoordinatesTest {
 
     private void checkValidConversion(String label, int row, int col) {
         Coordinates coords1 = Coordinates.of(label);
-        Coordinates coords2 = Coordinates.of(col, col);
+        Coordinates coords2 = Coordinates.of(row, col);
 
         assertThat(coords1, equalTo(coords2));
         assertThat(coords1.isValid(), is(true));
