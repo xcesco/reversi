@@ -46,6 +46,15 @@ public class CoordinatesTest {
         assertThat(coords1, equalTo(coords2));
     }
 
+
+    @Test
+    public void testHashCode() {
+        Coordinates coords1 = Coordinates.of("A1");
+        Coordinates coords2 = Coordinates.of("a1");
+
+        assertThat(coords1.hashCode(), equalTo(coords2.hashCode()));
+    }
+
     @Test
     public void checkProperties() {
         Coordinates coords1 = Coordinates.of("G3");
