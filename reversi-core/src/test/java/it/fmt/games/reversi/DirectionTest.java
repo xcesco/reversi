@@ -49,8 +49,13 @@ public class DirectionTest {
     }
 
     @Test
-    public void checkInvalidTranslation() {
+    public void checkInvalidTranslationA1() {
         checkInvalidTranslation("a1", Direction.UP);
+    }
+
+    @Test
+    public void checkInvalidTranslationG8() {
+        checkInvalidTranslation("g8", Direction.DOWN);
     }
 
 
