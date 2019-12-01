@@ -29,11 +29,6 @@ public class CoordinatesTest {
     }
 
     @Test
-    public void checkRow0Col0() {
-        checkCoordinateValidity(0, 0, true);
-    }
-
-    @Test
     public void checkRow3Col3() {
         checkCoordinateValidity(3, 3, true);
     }
@@ -54,6 +49,11 @@ public class CoordinatesTest {
     @Test
     public void testConversionA1() {
         checkValidConversion("A1", 0, 0);
+    }
+
+    @Test
+    public void testConversionH8() {
+        checkValidConversion("H8", 7, 7);
     }
 
     @Test
