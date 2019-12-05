@@ -18,12 +18,6 @@ class BoardTest {
         cellCheck(b, "a1", Piece.PLAYER_1);
     }
 
-    @Test
-    public void setInvalidCell() {
-        Board b = new Board();
-        boardInvalidCheck(b, "z1", Piece.PLAYER_1);
-    }
-
     public void cellCheck(Board board, String coord, Piece p) {
         Coordinates c = Coordinates.of(coord);
         board.setCell(c, p);
@@ -32,12 +26,17 @@ class BoardTest {
     }
 
     @Test
-    public void ReadBoardConfiguration()throws Exception {
-        Cell[]cells= BoardReader.read("boardConfig");
-        Board board=new Board();
+    public void invalidCoordinates() {
+        Board b = new Board();
         assertThrows(RuntimeException.class, () -> {
-            board.getCellContent(Coordinates.of(0, 10));
+            b.setCell(Coordinates.of(99, 99), Piece.PLAYER_1);
         });
+    }
+
+    @Test
+    public void setInvalidCell() throws Exception {
+        Board b = new Board();
+        boardInvalidCheck(b, "z1", Piece.PLAYER_1);
     }
 
     public void boardInvalidCheck(Board board, String coord, Piece p) {
@@ -47,8 +46,41 @@ class BoardTest {
             board.setCell(c, p);
         });
 
+    }
 
+    @Test
+    public void ReadBoardConfiguration() throws Exception {
+        Cell[] cells = BoardReader.read("boardConfig");
+        Board board = new Board(cells);
+        assertThrows(RuntimeException.class, () -> {
+            board.getCellContent(Coordinates.of(0, 10));
+        });
+    }
+
+    @Test
+    public void SetOnePieceFromFileConfiguration() throws Exception {
+        Cell[] cells = BoardReader.read("boardConfig");
+        Board board = new Board(cells);
+
+        assertThat(board.getCellContent(Coordinates.of("a1")), equalTo(Piece.PLAYER_2));
 
     }
 
+    @Test
+    public void SetTwoPieceFromFileConfiguration() throws Exception {
+        Cell[] cells = BoardReader.read("boardConfig");
+        Board board = new Board(cells);
+
+        assertThat(board.getCellContent(Coordinates.of("a1")), equalTo(Piece.PLAYER_2));
+        assertThat(board.getCellContent(Coordinates.of("a2")), equalTo(Piece.EMPTY));
+
+    }
+
+    @Test
+    public void WrongMarkerInConfiguration() {
+        assertThrows(RuntimeException.class, () -> {
+            BoardReader.read("boardConfigWrong");
+        });
+
+    }
 }

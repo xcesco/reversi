@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.stream.IntStream;
 
 public class BoardReader {
+
 //    public static Cell[] readFile(String boardConfig) throws Exception {
 //        BoardReader reader=new BoardReader();
 //        return reader.read(boardConfig);
@@ -23,6 +24,9 @@ public class BoardReader {
         Path resPath = Paths.get(url.toURI());
 
         final String fileContent= Files.readString(resPath).replaceAll("[^\\.ox]","");
+        if(fileContent.length()!=Board.BOARD_SIZE*Board.BOARD_SIZE){
+            throw new RuntimeException("Invalid marker in configuration file");
+        }
         Cell[] cells = IntStream.range(0, fileContent.length())
                 .mapToObj(index ->{
                     char c= fileContent.charAt(index);
@@ -35,11 +39,9 @@ public class BoardReader {
                         case 'x':
                             piece=Piece.PLAYER_2;
                             break;
-                        case '.':
+                        default:
                             piece=Piece.EMPTY;
                             break;
-                        default:
-                            throw new RuntimeException("Invalid marker in configuration file");
                     }
                     return new Cell(coordinates,piece);
         }).toArray(Cell[]::new);
