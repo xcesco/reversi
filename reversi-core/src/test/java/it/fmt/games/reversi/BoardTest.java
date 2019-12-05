@@ -32,12 +32,24 @@ class BoardTest {
         assertThat(board.getCellContent(c), equalTo(p));
     }
 
+    @Test
+    public void ReadBoardConfiguration()throws Exception {
+        Cell[]cells= BoardReader.read("boardConfig");
+        Board board=new Board();
+        assertThrows(RuntimeException.class, () -> {
+            board.getCellContent(Coordinates.of(0, 10));
+        });
+    }
+
     public void boardInvalidCheck(Board board, String coord, Piece p) {
         Coordinates c = Coordinates.of(coord);
 
         assertThrows(RuntimeException.class, () -> {
             board.setCell(c, p);
         });
+
+
+
     }
 
 }
