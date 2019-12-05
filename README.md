@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/xcesco/reversi.svg?branch=master)](https://travis-ci.org/xcesco/reversi)
+
 # Reversi
 _By [Francesco Benincasa](https://github.com/xcesco), [Tiziano Bonifazi](https://github.com/xcesco), [Matteo Franco](https://github.com/M4TT3O-91)_
 
