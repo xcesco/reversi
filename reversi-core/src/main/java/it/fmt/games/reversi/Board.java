@@ -15,6 +15,9 @@ public class Board {
                         .forEach(col -> setCell(Coordinates.of(row,col),Piece.EMPTY)));
 
     }
+    public Board(Cell[]cells){
+        this.cells=cells;
+    }
     public Stream<Cell> getCellStream(){
         return Arrays.stream(cells);
     }
