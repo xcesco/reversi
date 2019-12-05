@@ -45,7 +45,7 @@ class ScoreCalculatorTest {
 
     @Test
     void readPieces() throws Exception {
-        Board board=new Board(BoardReader.read("boardScore1at3"));
+        Board board=new Board(BoardReader.read("boardScoreTest1"));
 
         ScoreCalculator scoreCalculator=new ScoreCalculator(board);
         Score score=scoreCalculator.execute();
@@ -56,7 +56,7 @@ class ScoreCalculatorTest {
 
     @Test
     void readConsecutiveAndAlternatePieces() throws Exception {
-        Board board=new Board(BoardReader.read("boardScore8at10"));
+        Board board=new Board(BoardReader.read("boardScoreTest2"));
 
         ScoreCalculator scoreCalculator=new ScoreCalculator(board);
         Score score=scoreCalculator.execute();
