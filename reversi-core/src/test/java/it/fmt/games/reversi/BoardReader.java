@@ -12,6 +12,12 @@ public class BoardReader {
 //        return reader.read(boardConfig);
 //    }
 
+    /**
+     * <code>o</code> for player 1, <code>x</code> for player 2
+     * @param fileName
+     * @return
+     * @throws Exception
+     */
     public static  Cell[] read(String fileName) throws Exception {
         URL url = BoardReader.class.getClassLoader().getResource("boards/"+fileName+".txt");
         Path resPath = Paths.get(url.toURI());

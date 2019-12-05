@@ -22,7 +22,6 @@ class BoardTest {
     public void setInvalidCell() {
         Board b = new Board();
         boardInvalidCheck(b, "z1", Piece.PLAYER_1);
-
     }
 
     public void cellCheck(Board board, String coord, Piece p) {
