@@ -14,11 +14,30 @@ class BoardTest {
 
     @Test
     public void setCell() {
-        Coordinates coords1 = Coordinates.of("A1");
-        Board b =new Board();
-        b.setCell(coords1,Piece.PLAYER_1);
-        assertThat(b.getCell(coords1).getPiece(), equalTo(Piece.PLAYER_1));
+        Board b = new Board();
+        cellCheck(b, "a1", Piece.PLAYER_1);
     }
 
+    @Test
+    public void setInvalidCell() {
+        Board b = new Board();
+        boardInvalidCheck(b, "z1", Piece.PLAYER_1);
+
+    }
+
+    public void cellCheck(Board board, String coord, Piece p) {
+        Coordinates c = Coordinates.of(coord);
+        board.setCell(c, p);
+
+        assertThat(board.getCellContent(c), equalTo(p));
+    }
+
+    public void boardInvalidCheck(Board board, String coord, Piece p) {
+        Coordinates c = Coordinates.of(coord);
+
+        assertThrows(RuntimeException.class, () -> {
+            board.setCell(c, p);
+        });
+    }
 
 }

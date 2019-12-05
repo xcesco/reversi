@@ -1,24 +1,37 @@
 package it.fmt.games.reversi;
 
+import java.util.Arrays;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
 public class Board {
-    private static final int BOARD_SIZE = 8;
-    private Cell[][] board;
+    public static final int BOARD_SIZE = 8;
+    final Cell[] cells;
 
-    public void setCell(Coordinates c, Piece p) {
-        board[c.getRow()][c.getColumn()] = new Cell(c, p);
+    public Board(){
+        this.cells = new Cell[BOARD_SIZE*BOARD_SIZE];
+        IntStream.range(0,BOARD_SIZE)
+                .forEach(row -> IntStream.range(0,BOARD_SIZE)
+                        .forEach(col -> setCell(Coordinates.of(row,col),Piece.EMPTY)));
+
     }
-    public Cell getCell(Coordinates c){
-        return board[c.getRow()][c.getColumn()];
+    public Stream<Cell> getCellStream(){
+        return Arrays.stream(cells);
+    }
+    public void setCell(Coordinates coordinates, Piece content) {
+        if (!coordinates.isValid()) throw new RuntimeException("Invalid coordinates!");
+        cells[coordinates.getRow() * BOARD_SIZE + coordinates.getColumn()] = new Cell(coordinates, content);
     }
 
-    public Board() {
-        board = new Cell[BOARD_SIZE][];
-        for (int i = 0; i < BOARD_SIZE; i++) {
-            board[i] = new Cell[BOARD_SIZE];
-            for (int j = 0; j < BOARD_SIZE; j++)
-                board[i][j] = new Cell(new Coordinates(i, j), Piece.EMPTY);
-        }
+    public Piece getCellContent(Coordinates coordinates) {
+        if (!coordinates.isValid()) throw new RuntimeException("Invalid coordinates!");
+        return cells[coordinates.getRow() * BOARD_SIZE + coordinates.getColumn()].getPiece();
     }
+
+    public boolean isCellContentEqualsTo(Coordinates coordinates, Piece currentPlayer) {
+        return coordinates.isValid() && getCellContent(coordinates) == currentPlayer;
+    }
+
 
 }
 
