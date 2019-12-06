@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CoordinatesTest {
 
@@ -77,6 +78,31 @@ public class CoordinatesTest {
     public void testConversionAz() {
         checkInvalidConversion("Az");
     }
+
+    @Test
+    public void testConversion11() {
+        checkInvalidConversion("11");
+    }
+
+    @Test
+    public void testConversionAA(){checkInvalidConversion("AA");}
+
+    @Test
+    public void testConversionaaa(){checkInvalidConversion("aaa");}
+
+    @Test
+    public void testConversionSpecialChar(){checkInvalidConversion("!!");}
+
+    @Test
+    public void testConversion(){
+        assertThrows(InvalidCoordinates.class, () -> {
+            checkInvalidConversion("");
+        });
+    }
+
+
+
+
 
     @Test
     public void validCoordinates() {

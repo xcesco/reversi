@@ -32,14 +32,16 @@ public class Coordinates {
     }
 
     public static Coordinates of(String value) {
-        String v=value.toUpperCase();
-
-        return new Coordinates(v.charAt(1)-'0'-1, v.charAt(0)-'A');
+        String v = value.toUpperCase();
+        if (value.length() == 0) {
+            throw new InvalidCoordinates("Invalid coordinates!");
+        }
+        return new Coordinates(v.charAt(1) - '0' - 1, v.charAt(0) - 'A');
     }
 
     @Override
     public String toString() {
-        return ""+((char)('A'+column))+(row+1);
+        return "" + ((char) ('A' + column)) + (row + 1);
     }
 
     public int getRow() {
@@ -59,8 +61,8 @@ public class Coordinates {
     }
 
     public Coordinates translate(Direction direction, int count) {
-        int new_row = direction.getOffsetRow()*count + row;
-        int new_col = direction.getOffsetCol()*count + column;
-        return Coordinates.of(new_row, new_col);
+        int newRow = direction.getOffsetRow() * count + row;
+        int newCol = direction.getOffsetCol() * count + column;
+        return Coordinates.of(newRow, newCol);
     }
 }
