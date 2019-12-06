@@ -1,7 +1,5 @@
 package it.fmt.games.reversi;
 
-import java.util.stream.IntStream;
-
 public class ScoreCalculator {
 
     private final Board board;
@@ -11,7 +9,7 @@ public class ScoreCalculator {
     }
 
     public Score execute() {
-        int score[]=new int[Piece.values().length];
+        int[] score=new int[Piece.values().length];
         board.getCellStream().forEach(cell -> score[cell.getPiece().ordinal()]++);
         return new Score(score[Piece.PLAYER_1.ordinal()],score[Piece.PLAYER_2.ordinal()]);
     }

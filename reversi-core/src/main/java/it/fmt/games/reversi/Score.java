@@ -1,7 +1,5 @@
 package it.fmt.games.reversi;
 
-import java.util.stream.IntStream;
-
 public class Score {
     private int player1Scores = 0;
     private int player2Scores = 0;
