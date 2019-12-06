@@ -36,6 +36,20 @@ public class Board {
     public boolean isCellContentEqualsTo(Coordinates coordinates, Piece currentPlayer) {
         return coordinates.isValid() && getCellContent(coordinates) == currentPlayer;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Board board = (Board) o;
+        return Arrays.equals(cells, board.cells);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(cells);
+    }
 }
 
 

@@ -4,18 +4,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class EnemyPiecesToInvertFinder {
+public class EnemyPiecesToCaptureFinder {
     private final Coordinates searchOrigin;
     private final Piece piece;
     private final Board board;
     private final Piece enemyPiece;
 
-    public EnemyPiecesToInvertFinder(Board board, Coordinates coords, Piece piece) {
+    public EnemyPiecesToCaptureFinder(Board board, Coordinates coords, Piece piece) {
         this.piece = piece;
         this.board = board;
         this.searchOrigin = coords;
         this.enemyPiece = piece == Piece.PLAYER_1 ? Piece.PLAYER_2 : Piece.PLAYER_1;
-        if (piece==Piece.EMPTY) throw(new InvalidPieceSelectedException());
+        if (piece == Piece.EMPTY) throw (new InvalidPieceSelectedException());
     }
 
     public List<Coordinates> find() {
@@ -29,7 +29,7 @@ public class EnemyPiecesToInvertFinder {
     }
 
     private Stream<Coordinates> rotateEnemyPieces(Direction direction) {
-        return findEnemyPiecesAlongDirection(searchOrigin, direction).peek(item -> board.setCell(item, piece));
+        return findEnemyPiecesAlongDirection(searchOrigin, direction);
     }
 
     private boolean isAnyPieceToInvert(Coordinates initialCoordinates, Direction direction) {
