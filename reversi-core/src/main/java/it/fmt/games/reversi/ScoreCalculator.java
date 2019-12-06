@@ -1,7 +1,5 @@
 package it.fmt.games.reversi;
 
-import java.util.stream.IntStream;
-
 public class ScoreCalculator {
 
     private final Board board;
