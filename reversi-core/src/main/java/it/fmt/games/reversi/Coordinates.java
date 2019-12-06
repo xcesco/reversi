@@ -59,8 +59,8 @@ public class Coordinates {
     }
 
     public Coordinates translate(Direction direction, int count) {
-        int new_row = direction.getOffsetRow()*count + row;
-        int new_col = direction.getOffsetCol()*count + column;
-        return Coordinates.of(new_row, new_col);
+        int newRow = direction.getOffsetRow()*count + row;
+        int newCol = direction.getOffsetCol()*count + column;
+        return Coordinates.of(newRow, newCol);
     }
 }
