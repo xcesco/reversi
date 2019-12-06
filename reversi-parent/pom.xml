@@ -168,27 +168,6 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.5</version>
             </plugin>
-            <!--            <plugin>-->
-            <!--                <groupId>org.codehaus.mojo</groupId>-->
-            <!--                <artifactId>cobertura-maven-plugin</artifactId>-->
-            <!--                <version>2.7</version>-->
-            <!--            </plugin>-->
-
-            <!--            <plugin>-->
-            <!--                <groupId>org.codehaus.mojo</groupId>-->
-            <!--                <artifactId>findbugs-maven-plugin</artifactId>-->
-            <!--                <version>3.0.5</version>-->
-            <!--                <configuration>-->
-            <!--                    <threshold>Low</threshold>&lt;!&ndash; High|Normal|Low|Exp|Ignore &ndash;&gt;-->
-            <!--                    <effort>Default</effort>&lt;!&ndash; Min|Default|Max &ndash;&gt;-->
-            <!--                </configuration>-->
-            <!--            </plugin>-->
-            <!--            <plugin>-->
-            <!--                <groupId>org.apache.maven.plugins</groupId>-->
-            <!--                <artifactId>maven-javadoc-plugin</artifactId>-->
-            <!--                <version>3.1.1</version>-->
-            <!--            </plugin>-->
-
         </plugins>
     </reporting>
 
