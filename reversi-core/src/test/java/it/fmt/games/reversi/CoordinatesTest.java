@@ -91,6 +91,9 @@ public class CoordinatesTest {
     public void testConversionaaa(){checkInvalidConversion("aaa");}
 
     @Test
+    public void testConversionSpecialChar(){checkInvalidConversion("!!");}
+
+    @Test
     public void testConversion(){
         assertThrows(InvalidCoordinates.class, () -> {
             checkInvalidConversion("");
