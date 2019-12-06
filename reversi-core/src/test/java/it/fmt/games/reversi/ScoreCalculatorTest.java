@@ -10,10 +10,10 @@ class ScoreCalculatorTest {
 
     @Test
     void noScore() {
-        Board board=new Board();
+        Board board = new Board();
 
-        ScoreCalculator scoreCalculator=new ScoreCalculator(board);
-        Score score=scoreCalculator.execute();
+        ScoreCalculator scoreCalculator = new ScoreCalculator(board);
+        Score score = scoreCalculator.execute();
 
         assertThat(score.getPlayer1Scores(), equalTo(0));
         assertThat(score.getPlayer2Scores(), equalTo(0));
@@ -21,11 +21,11 @@ class ScoreCalculatorTest {
 
     @Test
     void onePiecePlayer1() {
-        Board board=new Board();
+        Board board = new Board();
         board.setCell(Coordinates.of("a1"), Piece.PLAYER_1);
 
-        ScoreCalculator scoreCalculator=new ScoreCalculator(board);
-        Score score=scoreCalculator.execute();
+        ScoreCalculator scoreCalculator = new ScoreCalculator(board);
+        Score score = scoreCalculator.execute();
 
         assertThat(score.getPlayer1Scores(), equalTo(1));
         assertThat(score.getPlayer2Scores(), equalTo(0));
@@ -33,11 +33,11 @@ class ScoreCalculatorTest {
 
     @Test
     void onePiecePlayer2() {
-        Board board=new Board();
+        Board board = new Board();
         board.setCell(Coordinates.of("d5"), Piece.PLAYER_2);
 
-        ScoreCalculator scoreCalculator=new ScoreCalculator(board);
-        Score score=scoreCalculator.execute();
+        ScoreCalculator scoreCalculator = new ScoreCalculator(board);
+        Score score = scoreCalculator.execute();
 
         assertThat(score.getPlayer1Scores(), equalTo(0));
         assertThat(score.getPlayer2Scores(), equalTo(1));
@@ -45,10 +45,10 @@ class ScoreCalculatorTest {
 
     @Test
     void readPieces() throws Exception {
-        Board board=new Board(BoardReader.read("boardScoreTest1"));
+        Board board = BoardReader.read("boardScoreTest1");
 
-        ScoreCalculator scoreCalculator=new ScoreCalculator(board);
-        Score score=scoreCalculator.execute();
+        ScoreCalculator scoreCalculator = new ScoreCalculator(board);
+        Score score = scoreCalculator.execute();
 
         assertThat(score.getPlayer1Scores(), equalTo(1));
         assertThat(score.getPlayer2Scores(), equalTo(3));
@@ -56,10 +56,10 @@ class ScoreCalculatorTest {
 
     @Test
     void readConsecutiveAndAlternatePieces() throws Exception {
-        Board board=new Board(BoardReader.read("boardScoreTest2"));
+        Board board = BoardReader.read("boardScoreTest2");
 
-        ScoreCalculator scoreCalculator=new ScoreCalculator(board);
-        Score score=scoreCalculator.execute();
+        ScoreCalculator scoreCalculator = new ScoreCalculator(board);
+        Score score = scoreCalculator.execute();
 
         assertThat(score.getPlayer1Scores(), equalTo(8));
         assertThat(score.getPlayer2Scores(), equalTo(10));
@@ -67,7 +67,7 @@ class ScoreCalculatorTest {
 
     @Test
     void invalidCoordinates() {
-        Board board=new Board();
+        Board board = new Board();
 
         assertThrows(RuntimeException.class, () -> {
             board.setCell(Coordinates.of("a9"), Piece.PLAYER_2);

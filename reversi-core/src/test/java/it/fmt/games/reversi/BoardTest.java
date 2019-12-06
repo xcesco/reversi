@@ -46,8 +46,7 @@ class BoardTest {
 
     @Test
     public void ReadBoardConfiguration() throws Exception {
-        Cell[] cells = BoardReader.read("boardConfig");
-        Board board = new Board(cells);
+        Board board = BoardReader.read("boardConfig");
         assertThrows(RuntimeException.class, () -> {
             board.getCellContent(Coordinates.of(0, 10));
         });
@@ -55,8 +54,7 @@ class BoardTest {
 
     @Test
     public void SetOnePieceFromFileConfiguration() throws Exception {
-        Cell[] cells = BoardReader.read("boardConfig");
-        Board board = new Board(cells);
+        Board board = BoardReader.read("boardConfig");
 
         assertThat(board.getCellContent(Coordinates.of("a1")), equalTo(Piece.PLAYER_2));
 
@@ -64,12 +62,10 @@ class BoardTest {
 
     @Test
     public void SetTwoPieceFromFileConfiguration() throws Exception {
-        Cell[] cells = BoardReader.read("boardConfig");
-        Board board = new Board(cells);
+        Board board = BoardReader.read("boardConfig");
 
         assertThat(board.getCellContent(Coordinates.of("a1")), equalTo(Piece.PLAYER_2));
         assertThat(board.getCellContent(Coordinates.of("a2")), equalTo(Piece.EMPTY));
-
     }
 
     @Test

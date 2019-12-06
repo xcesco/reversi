@@ -13,7 +13,6 @@ public class Board {
         IntStream.range(0, BOARD_SIZE)
                 .forEach(row -> IntStream.range(0, BOARD_SIZE)
                         .forEach(col -> setCell(Coordinates.of(row, col), Piece.EMPTY)));
-
     }
 
     public Board(Cell[] cells) {
@@ -37,16 +36,6 @@ public class Board {
     public boolean isCellContentEqualsTo(Coordinates coordinates, Piece currentPlayer) {
         return coordinates.isValid() && getCellContent(coordinates) == currentPlayer;
     }
-
-
-}
-
-class InvalidCoordinates extends RuntimeException {
-
-    public InvalidCoordinates(String message) {
-        super(message);
-    }
-
 }
 
 

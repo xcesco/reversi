@@ -14,5 +14,4 @@ public class ScoreTest {
         assertThat(scores.getPlayer2Scores(), is(7));
     }
 
-
 }

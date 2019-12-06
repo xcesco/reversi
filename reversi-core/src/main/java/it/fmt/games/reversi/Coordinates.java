@@ -1,6 +1,6 @@
 package it.fmt.games.reversi;
 
-public class Coordinates {
+public class Coordinates implements Comparable<Coordinates> {
     private int row;
     private int column;
 
@@ -64,5 +64,10 @@ public class Coordinates {
         int newRow = direction.getOffsetRow() * count + row;
         int newCol = direction.getOffsetCol() * count + column;
         return Coordinates.of(newRow, newCol);
+    }
+
+    @Override
+    public int compareTo(Coordinates o) {
+        return this.toString().compareTo(o.toString());
     }
 }

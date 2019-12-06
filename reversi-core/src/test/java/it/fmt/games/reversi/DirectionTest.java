@@ -58,7 +58,6 @@ public class DirectionTest {
         checkInvalidTranslation("g8", Direction.DOWN);
     }
 
-
     private void checkValidTranslation(String intialPosition, Direction direction, String finalPosition) {
         Coordinates coords1 = Coordinates.of(intialPosition);
         coords1 = coords1.translate(direction);

@@ -47,7 +47,6 @@ public class CoordinatesTest {
         assertThat(coords1, equalTo(coords2));
     }
 
-
     @Test
     public void testHashCode() {
         Coordinates coords1 = Coordinates.of("A1");
@@ -99,10 +98,6 @@ public class CoordinatesTest {
             checkInvalidConversion("");
         });
     }
-
-
-
-
 
     @Test
     public void validCoordinates() {
