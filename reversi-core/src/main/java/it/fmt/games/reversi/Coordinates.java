@@ -61,7 +61,6 @@ public class Coordinates {
     public Coordinates translate(Direction direction, int count) {
         int newRow = direction.getOffsetRow()*count + row;
         int newCol = direction.getOffsetCol()*count + column;
-
         return Coordinates.of(newRow, newCol);
     }
 }
