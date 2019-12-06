@@ -6,13 +6,16 @@ import java.util.stream.Stream;
 
 public class EnemyPiecesToInvertFinder {
     private final Coordinates searchOrigin;
-    protected final Piece piece;
-    protected final Board board;
+    private final Piece piece;
+    private final Board board;
+    private final Piece enemyPiece;
 
     public EnemyPiecesToInvertFinder(Board board, Coordinates coords, Piece piece) {
         this.piece = piece;
         this.board = board;
         this.searchOrigin = coords;
+        this.enemyPiece = piece == Piece.PLAYER_1 ? Piece.PLAYER_2 : Piece.PLAYER_1;
+        if (piece==Piece.EMPTY) throw(new InvalidPieceSelectedException());
     }
 
     public List<Coordinates> find() {
@@ -36,10 +39,8 @@ public class EnemyPiecesToInvertFinder {
     }
 
     private Stream<Coordinates> findEnemyPiecesAlongDirection(Coordinates coordinates, Direction direction) {
-        Piece enemyPlayer = piece == Piece.PLAYER_1 ? Piece.PLAYER_2 : Piece.PLAYER_1;
-
         return Stream.iterate(coordinates.translate(direction),
-                coords -> board.isCellContentEqualsTo(coords, enemyPlayer),
+                coords -> board.isCellContentEqualsTo(coords, enemyPiece),
                 coords -> coords.translate(direction));
     }
 }

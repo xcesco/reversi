@@ -34,7 +34,7 @@ public class Coordinates implements Comparable<Coordinates> {
     public static Coordinates of(String value) {
         String v = value.toUpperCase();
         if (value.length() == 0) {
-            throw new InvalidCoordinates("Invalid coordinates!");
+            throw new InvalidCoordinatesException("Invalid coordinates!");
         }
         return new Coordinates(v.charAt(1) - '0' - 1, v.charAt(0) - 'A');
     }

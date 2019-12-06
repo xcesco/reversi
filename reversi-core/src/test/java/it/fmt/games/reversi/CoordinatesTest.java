@@ -94,7 +94,7 @@ public class CoordinatesTest {
 
     @Test
     public void testConversion(){
-        assertThrows(InvalidCoordinates.class, () -> {
+        assertThrows(InvalidCoordinatesException.class, () -> {
             checkInvalidConversion("");
         });
     }

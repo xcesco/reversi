@@ -24,12 +24,12 @@ public class Board {
     }
 
     public void setCell(Coordinates coordinates, Piece content) {
-        if (!coordinates.isValid()) throw new InvalidCoordinates("Invalid coordinates!");
+        if (!coordinates.isValid()) throw new InvalidCoordinatesException("Invalid coordinates!");
         cells[coordinates.getRow() * BOARD_SIZE + coordinates.getColumn()] = new Cell(coordinates, content);
     }
 
     public Piece getCellContent(Coordinates coordinates) {
-        if (!coordinates.isValid()) throw new InvalidCoordinates("Invalid coordinates!");
+        if (!coordinates.isValid()) throw new InvalidCoordinatesException("Invalid coordinates!");
         return cells[coordinates.getRow() * BOARD_SIZE + coordinates.getColumn()].getPiece();
     }
 
