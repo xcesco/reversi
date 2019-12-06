@@ -10,6 +10,7 @@ class BoardTest {
     @Test
     public void newBoard() {
         Board b = new Board();
+        assertThat(b,equalTo(b));
     }
 
     @Test
@@ -28,7 +29,7 @@ class BoardTest {
     @Test
     public void invalidCoordinates() {
         Board b = new Board();
-        assertThrows(RuntimeException.class, () -> {
+        assertThrows(InvalidCoordinates.class, () -> {
             b.setCell(Coordinates.of(99, 99), Piece.PLAYER_1);
         });
     }
@@ -42,7 +43,7 @@ class BoardTest {
     public void boardInvalidCheck(Board board, String coord, Piece p) {
         Coordinates c = Coordinates.of(coord);
 
-        assertThrows(RuntimeException.class, () -> {
+        assertThrows(InvalidCoordinates.class, () -> {
             board.setCell(c, p);
         });
 
@@ -52,7 +53,7 @@ class BoardTest {
     public void ReadBoardConfiguration() throws Exception {
         Cell[] cells = BoardReader.read("boardConfig");
         Board board = new Board(cells);
-        assertThrows(RuntimeException.class, () -> {
+        assertThrows(InvalidCoordinates.class, () -> {
             board.getCellContent(Coordinates.of(0, 10));
         });
     }

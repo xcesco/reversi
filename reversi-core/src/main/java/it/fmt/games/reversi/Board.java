@@ -22,12 +22,12 @@ public class Board {
         return Arrays.stream(cells);
     }
     public void setCell(Coordinates coordinates, Piece content) {
-        if (!coordinates.isValid()) throw new RuntimeException("Invalid coordinates!");
+        if (!coordinates.isValid()) throw new InvalidCoordinates("Invalid coordinates!");
         cells[coordinates.getRow() * BOARD_SIZE + coordinates.getColumn()] = new Cell(coordinates, content);
     }
 
     public Piece getCellContent(Coordinates coordinates) {
-        if (!coordinates.isValid()) throw new RuntimeException("Invalid coordinates!");
+        if (!coordinates.isValid()) throw new InvalidCoordinates("Invalid coordinates!");
         return cells[coordinates.getRow() * BOARD_SIZE + coordinates.getColumn()].getPiece();
     }
 
@@ -35,6 +35,14 @@ public class Board {
         return coordinates.isValid() && getCellContent(coordinates) == currentPlayer;
     }
 
+
+}
+
+class InvalidCoordinates extends RuntimeException{
+
+    public InvalidCoordinates(String message) {
+        super(message);
+    }
 
 }
 
