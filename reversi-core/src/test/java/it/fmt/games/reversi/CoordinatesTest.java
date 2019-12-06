@@ -80,6 +80,28 @@ public class CoordinatesTest {
     }
 
     @Test
+    public void testConversion11() {
+        checkInvalidConversion("11");
+    }
+
+    @Test
+    public void testConversionAA(){checkInvalidConversion("AA");}
+
+    @Test
+    public void testConversionaaa(){checkInvalidConversion("aaa");}
+
+    @Test
+    public void testConversion(){
+        assertThrows(InvalidCoordinates.class, () -> {
+            checkInvalidConversion("");
+        });
+    }
+
+
+
+
+
+    @Test
     public void validCoordinates() {
         Coordinates coords = Coordinates.of(0, 0);
 
