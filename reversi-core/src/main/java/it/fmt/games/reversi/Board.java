@@ -8,19 +8,22 @@ public class Board {
     public static final int BOARD_SIZE = 8;
     final Cell[] cells;
 
-    public Board(){
-        this.cells = new Cell[BOARD_SIZE*BOARD_SIZE];
-        IntStream.range(0,BOARD_SIZE)
-                .forEach(row -> IntStream.range(0,BOARD_SIZE)
-                        .forEach(col -> setCell(Coordinates.of(row,col),Piece.EMPTY)));
+    public Board() {
+        this.cells = new Cell[BOARD_SIZE * BOARD_SIZE];
+        IntStream.range(0, BOARD_SIZE)
+                .forEach(row -> IntStream.range(0, BOARD_SIZE)
+                        .forEach(col -> setCell(Coordinates.of(row, col), Piece.EMPTY)));
 
     }
-    public Board(Cell[]cells){
-        this.cells=cells;
+
+    public Board(Cell[] cells) {
+        this.cells = cells;
     }
-    public Stream<Cell> getCellStream(){
+
+    public Stream<Cell> getCellStream() {
         return Arrays.stream(cells);
     }
+
     public void setCell(Coordinates coordinates, Piece content) {
         if (!coordinates.isValid()) throw new InvalidCoordinates("Invalid coordinates!");
         cells[coordinates.getRow() * BOARD_SIZE + coordinates.getColumn()] = new Cell(coordinates, content);
@@ -38,7 +41,7 @@ public class Board {
 
 }
 
-class InvalidCoordinates extends RuntimeException{
+class InvalidCoordinates extends RuntimeException {
 
     public InvalidCoordinates(String message) {
         super(message);
