@@ -43,6 +43,7 @@ class InvalidCoordinates extends RuntimeException{
     public InvalidCoordinates(String message) {
         super(message);
     }
+
 }
 
 
