@@ -93,6 +93,9 @@ public class CoordinatesTest {
     public void testConversionSpecialChar(){checkInvalidConversion("!!");}
 
     @Test
+    public void testConversionSpecialA1(){checkInvalidConversion("A     1");}
+
+    @Test
     public void testConversion(){
         assertThrows(InvalidCoordinatesException.class, () -> {
             checkInvalidConversion("");
@@ -107,6 +110,32 @@ public class CoordinatesTest {
         assertThat(coords.toString(), is("A1"));
     }
 
+    @Test
+    public void nonValidCoordinates() {
+        Coordinates coords = Coordinates.of(10, 0);
+
+        assertThat(coords.isValid(), is(false));
+    }
+
+    @Test
+    public void testTrueEquals() {
+        Coordinates cord1=new Coordinates(0,0);
+        Coordinates cord2=new Coordinates(0,0);
+        assertThat(cord1.equals(cord2),is(true));
+    }
+    @Test
+    public void testFalseEquals() {
+        Coordinates cord1=new Coordinates(0,0);
+        Coordinates cord2=new Coordinates(0,1);
+        assertThat(cord1.equals(cord2),is(false));
+    }
+    @Test
+    public void testObjectEquals() {
+        Coordinates cord1=new Coordinates(0,0);
+        String cord2="";
+        assertThat(cord1.equals(cord2),is(false));
+    }
+
     private void checkValidConversion(String label, int row, int col) {
         Coordinates coords1 = Coordinates.of(label);
         Coordinates coords2 = Coordinates.of(row, col);
@@ -118,11 +147,13 @@ public class CoordinatesTest {
     private void checkInvalidConversion(String label) {
         Coordinates coords1 = Coordinates.of(label);
         assertThat(coords1.isValid(), is(false));
+
     }
 
     private void checkCoordinateValidity(int row, int col, boolean valid) {
         Coordinates coords = Coordinates.of(row, col);
         assertThat(coords.isValid(), is(valid));
+
     }
 
 }
