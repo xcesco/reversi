@@ -2,10 +2,43 @@ package it.fmt.games.reversi;
 
 import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 
 public class CellTest {
+    @Test
+    public void testEquals() {
+        int row = 1;
+        int col = 1;
+        Coordinates cor = new Coordinates(row,col);
+        Coordinates cor2 = new Coordinates(++row, ++col);
+
+        Cell cell = new Cell(cor,Piece.PLAYER_1);
+        Cell cellEqual = new Cell(cor,Piece.PLAYER_1);
+        Cell cellNotEqual = new Cell(cor,Piece.PLAYER_2);
+        Cell cellNotEqual2 = new Cell(cor2,Piece.PLAYER_1);
+        String dummyObject = "Not cell";
+
+        assertThat(cell, equalTo(cell));
+        assertThat(cell, equalTo(cellEqual));
+        assertThat(cell, not(cellNotEqual));
+        assertThat(cell, not(cellNotEqual2));
+        assertThat(cell, not(dummyObject));
+    }
+
+    @Test
+    public void testHashCode() {
+        int row = 1;
+        int col = 1;
+        Coordinates cor = new Coordinates(row,col);
+        Coordinates cor2 = new Coordinates(++row, ++col);
+
+        Cell cell1 = new Cell(cor,Piece.PLAYER_1);
+        Cell cell2 = new Cell(cor2,Piece.PLAYER_2);
+
+        assertThat(cell1.hashCode(), equalTo(cell1.hashCode()));
+        assertThat(cell1.hashCode(), not(cell2.hashCode()));
+    }
+
     @Test
     public void player1CellTest() {
         int row = 1;
