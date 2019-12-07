@@ -118,22 +118,27 @@ public class CoordinatesTest {
     }
 
     @Test
-    public void testTrueEquals() {
-        Coordinates cord1=new Coordinates(0,0);
-        Coordinates cord2=new Coordinates(0,0);
-        assertThat(cord1.equals(cord2),is(true));
+    public void testEquals() {
+        Coordinates coordinatesA1=Coordinates.of("a1");
+        Coordinates coordinatesEquals=Coordinates.of("a1");
+        Coordinates coordinatesA2=Coordinates.of("a2");
+        Coordinates coordinatesB1=Coordinates.of("b1");
+        String dummyObject="Not cooordinates";
+
+        assertThat(coordinatesA1.equals(coordinatesA1), is(true));
+        assertThat(coordinatesA1.equals(coordinatesEquals), equalTo(true));
+        assertThat(coordinatesA1.equals(coordinatesA2), is(false));
+        assertThat(coordinatesA1.equals(coordinatesB1), is(false));
+        assertThat(coordinatesA1.equals(dummyObject), is(false));
     }
+
     @Test
-    public void testFalseEquals() {
-        Coordinates cord1=new Coordinates(0,0);
-        Coordinates cord2=new Coordinates(0,1);
-        assertThat(cord1.equals(cord2),is(false));
-    }
-    @Test
-    public void testObjectEquals() {
-        Coordinates cord1=new Coordinates(0,0);
-        String cord2="";
-        assertThat(cord1.equals(cord2),is(false));
+    public void testHashcode() {
+        Coordinates coordinatesA1=Coordinates.of("a1");
+        Coordinates coordinatesA2=Coordinates.of("a2");
+
+        assertThat(coordinatesA1.hashCode()==coordinatesA1.hashCode(), is(true));
+        assertThat(coordinatesA1.hashCode()==coordinatesA2.hashCode(), is(false));
     }
 
     private void checkValidConversion(String label, int row, int col) {
