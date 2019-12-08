@@ -130,6 +130,7 @@ public class CoordinatesTest {
         assertThat(coordinatesA1.equals(coordinatesA2), is(false));
         assertThat(coordinatesA1.equals(coordinatesB1), is(false));
         assertThat(coordinatesA1.equals(dummyObject), is(false));
+        assertThat(coordinatesA1.equals(null), is(false));
     }
 
     @Test
