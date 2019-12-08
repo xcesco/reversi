@@ -12,7 +12,7 @@ public class AvailableMoves {
     }
 
     public boolean availableMovesForPlayers() {
-        return isAvailableMovesCurrentPlayer() || movesOtherPlayer.size() > 0;
+        return isAvailableMovesCurrentPlayer() || !(movesOtherPlayer.isEmpty());
     }
 
     public List<Coordinates> getMovesCurrentPlayer() {
@@ -24,6 +24,6 @@ public class AvailableMoves {
     }
 
     public boolean isAvailableMovesCurrentPlayer() {
-        return movesCurrentPlayer.size() > 0;
+        return !(movesCurrentPlayer.isEmpty());
     }
 }
