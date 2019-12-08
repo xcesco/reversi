@@ -22,8 +22,8 @@ public class CellTest {
         assertThat(cell, equalTo(cellEqual));
         assertThat(cell, not(cellNotEqual));
         assertThat(cell, not(cellNotEqual2));
-        assertThat(cell.equals(dummyObject), is(false));
         assertThat(cell.equals(null), is(false));
+        assertThat(cell.equals(dummyObject), is(false));
     }
 
     @Test
