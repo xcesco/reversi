@@ -7,11 +7,15 @@ import java.util.stream.Stream;
 
 public class AvailableMovesFinder {
     protected final Piece piece;
+    protected final Piece enemyPlayer;
     protected final Board board;
+
 
     public AvailableMovesFinder(Piece piece, Board board) {
         this.piece = piece;
+        this.enemyPlayer = piece == Piece.PLAYER_1 ? Piece.PLAYER_2 : Piece.PLAYER_1;
         this.board = board;
+        if (piece == Piece.EMPTY) throw (new InvalidPieceSelectedException());
     }
 
     public List<Coordinates> findMoves() {
@@ -38,10 +42,9 @@ public class AvailableMovesFinder {
     }
 
     protected Stream<Coordinates> findEnemyPiecesAlongDirection(Coordinates coordinates, Direction direction) {
-        Piece enemyPlayer = piece == Piece.PLAYER_1 ? Piece.PLAYER_2 : Piece.PLAYER_1;
 
         return Stream.iterate(coordinates.translate(direction),
-                coords -> board.isCellContentEqualsTo(coords, enemyPlayer),
+                coords -> board.isCellContentEqualsTo(coords, this.enemyPlayer),
                 coords -> coords.translate(direction));
     }
 

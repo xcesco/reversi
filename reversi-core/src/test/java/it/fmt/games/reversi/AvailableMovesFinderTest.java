@@ -12,7 +12,14 @@ import static it.fmt.games.reversi.Coordinates.of;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AvailableMovesFinderTest {
-    // Test on start configuration board
+
+    @Test
+    void invalidPieceSelected() throws Exception {
+        assertThrows(InvalidPieceSelectedException.class, () -> {
+            checkAvailableMovesFinder("available_moves_finder00", Piece.EMPTY, of("a1"));
+        });
+    }
+
     @Test
     public void testStartConfigBoard() throws Exception {
         checkAvailableMovesFinder("available_moves_finder00", Piece.PLAYER_1, of("D3"), of("C4"), of("F5"), of("E6"));
