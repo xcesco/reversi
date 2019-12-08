@@ -6,14 +6,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class AvailableMovesFinder {
-    protected final Piece piece;
-    protected final Piece enemyPlayer;
+    protected final Piece currentPlayer;
+    protected final Piece otherPlayer;
     protected final Board board;
 
 
     public AvailableMovesFinder(Piece piece, Board board) {
-        this.piece = piece;
-        this.enemyPlayer = piece == Piece.PLAYER_1 ? Piece.PLAYER_2 : Piece.PLAYER_1;
+        this.currentPlayer = piece;
+        this.otherPlayer = piece == Piece.PLAYER_1 ? Piece.PLAYER_2 : Piece.PLAYER_1;
         this.board = board;
         if (piece == Piece.EMPTY) throw (new InvalidPieceSelectedException());
     }
@@ -38,13 +38,13 @@ public class AvailableMovesFinder {
     protected boolean hasPiecesToInvertAlongDirection(Coordinates initialCoordinates, Direction direction) {
         int piecesToReverte = (int) findEnemyPiecesAlongDirection(initialCoordinates, direction).count();
         return piecesToReverte > 0 &&
-                board.isCellContentEqualsTo(initialCoordinates.translate(direction, piecesToReverte + 1), piece);
+                board.isCellContentEqualsTo(initialCoordinates.translate(direction, piecesToReverte + 1), this.currentPlayer);
     }
 
     protected Stream<Coordinates> findEnemyPiecesAlongDirection(Coordinates coordinates, Direction direction) {
 
         return Stream.iterate(coordinates.translate(direction),
-                coords -> board.isCellContentEqualsTo(coords, this.enemyPlayer),
+                coords -> board.isCellContentEqualsTo(coords, this.otherPlayer),
                 coords -> coords.translate(direction));
     }
 
