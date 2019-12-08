@@ -12,23 +12,29 @@ import static it.fmt.games.reversi.Coordinates.of;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AvailableMovesTest {
-    // no moves for all players
+
     @Test
-    public void testNoMovesAvailable() throws Exception {
+    public void noMovesForAllPlayers() throws Exception {
         AvailableMoves availableMoves = checkAvailableMoves("available_moves00");
         assertThat(availableMoves.isAvailableMovesCurrentPlayer(), is(false));
         assertThat(availableMoves.availableMovesForPlayers(), is(false));
         assertEquals(availableMoves.getMovesCurrentPlayer().size(), availableMoves.getMovesOtherPlayer().size());
     }
 
-    // no moves for only one player
     @Test
-    public void testOnePlayerNoMoves() throws Exception {
+    public void noMovesForOtherPlayer() throws Exception {
         AvailableMoves availableMoves = checkAvailableMoves("available_moves01");
         assertThat(availableMoves.isAvailableMovesCurrentPlayer(), is(true));
         assertThat(availableMoves.availableMovesForPlayers(), is(true));
         assertThat(availableMoves.getMovesOtherPlayer().size(), is(0));
+    }
 
+    @Test
+    public void noMovesForCurrentPlayer() throws Exception {
+        AvailableMoves availableMoves = checkAvailableMoves("available_moves02");
+        assertThat(availableMoves.isAvailableMovesCurrentPlayer(), is(false));
+        assertThat(availableMoves.availableMovesForPlayers(), is(true));
+        assertThat(availableMoves.getMovesCurrentPlayer().size(), is(0));
     }
 
     public AvailableMoves checkAvailableMoves(String fileName) throws Exception {
