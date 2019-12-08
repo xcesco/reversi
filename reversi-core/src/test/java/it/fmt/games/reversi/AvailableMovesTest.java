@@ -37,6 +37,15 @@ public class AvailableMovesTest {
         assertThat(availableMoves.getMovesCurrentPlayer().size(), is(0));
     }
 
+    @Test
+    public void availableMovesForAllPlayers() throws Exception {
+        AvailableMoves availableMoves = checkAvailableMoves("available_moves03");
+        assertThat(availableMoves.isAvailableMovesCurrentPlayer(), is(true));
+        assertThat(availableMoves.availableMovesForPlayers(), is(true));
+        assertThat(availableMoves.getMovesCurrentPlayer().size(), is(4));
+        assertThat(availableMoves.getMovesOtherPlayer().size(), is(4));
+    }
+
     public AvailableMoves checkAvailableMoves(String fileName) throws Exception {
         Board board = BoardReader.read(fileName);
 
