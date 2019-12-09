@@ -64,7 +64,9 @@ public class BoardReader {
         Path resPath = Paths.get(url.toURI());
 
         String fileContent = Files.readString(resPath);
-        String[] boardBuffer = removeMultipleBoardSeparators(fileContent).replaceAll(ONLY_VALID_CHARS_REGEX, "").split(BOARD_SEPARATOR_REGEX);
+        String[] boardBuffer = removeMultipleBoardSeparators(fileContent)
+                .replaceAll(ONLY_VALID_CHARS_REGEX, "")
+                .split(BOARD_SEPARATOR_REGEX);
         return Arrays.stream(boardBuffer)
                 .map(BoardReader::parseSingleBoard)
                 .toArray(Board[]::new);

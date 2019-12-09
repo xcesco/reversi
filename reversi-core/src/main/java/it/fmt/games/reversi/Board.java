@@ -19,6 +19,15 @@ public class Board {
         this.cells = cells;
     }
 
+    public Board copy() {
+        Board board = new Board();
+        IntStream.range(0, BOARD_SIZE)
+                .forEach(row -> IntStream.range(0, BOARD_SIZE)
+                        .forEach(col -> board.setCell(Coordinates.of(row, col), getCellContent(Coordinates.of(row, col)))));
+
+        return board;
+    }
+
     public Stream<Cell> getCellStream() {
         return Arrays.stream(cells);
     }
