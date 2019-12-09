@@ -58,7 +58,6 @@ class BoardTest {
         Board board = BoardReader.read("boardConfig");
 
         assertThat(board.getCellContent(Coordinates.of("a1")), equalTo(Piece.PLAYER_2));
-
     }
 
     @Test

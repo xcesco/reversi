@@ -14,6 +14,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class EnemyPiecesToCaptureFinderTest {
 
     @Test
+    void failOnInvalidPiece() {
+        assertThrows(InvalidPieceSelectedException.class, () -> {
+            new EnemyPiecesToCaptureFinder(null, of("a1"), Piece.EMPTY);
+        });
+
+        assertThrows(InvalidPieceSelectedException.class, () -> {
+            new EnemyPiecesToCaptureFinder(null, of("a1"), null);
+        });
+
+    }
+
+    @Test
     void find00() throws Exception {
         assertThrows(InvalidPieceSelectedException.class, () -> {
             new EnemyPiecesToCaptureFinder(null, of("a1"), Piece.EMPTY);

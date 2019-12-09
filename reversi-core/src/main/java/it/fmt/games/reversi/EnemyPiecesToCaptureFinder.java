@@ -11,11 +11,11 @@ public class EnemyPiecesToCaptureFinder {
     private final Piece enemyPiece;
 
     public EnemyPiecesToCaptureFinder(Board board, Coordinates coords, Piece piece) {
+        if (piece == Piece.EMPTY || piece == null) throw (new InvalidPieceSelectedException());
         this.piece = piece;
         this.board = board;
         this.searchOrigin = coords;
         this.enemyPiece = piece == Piece.PLAYER_1 ? Piece.PLAYER_2 : Piece.PLAYER_1;
-        if (piece == Piece.EMPTY) throw (new InvalidPieceSelectedException());
     }
 
     public List<Coordinates> find() {
