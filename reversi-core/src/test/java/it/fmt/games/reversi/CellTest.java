@@ -35,9 +35,11 @@ public class CellTest {
 
         Cell cell1 = new Cell(cor,Piece.PLAYER_1);
         Cell cell2 = new Cell(cor2,Piece.PLAYER_2);
+        Cell cellEmpty = new Cell(null, null);
 
         assertThat(cell1.hashCode() == cell1.hashCode(), is(true));
         assertThat(cell1.hashCode() == cell2.hashCode(), is(false));
+        assertThat(cellEmpty.hashCode(), equalTo(0));
     }
 
     @Test
