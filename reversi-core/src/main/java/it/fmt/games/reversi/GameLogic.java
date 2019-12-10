@@ -14,10 +14,6 @@ public class GameLogic {
         return board;
     }
 
-    public GameLogic(Board board) {
-        this.board = board;
-    }
-
     public GameLogic() {
         this.board = new Board();
     }
@@ -31,8 +27,8 @@ public class GameLogic {
     }
 
     private void insertPieces(Piece piece, List<Coordinates> coordsList) {
-        InsertPieceOperation insertPieceOperation =new InsertPieceOperation(board, piece);
-        board=insertPieceOperation.insert(coordsList);
+        InsertPieceOperation insertPieceOperation = new InsertPieceOperation(board, piece);
+        board = insertPieceOperation.insert(coordsList);
     }
 
     public void initializeBoard() {
@@ -43,22 +39,22 @@ public class GameLogic {
         otherPlayer = new Player2();
     }
 
-    public AvailableMoves findMovesForPlayers(){
-        AvailableMovesFinder finderCurrentPlayer = new AvailableMovesFinder(board , currentPlayer.getPiece());
-        AvailableMovesFinder finderOtherPlayer = new AvailableMovesFinder(board , otherPlayer.getPiece());
+    public AvailableMoves findMovesForPlayers() {
+        AvailableMovesFinder finderCurrentPlayer = new AvailableMovesFinder(board, currentPlayer.getPiece());
+        AvailableMovesFinder finderOtherPlayer = new AvailableMovesFinder(board, otherPlayer.getPiece());
         List<Coordinates> list1 = finderCurrentPlayer.findMoves();
-        return new AvailableMoves(list1,finderOtherPlayer.findMoves());
+        return new AvailableMoves(list1, finderOtherPlayer.findMoves());
     }
 
-    public void insertSelectedMove (Coordinates coord){
-        Piece piece=this.currentPlayer.getPiece();
-        EnemyPiecesToCaptureFinder enemyPiecesFinder = new EnemyPiecesToCaptureFinder(board,coord,piece);
+    public void insertSelectedMove(Coordinates coord) {
+        Piece piece = this.currentPlayer.getPiece();
+        EnemyPiecesToCaptureFinder enemyPiecesFinder = new EnemyPiecesToCaptureFinder(board, coord, piece);
         List<Coordinates> piecesToInsert = enemyPiecesFinder.find();
         piecesToInsert.add(coord);
         insertPieces(piece, piecesToInsert);
     }
 
-    public void switchPlayer(){
+    public void switchPlayer() {
         Player temp = currentPlayer;
         currentPlayer = otherPlayer;
         otherPlayer = temp;
