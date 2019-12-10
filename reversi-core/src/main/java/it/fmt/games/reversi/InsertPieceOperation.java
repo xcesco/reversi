@@ -12,17 +12,9 @@ public class InsertPieceOperation {
         this.pieceToInsert=pieceToInsert;
     }
 
-    public InsertPieceOperation insert(Coordinates position) {
-        board.setCell(position, pieceToInsert);
-        return this;
-    }
-
-    public InsertPieceOperation insert(List<Coordinates> positions) {
+    public Board insert(List<Coordinates> positions) {
         positions.forEach(position -> board.setCell(position, pieceToInsert));
-        return this;
-    }
-
-    public Board getBoard() {
         return board;
     }
+
 }

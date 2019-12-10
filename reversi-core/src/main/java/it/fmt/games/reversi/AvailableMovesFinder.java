@@ -11,7 +11,7 @@ public class AvailableMovesFinder {
     protected final Board board;
 
 
-    public AvailableMovesFinder(Piece piece, Board board) {
+    public AvailableMovesFinder(Board board, Piece piece) {
         this.currentPlayer = piece;
         this.otherPlayer = piece == Piece.PLAYER_1 ? Piece.PLAYER_2 : Piece.PLAYER_1;
         this.board = board;
@@ -35,13 +35,13 @@ public class AvailableMovesFinder {
                 Stream.of(Direction.values()).anyMatch(direction -> hasPiecesToInvertAlongDirection(cell.getCoordinates(), direction));
     }
 
-    protected boolean hasPiecesToInvertAlongDirection(Coordinates initialCoordinates, Direction direction) {
+    private boolean hasPiecesToInvertAlongDirection(Coordinates initialCoordinates, Direction direction) {
         int piecesToReverte = (int) findEnemyPiecesAlongDirection(initialCoordinates, direction).count();
         return piecesToReverte > 0 &&
                 board.isCellContentEqualsTo(initialCoordinates.translate(direction, piecesToReverte + 1), this.currentPlayer);
     }
 
-    protected Stream<Coordinates> findEnemyPiecesAlongDirection(Coordinates coordinates, Direction direction) {
+    private Stream<Coordinates> findEnemyPiecesAlongDirection(Coordinates coordinates, Direction direction) {
 
         return Stream.iterate(coordinates.translate(direction),
                 coords -> board.isCellContentEqualsTo(coords, this.otherPlayer),

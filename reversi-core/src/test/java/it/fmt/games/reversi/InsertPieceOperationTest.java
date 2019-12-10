@@ -2,6 +2,7 @@ package it.fmt.games.reversi;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static it.fmt.games.reversi.BoardReader.readBoards;
@@ -21,25 +22,23 @@ public class InsertPieceOperationTest {
     }
 
     @Test
-    void insertEmpty() throws Exception {
+    void insertEmpty() {
         Board board = new Board();
         assertThrows(InvalidInsertOperationException.class, () -> {
             InsertPieceOperation insertPieceOperation = new InsertPieceOperation(board, null);
-            insertPieceOperation.insert(Coordinates.of("c4"));
+            insertPieceOperation.insert(Arrays.asList(Coordinates.of("c4")));
         });
-
     }
 
     private void checkMove(Board[] snapshots, Piece piece, String coords, int boardIndex) {
         Coordinates move = Coordinates.of(coords);
         EnemyPiecesToCaptureFinder finder = new EnemyPiecesToCaptureFinder(snapshots[boardIndex - 1], move, piece);
-        List<Coordinates> positionsToInvert = finder.find();
+        List<Coordinates> positionsToInsert = finder.find();
+        positionsToInsert.add(move);
 
         InsertPieceOperation insertPieceOperation = new InsertPieceOperation(snapshots[boardIndex - 1], piece);
         Board result = insertPieceOperation
-                .insert(move)
-                .insert(positionsToInvert)
-                .getBoard();
+                .insert(positionsToInsert);
 
         assertThat(result, equalTo(snapshots[boardIndex]));
     }

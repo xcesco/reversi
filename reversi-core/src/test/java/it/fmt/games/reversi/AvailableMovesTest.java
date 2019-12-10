@@ -2,7 +2,6 @@ package it.fmt.games.reversi;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -49,8 +48,8 @@ public class AvailableMovesTest {
     public AvailableMoves checkAvailableMoves(String fileName) throws Exception {
         Board board = BoardReader.read(fileName);
 
-        AvailableMovesFinder movesPlayer1Finder = new AvailableMovesFinder(Piece.PLAYER_1, board);
-        AvailableMovesFinder movesPlayer2Finder = new AvailableMovesFinder(Piece.PLAYER_2, board);
+        AvailableMovesFinder movesPlayer1Finder = new AvailableMovesFinder(board, Piece.PLAYER_1);
+        AvailableMovesFinder movesPlayer2Finder = new AvailableMovesFinder(board, Piece.PLAYER_2);
 
         List<Coordinates> availableMovesForPlayer1 = movesPlayer1Finder.findMoves();
         List<Coordinates> availableMovesForPlayer2 = movesPlayer2Finder.findMoves();
