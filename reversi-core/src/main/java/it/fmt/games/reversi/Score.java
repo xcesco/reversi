@@ -13,6 +13,24 @@ public class Score {
         return player1Scores;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Score score = (Score) o;
+
+        if (player1Scores != score.player1Scores) return false;
+        return player2Scores == score.player2Scores;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = player1Scores;
+        result = 31 * result + player2Scores;
+        return result;
+    }
+
     public int getPlayer2Scores() {
         return player2Scores;
     }

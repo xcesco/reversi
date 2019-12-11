@@ -23,6 +23,24 @@ public class AvailableMoves {
         return movesOtherPlayer;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AvailableMoves that = (AvailableMoves) o;
+
+        if (!movesCurrentPlayer.equals(that.movesCurrentPlayer)) return false;
+        return movesOtherPlayer.equals(that.movesOtherPlayer);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = movesCurrentPlayer.hashCode();
+        result = 31 * result + movesOtherPlayer.hashCode();
+        return result;
+    }
+
     public boolean isAvailableMovesCurrentPlayer() {
         return !(movesCurrentPlayer.isEmpty());
     }
