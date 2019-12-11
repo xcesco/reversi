@@ -1,5 +1,7 @@
 package it.fmt.games.reversi;
 
+import it.fmt.games.reversi.model.*;
+
 public class Reversi {
     private final GameRenderer renderer;
 
