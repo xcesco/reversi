@@ -1,5 +1,7 @@
 package it.fmt.games.reversi;
 
+import it.fmt.games.reversi.exceptions.InvalidInsertOperationException;
+
 import java.util.List;
 
 public class InsertPieceOperation {

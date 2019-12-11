@@ -15,8 +15,8 @@ class ScoreCalculatorTest {
         ScoreCalculator scoreCalculator = new ScoreCalculator(board);
         Score score = scoreCalculator.execute();
 
-        assertThat(score.getPlayer1Scores(), equalTo(0));
-        assertThat(score.getPlayer2Scores(), equalTo(0));
+        assertThat(score.getPlayer1Score(), equalTo(0));
+        assertThat(score.getPlayer2Score(), equalTo(0));
     }
 
     @Test
@@ -27,8 +27,8 @@ class ScoreCalculatorTest {
         ScoreCalculator scoreCalculator = new ScoreCalculator(board);
         Score score = scoreCalculator.execute();
 
-        assertThat(score.getPlayer1Scores(), equalTo(1));
-        assertThat(score.getPlayer2Scores(), equalTo(0));
+        assertThat(score.getPlayer1Score(), equalTo(1));
+        assertThat(score.getPlayer2Score(), equalTo(0));
     }
 
     @Test
@@ -39,8 +39,8 @@ class ScoreCalculatorTest {
         ScoreCalculator scoreCalculator = new ScoreCalculator(board);
         Score score = scoreCalculator.execute();
 
-        assertThat(score.getPlayer1Scores(), equalTo(0));
-        assertThat(score.getPlayer2Scores(), equalTo(1));
+        assertThat(score.getPlayer1Score(), equalTo(0));
+        assertThat(score.getPlayer2Score(), equalTo(1));
     }
 
     @Test
@@ -50,8 +50,8 @@ class ScoreCalculatorTest {
         ScoreCalculator scoreCalculator = new ScoreCalculator(board);
         Score score = scoreCalculator.execute();
 
-        assertThat(score.getPlayer1Scores(), equalTo(1));
-        assertThat(score.getPlayer2Scores(), equalTo(3));
+        assertThat(score.getPlayer1Score(), equalTo(1));
+        assertThat(score.getPlayer2Score(), equalTo(3));
     }
 
     @Test
@@ -61,8 +61,8 @@ class ScoreCalculatorTest {
         ScoreCalculator scoreCalculator = new ScoreCalculator(board);
         Score score = scoreCalculator.execute();
 
-        assertThat(score.getPlayer1Scores(), equalTo(8));
-        assertThat(score.getPlayer2Scores(), equalTo(10));
+        assertThat(score.getPlayer1Score(), equalTo(8));
+        assertThat(score.getPlayer2Score(), equalTo(10));
     }
 
     @Test

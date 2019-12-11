@@ -1,5 +1,7 @@
 package it.fmt.games.reversi;
 
+import it.fmt.games.reversi.exceptions.InvalidCoordinatesException;
+
 public class Coordinates implements Comparable<Coordinates> {
     private int row;
     private int column;

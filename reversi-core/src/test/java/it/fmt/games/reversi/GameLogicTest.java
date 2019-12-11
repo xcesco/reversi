@@ -15,7 +15,7 @@ class GameLogicTest {
     @Test
     void initBoard() throws Exception {
         GameLogic gameLogic = new GameLogic();
-        gameLogic.initializeBoard();
+        gameLogic.initialize();
         Board aspectedBoard = BoardReader.read("gameLogicTest");
 
         assertThat(gameLogic.getBoard(), is(aspectedBoard));
@@ -29,7 +29,7 @@ class GameLogicTest {
         List<Coordinates> aspectedMovesForPlayer2 = Arrays.asList(of("e3"), of("f4"), of("c5"), of("d6"));
 
         GameLogic gameLogic = new GameLogic();
-        gameLogic.initializeBoard();
+        gameLogic.initialize();
 
         AvailableMoves availableMoves = gameLogic.findMovesForPlayers();
         checkAvailableMovesFinder(availableMoves.getMovesCurrentPlayer(), aspectedMovesForPlayer1);
@@ -44,7 +44,7 @@ class GameLogicTest {
     @Test
     void insertSelectedMove() throws Exception {
         GameLogic gameLogic = new GameLogic();
-        gameLogic.initializeBoard();
+        gameLogic.initialize();
 
         AvailableMoves availableMoves = gameLogic.findMovesForPlayers();
         Coordinates player1Move = availableMoves.getMovesCurrentPlayer().get(0);
@@ -59,7 +59,7 @@ class GameLogicTest {
     @Test
     void switchPlayer() {
         GameLogic gameLogic = new GameLogic();
-        gameLogic.initializeBoard();
+        gameLogic.initialize();
 
         gameLogic.switchPlayer();
         assertThat(gameLogic.getCurrentPlayer().getPiece(), is(Piece.PLAYER_2));

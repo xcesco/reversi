@@ -10,8 +10,8 @@ public class ScoreTest {
     @Test
     public void playersScoresTest() {
         Score scores = new Score(6,7);
-        assertThat(scores.getPlayer1Scores(), is(6));
-        assertThat(scores.getPlayer2Scores(), is(7));
+        assertThat(scores.getPlayer1Score(), is(6));
+        assertThat(scores.getPlayer2Score(), is(7));
     }
 
 }

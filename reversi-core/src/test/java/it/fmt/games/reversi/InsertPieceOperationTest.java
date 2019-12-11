@@ -1,5 +1,6 @@
 package it.fmt.games.reversi;
 
+import it.fmt.games.reversi.exceptions.InvalidInsertOperationException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

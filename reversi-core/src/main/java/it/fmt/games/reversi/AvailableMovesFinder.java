@@ -1,5 +1,7 @@
 package it.fmt.games.reversi;
 
+import it.fmt.games.reversi.exceptions.InvalidPieceSelectedException;
+
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;

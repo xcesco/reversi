@@ -1,5 +1,7 @@
 package it.fmt.games.reversi;
 
+import it.fmt.games.reversi.exceptions.InvalidBoardReaderException;
+
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -84,7 +86,7 @@ public class BoardReader {
         Board[] result = readBoards(fileName);
 
         if (result == null || result.length != 1) {
-            throw new InvalidBoardSnapshotException(String.format("File %s does not contains a valid snapshot", fileName));
+            throw new InvalidBoardReaderException(String.format("File %s does not contains a valid snapshot", fileName));
         }
 
         return result[0];

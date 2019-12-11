@@ -11,7 +11,7 @@ public class AvailableMoves {
         this.movesOtherPlayer = availableMovesOtherPlayer;
     }
 
-    public boolean availableMovesForPlayers() {
+    public boolean isAnyAvailableMoves() {
         return isAvailableMovesCurrentPlayer() || !(movesOtherPlayer.isEmpty());
     }
 
@@ -44,4 +44,5 @@ public class AvailableMoves {
     public boolean isAvailableMovesCurrentPlayer() {
         return !(movesCurrentPlayer.isEmpty());
     }
+
 }

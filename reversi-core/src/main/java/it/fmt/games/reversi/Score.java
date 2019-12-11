@@ -9,7 +9,7 @@ public class Score {
         this.player2Scores=player2Scores;
     }
 
-    public int getPlayer1Scores() {
+    public int getPlayer1Score() {
         return player1Scores;
     }
 
@@ -31,7 +31,7 @@ public class Score {
         return result;
     }
 
-    public int getPlayer2Scores() {
+    public int getPlayer2Score() {
         return player2Scores;
     }
 
