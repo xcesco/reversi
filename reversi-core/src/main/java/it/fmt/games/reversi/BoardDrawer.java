@@ -7,7 +7,7 @@ public class BoardDrawer {
     private Board board;
     private Piece player = Piece.PLAYER_1;
     private List<Coordinates> playerMoves;
-    private final String prefix = "\t";
+    static final String PREFIX = "\t";
     static final String ROW_SEPARATOR = "  +-----+-----+-----+-----+-----+-----+-----+-----+";
 
     public BoardDrawer(Board board) {
@@ -18,15 +18,15 @@ public class BoardDrawer {
 
     public void drawBoard() {
 
-        System.out.print(prefix+"  ");
+        System.out.print(PREFIX +"  ");
         IntStream.range(0, Board.BOARD_SIZE).forEach(col ->
                         System.out.print(String.format("   %s  ", (char) ('A' + col))));
-        System.out.println("\n" + prefix + ROW_SEPARATOR);
+        System.out.println("\n" + PREFIX + ROW_SEPARATOR);
         IntStream.range(0, Board.BOARD_SIZE).forEach(row -> {
-                System.out.print(String.format(prefix + "%s |", row + 1));
+                System.out.print(String.format(PREFIX + "%s |", row + 1));
                 IntStream.range(0, Board.BOARD_SIZE).forEach(col ->
                         System.out.print(String.format("  %s  |", drawAvailableMovesOnBoard(Coordinates.of(row, col)))));
-                System.out.println("\n" + prefix + ROW_SEPARATOR);
+                System.out.println("\n" + PREFIX + ROW_SEPARATOR);
         });
     }
 
@@ -40,7 +40,7 @@ public class BoardDrawer {
     }
 
     public void drawAvailableMove() {
-        System.out.print("\n" + prefix + "Available moves for player" + (player == Piece.PLAYER_1 ? "1 (pieces O)" : "2 (pieces X)") + ":\n" + prefix);
+        System.out.print("\n" + PREFIX + "Available moves for player" + (player == Piece.PLAYER_1 ? "1 (pieces O)" : "2 (pieces X)") + ":\n" + PREFIX);
         playerMoves.forEach(moves -> System.out.print(String.format(moves + " ")));
     }
 }
