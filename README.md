@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/xcesco/reversi.svg?branch=master)](https://travis-ci.org/xcesco/reversi)
 [![codecov](https://codecov.io/gh/xcesco/reversi/branch/master/graph/badge.svg)](https://codecov.io/gh/xcesco/reversi)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=it.fmt.games.reversi%3Areversi-project&metric=alert_status)](https://sonarcloud.io/dashboard?id=it.fmt.games.reversi%3Areversi-project)
+[![GitHub issues](https://img.shields.io/github/issues/xcesco/reversi.svg)](https://github.com/xcesco/reversi/issues)
 
 # Reversi
 By [Francesco Benincasa](https://github.com/xcesco), [Tiziano Bonifazi](https://github.com/tboni91), [Matteo Franco](https://github.com/M4TT3O-91)
