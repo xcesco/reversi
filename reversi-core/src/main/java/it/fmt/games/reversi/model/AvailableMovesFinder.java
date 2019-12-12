@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class AvailableMovesFinder extends AbstractBoardOperation {
+public class AvailableMovesFinder extends AbstractPieceOperation {
 
     public AvailableMovesFinder(Board board, Piece piece) {
         super(board, piece);

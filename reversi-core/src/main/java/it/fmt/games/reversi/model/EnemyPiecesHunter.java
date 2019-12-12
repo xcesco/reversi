@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class EnemyPiecesHunter extends AbstractBoardOperation {
+public class EnemyPiecesHunter extends AbstractPieceOperation {
     private final Coordinates searchOrigin;
 
     public EnemyPiecesHunter(Board board, Coordinates coords, Piece piece) {

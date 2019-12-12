@@ -4,12 +4,12 @@ import it.fmt.games.reversi.exceptions.InvalidPieceSelectedException;
 
 import java.util.stream.Stream;
 
-public abstract class AbstractBoardOperation {
+public abstract class AbstractPieceOperation {
     protected final Piece piece;
     protected final Piece enemyPiece;
     protected final Board board;
 
-    public AbstractBoardOperation(Board board, Piece piece) {
+    public AbstractPieceOperation(Board board, Piece piece) {
         if (piece == Piece.EMPTY) throw (new InvalidPieceSelectedException());
         this.piece = piece;
         this.enemyPiece = piece == Piece.PLAYER_1 ? Piece.PLAYER_2 : Piece.PLAYER_1;
