@@ -13,7 +13,7 @@
     <version>0.2.0-SNAPSHOT</version>
 
     <packaging>pom</packaging>
-    <name>Reversi project</name>
+    <name>reversi-project</name>
     <description>Reversi - project</description>
     <url>https://github.com/xcesco/reversi</url>
 

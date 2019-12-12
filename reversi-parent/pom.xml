@@ -7,7 +7,7 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Reversi (Parent)</name>
+    <name>reversi-parent</name>
     <description>Reversi Game - parent pom</description>
     <url>https://github.com/xcesco/reversi</url>
 
