@@ -1,7 +1,6 @@
 package it.fmt.games.reversi.model;
 
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.IntStream;
 
 public class BoardDrawer {

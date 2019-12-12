@@ -1,11 +1,6 @@
-package it.fmt.games.reversi;
+package it.fmt.games.reversi.model;
 
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-
-import static it.fmt.games.reversi.Coordinates.of;
-import static org.junit.jupiter.api.Assertions.*;
 
 class BoardDrawerTest {
 
