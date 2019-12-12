@@ -2,21 +2,26 @@ package it.fmt.games.reversi.model;
 
 import it.fmt.games.reversi.exceptions.InvalidInsertOperationException;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class InsertPieceOperation {
-    private final Board board;
-    private final Piece pieceToInsert;
-
-    public InsertPieceOperation(Board board, Piece pieceToInsert) {
-        if (pieceToInsert==null) throw new InvalidInsertOperationException();
-        this.board = board.copy();
-        this.pieceToInsert=pieceToInsert;
+public abstract class InsertPieceOperation {
+    public static Board insertMove(Board board, PlayerMove move) {
+        List<Coordinates> coordinateToInsert = new ArrayList<>(move.getCapturedEnemyPiecesCoords());
+        coordinateToInsert.add(move.getMoveCoords());
+        return insertMove(board, move.getPiece(), coordinateToInsert);
     }
 
-    public Board insert(List<Coordinates> positions) {
-        positions.forEach(position -> board.setCell(position, pieceToInsert));
-        return board;
+    public static Board insertMove(Board board, Piece piece, List<Coordinates> coordinates) {
+        if (piece == null || piece == Piece.EMPTY) throw new InvalidInsertOperationException();
+        Board boardResult = board.copy();
+        coordinates.forEach(position -> boardResult.setCell(position, piece));
+        return boardResult;
+    }
+
+    public static Board insertMove(Board board, Piece piece, Coordinates... coordinates) {
+        return insertMove(board, piece, Arrays.asList(coordinates));
     }
 
 }

@@ -13,15 +13,15 @@ public class AvailableMovesTest {
     @Test
     public void noMovesForAllPlayers() throws Exception {
         AvailableMoves availableMoves = checkAvailableMoves("available_moves00");
-        assertThat(availableMoves.isAvailableMovesCurrentPlayer(), is(false));
+        assertThat(availableMoves.isAvailableMovesForActivePlayer(), is(false));
         assertThat(availableMoves.isAnyAvailableMoves(), is(false));
-        assertEquals(availableMoves.getMovesCurrentPlayer().size(), availableMoves.getMovesOtherPlayer().size());
+        assertEquals(availableMoves.getMovesActivePlayer().size(), availableMoves.getMovesOtherPlayer().size());
     }
 
     @Test
     public void noMovesForOtherPlayer() throws Exception {
         AvailableMoves availableMoves = checkAvailableMoves("available_moves01");
-        assertThat(availableMoves.isAvailableMovesCurrentPlayer(), is(true));
+        assertThat(availableMoves.isAvailableMovesForActivePlayer(), is(true));
         assertThat(availableMoves.isAnyAvailableMoves(), is(true));
         assertThat(availableMoves.getMovesOtherPlayer().size(), is(0));
     }
@@ -29,17 +29,17 @@ public class AvailableMovesTest {
     @Test
     public void noMovesForCurrentPlayer() throws Exception {
         AvailableMoves availableMoves = checkAvailableMoves("available_moves02");
-        assertThat(availableMoves.isAvailableMovesCurrentPlayer(), is(false));
+        assertThat(availableMoves.isAvailableMovesForActivePlayer(), is(false));
         assertThat(availableMoves.isAnyAvailableMoves(), is(true));
-        assertThat(availableMoves.getMovesCurrentPlayer().size(), is(0));
+        assertThat(availableMoves.getMovesActivePlayer().size(), is(0));
     }
 
     @Test
     public void availableMovesForAllPlayers() throws Exception {
         AvailableMoves availableMoves = checkAvailableMoves("available_moves03");
-        assertThat(availableMoves.isAvailableMovesCurrentPlayer(), is(true));
+        assertThat(availableMoves.isAvailableMovesForActivePlayer(), is(true));
         assertThat(availableMoves.isAnyAvailableMoves(), is(true));
-        assertThat(availableMoves.getMovesCurrentPlayer().size(), is(4));
+        assertThat(availableMoves.getMovesActivePlayer().size(), is(4));
         assertThat(availableMoves.getMovesOtherPlayer().size(), is(4));
     }
 

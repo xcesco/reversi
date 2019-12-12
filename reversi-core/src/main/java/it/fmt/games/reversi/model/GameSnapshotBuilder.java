@@ -2,12 +2,13 @@ package it.fmt.games.reversi.model;
 
 import it.fmt.games.reversi.exceptions.InvalidInsertOperationException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameSnapshotBuilder {
 
     public GameSnapshotBuilder setActivePiece(Piece activePiece) {
-        if (activePiece==Piece.EMPTY) throw new InvalidInsertOperationException();
+        if (activePiece == Piece.EMPTY) throw new InvalidInsertOperationException();
         this.activePiece = activePiece;
         return this;
     }
@@ -27,15 +28,13 @@ public class GameSnapshotBuilder {
         return this;
     }
 
-    public GameSnapshotBuilder setLastMoveAndCapturedPieces(Coordinates insertedCoord, List<Coordinates> lastCapturedCoords) {
-        this.lastMove=insertedCoord;
-        this.lastCapturedCoords=lastCapturedCoords;
+    public GameSnapshotBuilder setLastMove(PlayerMove move) {
+        this.lastMove = move;
         return this;
     }
 
-    public GameSnapshotBuilder clearLastMoveAndCapturedPieces() {
-        this.lastMove=null;
-        this.lastCapturedCoords=null;
+    public GameSnapshotBuilder clearLastMove() {
+        this.lastMove = null;
         return this;
     }
 
@@ -43,11 +42,10 @@ public class GameSnapshotBuilder {
     private AvailableMoves availableMoves;
     private Score score;
     private Board board;
-    private Coordinates lastMove;
-    private List<Coordinates> lastCapturedCoords;
+    private PlayerMove lastMove;
 
     public GameSnapshot build() {
-        return new GameSnapshot(score, activePiece, availableMoves, board, GameStatusFactory.create(availableMoves, score));
+        return new GameSnapshot(score, lastMove, activePiece, availableMoves, board, GameStatusFactory.create(availableMoves, score));
     }
 
 }

@@ -1,10 +1,12 @@
 package it.fmt.games.reversi.model;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static it.fmt.games.reversi.model.AvailableMovesFinder.findMoves;
 import static it.fmt.games.reversi.model.Coordinates.of;
+import static it.fmt.games.reversi.model.InsertPieceOperation.insertMove;
+import static it.fmt.games.reversi.model.ScoreCalculator.computeScore;
 
 public class GameLogic {
     private Board board;
@@ -17,63 +19,37 @@ public class GameLogic {
         this.gameSnapshotBuilder = new GameSnapshotBuilder();
     }
 
-    public Board getBoard() {
-        return board;
-    }
-
-    public Player getCurrentPlayer() {
-        return currentPlayer;
-    }
-
-    public Player getOtherPlayer() {
-        return otherPlayer;
-    }
-
     private void insertNewMoveAndCapturedPieces(Piece piece, List<Coordinates> insertedPieceCoords) {
-        InsertPieceOperation insertPieceOperation = new InsertPieceOperation(board, piece);
-        board = insertPieceOperation.insert(insertedPieceCoords);
+        board = insertMove(board, piece, insertedPieceCoords);
     }
 
-    public void initialize() {
+    private void insertNewMoveAndCapturedPieces(PlayerMove playerMove) {
+        board = insertMove(board, playerMove);
+    }
+
+    public AvailableMoves initialize() {
+        currentPlayer = new Player1();
+        otherPlayer = new Player2();
         insertNewMoveAndCapturedPieces(Piece.PLAYER_1, Arrays.asList(of("e4"), of("d5")));
         insertNewMoveAndCapturedPieces(Piece.PLAYER_2, Arrays.asList(of("d4"), of("e5")));
 
-        currentPlayer = new Player1();
-        otherPlayer = new Player2();
-
-        gameSnapshotBuilder
-                .clearLastMoveAndCapturedPieces()
-                .setActivePiece(currentPlayer.getPiece())
-                .setScore(new ScoreCalculator(board).execute())
-                .setBoard(board.copy());
+        gameSnapshotBuilder.clearLastMove().setActivePiece(currentPlayer.getPiece()).setScore(computeScore(board)).setBoard(board.copy());
+        return findMovesForPlayers();
     }
 
     public AvailableMoves findMovesForPlayers() {
-        AvailableMovesFinder finderCurrentPlayer = new AvailableMovesFinder(board, currentPlayer.getPiece());
-        AvailableMovesFinder finderOtherPlayer = new AvailableMovesFinder(board, otherPlayer.getPiece());
-        List<Coordinates> list1 = finderCurrentPlayer.findMoves();
-        AvailableMoves availableMoves = new AvailableMoves(list1, finderOtherPlayer.findMoves());
+        AvailableMoves availableMoves = new AvailableMoves(findMoves(board, currentPlayer.getPiece()), findMoves(board, otherPlayer.getPiece()));
 
-        gameSnapshotBuilder
-                .setAvailableMoves(availableMoves);
-
+        gameSnapshotBuilder.setAvailableMoves(availableMoves);
         return availableMoves;
     }
 
     public void insertSelectedMove(Coordinates newMoveCoords) {
         Piece piece = currentPlayer.getPiece();
-        EnemyPiecesHunter enemyPiecesFinder = new EnemyPiecesHunter(board, newMoveCoords, piece);
-        List<Coordinates> capturedEnemyPiecesCoords = enemyPiecesFinder.find();
-        List<Coordinates> piecesToInsertCoords = new ArrayList<>(capturedEnemyPiecesCoords);
-        piecesToInsertCoords.add(newMoveCoords);
-        insertNewMoveAndCapturedPieces(piece, piecesToInsertCoords);
+        PlayerMove playerMove = new PlayerMove(piece, newMoveCoords, EnemyPiecesHunter.find(board, newMoveCoords, piece));
+        insertNewMoveAndCapturedPieces(playerMove);
 
-        ScoreCalculator scoreCalculator = new ScoreCalculator(board);
-        Score score = scoreCalculator.execute();
-
-        gameSnapshotBuilder.setLastMoveAndCapturedPieces(newMoveCoords, capturedEnemyPiecesCoords)
-                .setBoard(board.copy())
-                .setScore(score);
+        gameSnapshotBuilder.setLastMove(playerMove).setBoard(board.copy()).setScore(computeScore(board));
     }
 
     public void switchPlayer() {
@@ -81,7 +57,7 @@ public class GameLogic {
         currentPlayer = otherPlayer;
         otherPlayer = temp;
 
-        gameSnapshotBuilder.clearLastMoveAndCapturedPieces().setActivePiece(currentPlayer.getPiece());
+        gameSnapshotBuilder.clearLastMove().setActivePiece(currentPlayer.getPiece());
     }
 
     public GameSnapshot getGameSnapshot() {

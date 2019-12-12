@@ -12,10 +12,10 @@ public class AvailableMoves {
     }
 
     public boolean isAnyAvailableMoves() {
-        return isAvailableMovesCurrentPlayer() || !(movesOtherPlayer.isEmpty());
+        return isAvailableMovesForActivePlayer() || !(movesOtherPlayer.isEmpty());
     }
 
-    public List<Coordinates> getMovesCurrentPlayer() {
+    public List<Coordinates> getMovesActivePlayer() {
         return movesCurrentPlayer;
     }
 
@@ -41,7 +41,7 @@ public class AvailableMoves {
         return result;
     }
 
-    public boolean isAvailableMovesCurrentPlayer() {
+    public boolean isAvailableMovesForActivePlayer() {
         return !(movesCurrentPlayer.isEmpty());
     }
 

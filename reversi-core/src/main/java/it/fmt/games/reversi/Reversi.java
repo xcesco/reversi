@@ -11,14 +11,13 @@ public class Reversi {
 
     public GameSnapshot play() {
         GameLogic gameLogic = new GameLogic();
-        gameLogic.initialize();
 
-        AvailableMoves availableMoves = gameLogic.findMovesForPlayers();
+        AvailableMoves availableMoves = gameLogic.initialize();
         while (availableMoves.isAnyAvailableMoves()) {
             renderer.render(gameLogic.getGameSnapshot());
 
-            if (availableMoves.isAvailableMovesCurrentPlayer()) {
-                Coordinates nextMove = availableMoves.getMovesCurrentPlayer().get(0);
+            if (availableMoves.isAvailableMovesForActivePlayer()) {
+                Coordinates nextMove = availableMoves.getMovesActivePlayer().get(0);
                 gameLogic.insertSelectedMove(nextMove);
             }
 

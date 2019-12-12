@@ -3,7 +3,6 @@ package it.fmt.games.reversi.model;
 import it.fmt.games.reversi.exceptions.InvalidInsertOperationException;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static it.fmt.games.reversi.model.BoardReader.readBoards;
@@ -26,8 +25,7 @@ public class InsertPieceOperationTest {
     void insertEmpty() {
         Board board = new Board();
         assertThrows(InvalidInsertOperationException.class, () -> {
-            InsertPieceOperation insertPieceOperation = new InsertPieceOperation(board, null);
-            insertPieceOperation.insert(Arrays.asList(Coordinates.of("c4")));
+            InsertPieceOperation.insertMove(board, null, Coordinates.of("c4"));
         });
     }
 
@@ -37,9 +35,7 @@ public class InsertPieceOperationTest {
         List<Coordinates> positionsToInsert = finder.find();
         positionsToInsert.add(move);
 
-        InsertPieceOperation insertPieceOperation = new InsertPieceOperation(snapshots[boardIndex - 1], piece);
-        Board result = insertPieceOperation
-                .insert(positionsToInsert);
+        Board result = InsertPieceOperation.insertMove(snapshots[boardIndex - 1], piece, positionsToInsert);
 
         assertThat(result, equalTo(snapshots[boardIndex]));
     }

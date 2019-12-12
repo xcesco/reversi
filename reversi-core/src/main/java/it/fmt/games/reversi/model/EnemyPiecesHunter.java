@@ -20,6 +20,11 @@ public class EnemyPiecesHunter {
         this.enemyPiece = piece == Piece.PLAYER_1 ? Piece.PLAYER_2 : Piece.PLAYER_1;
     }
 
+    public static List<Coordinates> find(Board board, Coordinates newMoveCoords, Piece piece) {
+        EnemyPiecesHunter hunter = new EnemyPiecesHunter(board, newMoveCoords, piece);
+        return hunter.find();
+    }
+
     public List<Coordinates> find() {
         return Stream.of(Direction.values()).filter(this::isAnyPieceToInvertAlongDirection)
                 .map(this::rotateEnemyPieces).flatMap(x -> x).sorted()

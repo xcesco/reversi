@@ -12,8 +12,7 @@ class ScoreCalculatorTest {
     void noScore() {
         Board board = new Board();
 
-        ScoreCalculator scoreCalculator = new ScoreCalculator(board);
-        Score score = scoreCalculator.execute();
+        Score score = ScoreCalculator.computeScore(board);
 
         assertThat(score.getPlayer1Score(), equalTo(0));
         assertThat(score.getPlayer2Score(), equalTo(0));
@@ -24,8 +23,7 @@ class ScoreCalculatorTest {
         Board board = new Board();
         board.setCell(Coordinates.of("a1"), Piece.PLAYER_1);
 
-        ScoreCalculator scoreCalculator = new ScoreCalculator(board);
-        Score score = scoreCalculator.execute();
+        Score score = ScoreCalculator.computeScore(board);
 
         assertThat(score.getPlayer1Score(), equalTo(1));
         assertThat(score.getPlayer2Score(), equalTo(0));
@@ -36,8 +34,7 @@ class ScoreCalculatorTest {
         Board board = new Board();
         board.setCell(Coordinates.of("d5"), Piece.PLAYER_2);
 
-        ScoreCalculator scoreCalculator = new ScoreCalculator(board);
-        Score score = scoreCalculator.execute();
+        Score score = ScoreCalculator.computeScore(board);
 
         assertThat(score.getPlayer1Score(), equalTo(0));
         assertThat(score.getPlayer2Score(), equalTo(1));
@@ -47,8 +44,7 @@ class ScoreCalculatorTest {
     void readPieces() throws Exception {
         Board board = BoardReader.read("boardScoreTest1");
 
-        ScoreCalculator scoreCalculator = new ScoreCalculator(board);
-        Score score = scoreCalculator.execute();
+        Score score = ScoreCalculator.computeScore(board);
 
         assertThat(score.getPlayer1Score(), equalTo(1));
         assertThat(score.getPlayer2Score(), equalTo(3));
@@ -58,8 +54,7 @@ class ScoreCalculatorTest {
     void readConsecutiveAndAlternatePieces() throws Exception {
         Board board = BoardReader.read("boardScoreTest2");
 
-        ScoreCalculator scoreCalculator = new ScoreCalculator(board);
-        Score score = scoreCalculator.execute();
+        Score score = ScoreCalculator.computeScore(board);
 
         assertThat(score.getPlayer1Score(), equalTo(8));
         assertThat(score.getPlayer2Score(), equalTo(10));

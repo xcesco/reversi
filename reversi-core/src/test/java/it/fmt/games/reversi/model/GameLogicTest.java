@@ -18,9 +18,10 @@ class GameLogicTest {
         gameLogic.initialize();
         Board aspectedBoard = BoardReader.read("gameLogicTest");
 
-        assertThat(gameLogic.getBoard(), is(aspectedBoard));
-        assertThat(gameLogic.getCurrentPlayer().getPiece(), is(Piece.PLAYER_1));
-        assertThat(gameLogic.getOtherPlayer().getPiece(), is(Piece.PLAYER_2));
+        GameSnapshot gameSnapshot = gameLogic.getGameSnapshot();
+        assertThat(gameSnapshot.getBoard(), is(aspectedBoard));
+        assertThat(gameSnapshot.getActivePiece(), is(Piece.PLAYER_1));
+        assertThat(gameSnapshot.getOtherPlayer(), is(Piece.PLAYER_2));
     }
 
     @Test
@@ -32,7 +33,7 @@ class GameLogicTest {
         gameLogic.initialize();
 
         AvailableMoves availableMoves = gameLogic.findMovesForPlayers();
-        checkAvailableMovesFinder(availableMoves.getMovesCurrentPlayer(), aspectedMovesForPlayer1);
+        checkAvailableMovesFinder(availableMoves.getMovesActivePlayer(), aspectedMovesForPlayer1);
         checkAvailableMovesFinder(availableMoves.getMovesOtherPlayer(), aspectedMovesForPlayer2);
     }
 
@@ -47,13 +48,12 @@ class GameLogicTest {
         gameLogic.initialize();
 
         AvailableMoves availableMoves = gameLogic.findMovesForPlayers();
-        Coordinates player1Move = availableMoves.getMovesCurrentPlayer().get(0);
+        Coordinates player1Move = availableMoves.getMovesActivePlayer().get(0);
         gameLogic.insertSelectedMove(player1Move);
 
-
         Board aspectedBoard = BoardReader.read("gameLogicTest1");
-
-        assertThat(gameLogic.getBoard(), is(aspectedBoard));
+        GameSnapshot gameSnapshot = gameLogic.getGameSnapshot();
+        assertThat(gameSnapshot.getBoard(), is(aspectedBoard));
     }
 
     @Test
@@ -62,8 +62,9 @@ class GameLogicTest {
         gameLogic.initialize();
 
         gameLogic.switchPlayer();
-        assertThat(gameLogic.getCurrentPlayer().getPiece(), is(Piece.PLAYER_2));
-        assertThat(gameLogic.getOtherPlayer().getPiece(), is(Piece.PLAYER_1));
+        GameSnapshot gameSnapshot = gameLogic.getGameSnapshot();
+        assertThat(gameSnapshot.getActivePiece(), is(Piece.PLAYER_2));
+        assertThat(gameSnapshot.getOtherPlayer(), is(Piece.PLAYER_1));
 
 
     }

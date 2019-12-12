@@ -20,6 +20,12 @@ public class AvailableMovesFinder {
         if (piece == Piece.EMPTY) throw (new InvalidPieceSelectedException());
     }
 
+    public static List<Coordinates> findMoves(Board board, Piece piece) {
+        AvailableMovesFinder finder = new AvailableMovesFinder(board, piece);
+
+        return finder.findMoves();
+    }
+
     public List<Coordinates> findMoves() {
         return getAvailableCoordinates(this::onlyValidCell);
     }
