@@ -10,7 +10,7 @@ public abstract class AbstractPieceOperation {
     protected final Board board;
 
     public AbstractPieceOperation(Board board, Piece piece) {
-        if (piece == Piece.EMPTY) throw (new InvalidPieceSelectedException());
+        if (piece == null || piece == Piece.EMPTY) throw (new InvalidPieceSelectedException());
         this.piece = piece;
         this.enemyPiece = piece == Piece.PLAYER_1 ? Piece.PLAYER_2 : Piece.PLAYER_1;
         this.board = board;
