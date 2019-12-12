@@ -1,6 +1,4 @@
 package it.fmt.games.reversi.desktop;
-// 2012-04-23
-// Graham Mitchell
 
 import javax.swing.*;
 import java.awt.*;

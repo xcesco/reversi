@@ -20,6 +20,7 @@
     <modules>
         <module>reversi-parent</module>
         <module>reversi-core</module>
+        <module>reversi-console</module>
         <module>reversi-desktop</module>
     </modules>
 
