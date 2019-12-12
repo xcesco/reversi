@@ -57,7 +57,7 @@ public class GameLogic {
         currentPlayer = otherPlayer;
         otherPlayer = temp;
 
-        gameSnapshotBuilder.clearLastMove().setActivePiece(currentPlayer.getPiece());
+        gameSnapshotBuilder.setActivePiece(currentPlayer.getPiece());
     }
 
     public GameSnapshot getGameSnapshot() {

@@ -25,13 +25,13 @@ public class ConsoleRenderer implements GameRenderer {
         System.out.println("");
     }
 
-    private void drawPlayerMove(Piece piece, Coordinates nextMove, List<Coordinates> invertedCoordinates) {
-        if (invertedCoordinates != null) {
-            System.out.println(String.format(prefix + "%s moves on %s", piece, nextMove));
-            String result = invertedCoordinates.stream()
+    private void drawPlayerMove(PlayerMove move) {
+        if (move != null) {
+            System.out.println(String.format(prefix + "%s moves on %s", move.getPiece(), move.getMoveCoords()));
+            String result = move.getCapturedEnemyPiecesCoords().stream()
                     .map(String::valueOf)
                     .collect(Collectors.joining(", ", "{", "}"));
-            System.out.println(String.format(prefix + "inverted pieces on (#%s): %s", invertedCoordinates.size(), result));
+            System.out.println(String.format(prefix + "inverted pieces on (#%s): %s", move.getCapturedEnemyPiecesCoords().size(), result));
         }
     }
 
@@ -86,7 +86,7 @@ public class ConsoleRenderer implements GameRenderer {
 
     @Override
     public void render(GameSnapshot gameSnapshot) {
-        //drawPlayerMove(gameSnapshot.getInactivePiece(), gameSnapshot.getLastMove(), gameSnapshot.getInvertedPiecesByInactivePiece());
+        drawPlayerMove(gameSnapshot.getLastMove());
         drawCurrentPlayer(gameSnapshot.getActivePiece());
         drawAvailableMoves(gameSnapshot.getAvailableMoves().getMovesActivePlayer());
         drawBoard(gameSnapshot.getBoard());
