@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-class ReversiTest {
+public class ReversiTest {
 
     @Test
-    void checkGameSnapshot() {
+    public void checkGameSnapshot() {
         Reversi reversi = new Reversi(gameSnapshot -> {
             assertThat(gameSnapshot, notNullValue());
             assertThat(gameSnapshot.getStatus(), notNullValue());
@@ -27,7 +27,7 @@ class ReversiTest {
     }
 
     @Test
-    void playOnConsole() {
+    public void playOnConsole() {
         Reversi reversi = new Reversi(new ConsoleRenderer());
         GameSnapshot result = reversi.play();
 

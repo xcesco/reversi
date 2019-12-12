@@ -7,7 +7,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.hamcrest.Matchers.*;
 
-class BoardTest {
+public class BoardTest {
 
     @Test
     public void setCell() {

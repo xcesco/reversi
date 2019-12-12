@@ -6,10 +6,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class ScoreCalculatorTest {
+public class ScoreCalculatorTest {
 
     @Test
-    void noScore() {
+    public void noScore() {
         Board board = new Board();
 
         Score score = ScoreCalculator.computeScore(board);
@@ -19,7 +19,7 @@ class ScoreCalculatorTest {
     }
 
     @Test
-    void onePiecePlayer1() {
+    public void onePiecePlayer1() {
         Board board = new Board();
         board.setCell(Coordinates.of("a1"), Piece.PLAYER_1);
 
@@ -30,7 +30,7 @@ class ScoreCalculatorTest {
     }
 
     @Test
-    void onePiecePlayer2() {
+    public void onePiecePlayer2() {
         Board board = new Board();
         board.setCell(Coordinates.of("d5"), Piece.PLAYER_2);
 
@@ -41,7 +41,7 @@ class ScoreCalculatorTest {
     }
 
     @Test
-    void readPieces() throws Exception {
+    public void readPieces() throws Exception {
         Board board = BoardReader.read("boardScoreTest1");
 
         Score score = ScoreCalculator.computeScore(board);
@@ -51,7 +51,7 @@ class ScoreCalculatorTest {
     }
 
     @Test
-    void readConsecutiveAndAlternatePieces() throws Exception {
+    public void readConsecutiveAndAlternatePieces() throws Exception {
         Board board = BoardReader.read("boardScoreTest2");
 
         Score score = ScoreCalculator.computeScore(board);
@@ -61,7 +61,7 @@ class ScoreCalculatorTest {
     }
 
     @Test
-    void invalidCoordinates() {
+    public void invalidCoordinates() {
         Board board = new Board();
 
         assertThrows(RuntimeException.class, () -> {

@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class InsertPieceOperationTest {
 
     @Test
-    void execute() throws Exception {
+    public void execute() throws Exception {
         Board[] snapshots = readBoards("insert_piece01");
 
         checkMove(snapshots, Piece.PLAYER_1, "c4", 1);
@@ -22,7 +22,7 @@ public class InsertPieceOperationTest {
     }
 
     @Test
-    void insertEmpty() {
+    public void insertEmpty() {
         Board board = new Board();
         assertThrows(InvalidInsertOperationException.class, () -> {
             InsertPieceOperation.insertMove(board, null, Coordinates.of("c4"));

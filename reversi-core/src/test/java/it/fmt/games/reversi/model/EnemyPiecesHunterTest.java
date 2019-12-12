@@ -12,10 +12,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static it.fmt.games.reversi.model.Coordinates.of;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class EnemyPiecesHunterTest {
+public class EnemyPiecesHunterTest {
 
     @Test
-    void failOnInvalidPiece() {
+    public void failOnInvalidPiece() {
         assertThrows(InvalidPieceSelectedException.class, () -> {
             new EnemyPiecesHunter(null, of("a1"), Piece.EMPTY);
         });
@@ -26,44 +26,44 @@ class EnemyPiecesHunterTest {
     }
 
     @Test
-    void find00() throws Exception {
+    public void find00() throws Exception {
         assertThrows(InvalidPieceSelectedException.class, () -> {
             new EnemyPiecesHunter(null, of("a1"), Piece.EMPTY);
         });
     }
 
     @Test
-    void find01() throws Exception {
+    public void find01() throws Exception {
         checkEnemyPieceFinderForPlayer1(of("d1"), "enemy_pieces_to_capture_finder01", of("c1"));
     }
 
     @Test
-    void find02() throws Exception {
+    public void find02() throws Exception {
         checkEnemyPieceFinderForPlayer1(of("d1"), "enemy_pieces_to_capture_finder02");
     }
 
     @Test
-    void find03() throws Exception {
+    public void find03() throws Exception {
         checkEnemyPieceFinderForPlayer1(of("c4"), "enemy_pieces_to_capture_finder03", of("d4"));
     }
 
     @Test
-    void find03Player2() throws Exception {
+    public void find03Player2() throws Exception {
         checkEnemyPieceFinderForPlayer2(of("f4"), "enemy_pieces_to_capture_finder03", of("e4"));
     }
 
     @Test
-    void find04() throws Exception {
+    public void find04() throws Exception {
         checkEnemyPieceFinderForPlayer1(of("c4"), "enemy_pieces_to_capture_finder04", of("c3"), of("d4"));
     }
 
     @Test
-    void find05() throws Exception {
+    public void find05() throws Exception {
         checkEnemyPieceFinderForPlayer1(of("c4"), "enemy_pieces_to_capture_finder05", of("c2"), of("c3"), of("d4"));
     }
 
     @Test
-    void find06() throws Exception {
+    public void find06() throws Exception {
         checkEnemyPieceFinderForPlayer1(of("c4"), "enemy_pieces_to_capture_finder06", of("c2"), of("c3"), of("d3"), of("d4"), of("e2"));
     }
 

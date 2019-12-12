@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class AvailableMovesFinderTest {
 
     @Test
-    void invalidPieceSelected() throws Exception {
+    public void invalidPieceSelected() throws Exception {
         assertThrows(InvalidPieceSelectedException.class, () -> {
             checkAvailableMovesFinder("available_moves_finder00", Piece.EMPTY, of("a1"));
         });

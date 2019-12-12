@@ -9,7 +9,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.nullValue;
 
-class GameSnapshotTest {
+public class GameSnapshotTest {
     @Test
     public void testData() {
         Score score = new Score(20, 10);

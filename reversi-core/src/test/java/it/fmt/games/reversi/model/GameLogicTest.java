@@ -10,10 +10,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class GameLogicTest {
+public class GameLogicTest {
 
     @Test
-    void initBoard() throws Exception {
+    public void initBoard() throws Exception {
         GameLogic gameLogic = new GameLogic();
         gameLogic.initialize();
         Board aspectedBoard = BoardReader.read("gameLogicTest");
@@ -25,7 +25,7 @@ class GameLogicTest {
     }
 
     @Test
-    void findMovesForPlayers() {
+    public void findMovesForPlayers() {
         List<Coordinates> aspectedMovesForPlayer1 = Arrays.asList(of("d3"), of("c4"), of("f5"), of("e6"));
         List<Coordinates> aspectedMovesForPlayer2 = Arrays.asList(of("e3"), of("f4"), of("c5"), of("d6"));
 
@@ -43,7 +43,7 @@ class GameLogicTest {
     }
 
     @Test
-    void insertSelectedMove() throws Exception {
+    public void insertSelectedMove() throws Exception {
         GameLogic gameLogic = new GameLogic();
         gameLogic.initialize();
 
@@ -57,7 +57,7 @@ class GameLogicTest {
     }
 
     @Test
-    void switchPlayer() {
+    public void switchPlayer() {
         GameLogic gameLogic = new GameLogic();
         gameLogic.initialize();
 
