@@ -1,6 +1,7 @@
 package it.fmt.games.reversi;
 
 import it.fmt.games.reversi.model.GameSnapshot;
+import it.fmt.games.reversi.model.GameStatus;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -24,6 +25,7 @@ public class ReversiTest {
         GameSnapshot result = reversi.play();
 
         assertThat(result.getStatus().isGameOver(), is(true));
+        assertThat(result.getStatus().isGameOver(), is(true));
     }
 
     @Test
@@ -32,5 +34,8 @@ public class ReversiTest {
         GameSnapshot result = reversi.play();
 
         assertThat(result.getStatus().isGameOver(), is(true));
+        assertThat(result.getStatus(), is(GameStatus.PLAYER2_WIN));
+        assertThat(result.getScore().getPlayer1Score(), is(19));
+        assertThat(result.getScore().getPlayer2Score(), is(45));
     }
 }
