@@ -1,5 +1,7 @@
 package it.fmt.games.reversi.model;
 
+import it.fmt.games.reversi.UserInputReader;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,14 +11,18 @@ import static it.fmt.games.reversi.model.InsertPieceOperation.insertMove;
 import static it.fmt.games.reversi.model.ScoreCalculator.computeScore;
 
 public class GameLogic {
+    private final GameSnapshotBuilder gameSnapshotBuilder;
+    private final UserInputReader userInputReader;
     private Board board;
     private Player currentPlayer;
     private Player otherPlayer;
-    private final GameSnapshotBuilder gameSnapshotBuilder;
 
-    public GameLogic() {
+    public GameLogic(Player player1, Player player2, UserInputReader userInputReader) {
         this.board = new Board();
         this.gameSnapshotBuilder = new GameSnapshotBuilder();
+        this.currentPlayer = player1;
+        this.otherPlayer = player2;
+        this.userInputReader = userInputReader;
     }
 
     private void insertNewMoveAndCapturedPieces(Piece piece, List<Coordinates> insertedPieceCoords) {
@@ -28,12 +34,10 @@ public class GameLogic {
     }
 
     public AvailableMoves initialize() {
-        currentPlayer = new Player1();
-        otherPlayer = new Player2();
         insertNewMoveAndCapturedPieces(Piece.PLAYER_1, Arrays.asList(of("e4"), of("d5")));
         insertNewMoveAndCapturedPieces(Piece.PLAYER_2, Arrays.asList(of("d4"), of("e5")));
 
-        gameSnapshotBuilder.clearLastMove().setActivePiece(currentPlayer.getPiece()).setScore(computeScore(board)).setBoard(board.copy());
+        gameSnapshotBuilder.setActivePiece(currentPlayer.getPiece()).setScore(computeScore(board)).setBoard(board.copy());
         return findMovesForPlayers();
     }
 
@@ -44,9 +48,9 @@ public class GameLogic {
         return availableMoves;
     }
 
-    public void insertSelectedMove(Coordinates newMoveCoords) {
-        Piece piece = currentPlayer.getPiece();
-        PlayerMove playerMove = new PlayerMove(piece, newMoveCoords, EnemyPiecesHunter.find(board, newMoveCoords, piece));
+    public void insertSelectedMove(Coordinates moveCoords) {
+        Piece currentPiece = currentPlayer.getPiece();
+        PlayerMove playerMove = new PlayerMove(currentPiece, moveCoords, EnemyPiecesHunter.find(board, moveCoords, currentPiece));
         insertNewMoveAndCapturedPieces(playerMove);
 
         gameSnapshotBuilder.setLastMove(playerMove).setBoard(board.copy()).setScore(computeScore(board));
@@ -62,5 +66,13 @@ public class GameLogic {
 
     public GameSnapshot getGameSnapshot() {
         return gameSnapshotBuilder.build();
+    }
+
+    public Coordinates readActivePlayeMove(List<Coordinates> availableMoves) {
+        if (currentPlayer.isHumanPlayer()) {
+            return userInputReader.readInputFor(currentPlayer, availableMoves);
+        } else {
+            return currentPlayer.computeNextMove(availableMoves);
+        }
     }
 }

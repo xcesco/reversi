@@ -1,5 +1,8 @@
 package it.fmt.games.reversi.model;
 
+import it.fmt.games.reversi.Player1;
+import it.fmt.games.reversi.Player2;
+import it.fmt.games.reversi.PlayerFactory;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -12,8 +15,8 @@ public class PlayerTest {
 
     @Test
     public void getPieceTest() {
-        Player player1 = new Player(Piece.PLAYER_1);
-        Player player2 = new Player(Piece.PLAYER_2);
+        Player player1 = PlayerFactory.createUserPlayer1();
+        Player player2 = PlayerFactory.createUserPlayer2();
 
         assertThat(player1.getPiece(), is(Piece.PLAYER_1));
         assertThat(player2.getPiece(), is(Piece.PLAYER_2));

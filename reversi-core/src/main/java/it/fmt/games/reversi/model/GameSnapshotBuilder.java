@@ -33,11 +33,6 @@ public class GameSnapshotBuilder {
         return this;
     }
 
-    public GameSnapshotBuilder clearLastMove() {
-        this.lastMove = null;
-        return this;
-    }
-
     private Piece activePiece;
     private AvailableMoves availableMoves;
     private Score score;

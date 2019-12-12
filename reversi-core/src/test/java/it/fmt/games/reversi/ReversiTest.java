@@ -1,5 +1,6 @@
 package it.fmt.games.reversi;
 
+import it.fmt.games.reversi.model.DummyUserInputReader;
 import it.fmt.games.reversi.model.GameSnapshot;
 import it.fmt.games.reversi.model.GameStatus;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,7 @@ public class ReversiTest {
             assertThat(gameSnapshot.getAvailableMoves().getMovesOtherPlayer(), notNullValue());
             assertThat(gameSnapshot.getBoard(), notNullValue());
             assertThat(gameSnapshot.getStatus(), notNullValue());
-        });
+        }, new DummyUserInputReader(), PlayerFactory.createRoboPlayer1(), PlayerFactory.createRoboPlayer2());
         GameSnapshot result = reversi.play();
 
         assertThat(result.getStatus().isGameOver(), is(true));
@@ -30,7 +31,7 @@ public class ReversiTest {
 
     @Test
     public void playOnConsole() {
-        Reversi reversi = new Reversi(new ConsoleRenderer());
+        Reversi reversi = new Reversi(new ConsoleRenderer(), new DummyUserInputReader(), PlayerFactory.createRoboPlayer1(), PlayerFactory.createRoboPlayer2());
         GameSnapshot result = reversi.play();
 
         assertThat(result.getStatus().isGameOver(), is(true));

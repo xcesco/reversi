@@ -1,5 +1,6 @@
 package it.fmt.games.reversi.model;
 
+import it.fmt.games.reversi.PlayerFactory;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -14,7 +15,7 @@ public class GameLogicTest {
 
     @Test
     public void initBoard() throws Exception {
-        GameLogic gameLogic = new GameLogic();
+        GameLogic gameLogic = new GameLogic(PlayerFactory.createRoboPlayer1(), PlayerFactory.createRoboPlayer2(), new DummyUserInputReader());
         gameLogic.initialize();
         Board aspectedBoard = BoardReader.read("gameLogicTest");
 
@@ -29,7 +30,7 @@ public class GameLogicTest {
         List<Coordinates> aspectedMovesForPlayer1 = Arrays.asList(of("d3"), of("c4"), of("f5"), of("e6"));
         List<Coordinates> aspectedMovesForPlayer2 = Arrays.asList(of("e3"), of("f4"), of("c5"), of("d6"));
 
-        GameLogic gameLogic = new GameLogic();
+        GameLogic gameLogic = new GameLogic(PlayerFactory.createRoboPlayer1(), PlayerFactory.createRoboPlayer2(), new DummyUserInputReader());
         gameLogic.initialize();
 
         AvailableMoves availableMoves = gameLogic.findMovesForPlayers();
@@ -44,7 +45,7 @@ public class GameLogicTest {
 
     @Test
     public void insertSelectedMove() throws Exception {
-        GameLogic gameLogic = new GameLogic();
+        GameLogic gameLogic = new GameLogic(PlayerFactory.createRoboPlayer1(), PlayerFactory.createRoboPlayer2(), new DummyUserInputReader());
         gameLogic.initialize();
 
         AvailableMoves availableMoves = gameLogic.findMovesForPlayers();
@@ -58,14 +59,12 @@ public class GameLogicTest {
 
     @Test
     public void switchPlayer() {
-        GameLogic gameLogic = new GameLogic();
+        GameLogic gameLogic = new GameLogic(PlayerFactory.createRoboPlayer1(), PlayerFactory.createRoboPlayer2(), new DummyUserInputReader());
         gameLogic.initialize();
 
         gameLogic.switchPlayer();
         GameSnapshot gameSnapshot = gameLogic.getGameSnapshot();
         assertThat(gameSnapshot.getActivePiece(), is(Piece.PLAYER_2));
         assertThat(gameSnapshot.getOtherPlayer(), is(Piece.PLAYER_1));
-
-
     }
 }

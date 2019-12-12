@@ -1,7 +1,6 @@
 package it.fmt.games.reversi.model;
 
 import it.fmt.games.reversi.exceptions.InvalidCoordinatesException;
-import it.fmt.games.reversi.model.Coordinates;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
