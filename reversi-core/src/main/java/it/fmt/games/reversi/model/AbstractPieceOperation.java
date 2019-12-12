@@ -17,9 +17,15 @@ public abstract class AbstractPieceOperation {
     }
 
     protected Stream<Coordinates> findEnemyPiecesAlongDirection(Coordinates coordinates, Direction direction) {
-        return Stream.iterate(coordinates.translate(direction),
-                coords -> board.isCellContentEqualsTo(coords, this.enemyPiece),
-                coords -> coords.translate(direction));
+        // done in this way for JDK1.8 compatibility
+        Stream.Builder<Coordinates> builder = Stream.builder();
+        Coordinates current = coordinates.translate(direction);
+
+        while (board.isCellContentEqualsTo(current, this.enemyPiece)) {
+            builder.add(current);
+            current = current.translate(direction);
+        }
+        return builder.build();
     }
 
     protected boolean isAnyPieceToInvert(Coordinates initialCoordinates, Direction direction) {
