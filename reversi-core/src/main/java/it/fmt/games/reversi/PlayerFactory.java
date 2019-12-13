@@ -17,11 +17,19 @@ public abstract class PlayerFactory {
         return new Player2(type.createHandler());
     }
 
+    public static Player2 createRoboPlayer2(DecisionHandler handler) {
+        return new Player2(handler);
+    }
+
     public static Player1 createRoboPlayer1() {
         return createRoboPlayer1(DecisionHandlerType.SIMPLE);
     }
 
     public static Player1 createRoboPlayer1(DecisionHandlerType type) {
         return new Player1(type.createHandler());
+    }
+
+    public static Player1 createRoboPlayer1(DecisionHandler handler) {
+        return new Player1(handler);
     }
 }
