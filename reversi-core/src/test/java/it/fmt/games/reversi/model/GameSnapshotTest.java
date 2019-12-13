@@ -25,13 +25,13 @@ public class GameSnapshotTest {
         AvailableMoves aspectedMoves = new AvailableMoves(Arrays.asList(of("a1")), Arrays.asList(of("a2")));
         Board aspectedBoard = new Board();
         GameStatus aspectedStatus = GameStatus.DRAW;
-
         assertThat(gameSnapshot.getAvailableMoves(), equalTo(aspectedMoves));
         assertThat(gameSnapshot.getScore(), equalTo(aspectedScore));
         assertThat(gameSnapshot.getLastMove(), nullValue());
         assertThat(gameSnapshot.getActivePiece(), equalTo(aspectedCurrentPlayer.getPiece()));
         assertThat(gameSnapshot.getBoard(), equalTo(aspectedBoard));
         assertThat(gameSnapshot.getStatus(), equalTo(aspectedStatus));
+
     }
 
 }
