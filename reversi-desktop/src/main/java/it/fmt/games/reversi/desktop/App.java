@@ -35,12 +35,9 @@ public class App extends Canvas implements MouseListener {
         addMouseListener(this);
         boxes = new Rectangle[8][8];
 
-        for (int r = 0; r < boxes.length; r++) {
-            for (int c = 0; c < boxes[0].length; c++) {
-                boxes[r][c] = new Rectangle(30 + c * 70, 100 + r * 70, 70, 70);
-            }
-        }
-
+        IntStream.range(0, Board.BOARD_SIZE)
+                .forEach(row -> IntStream.range(0, Board.BOARD_SIZE)
+                        .forEach(col -> boxes[row][col] = new Rectangle(30 + col * 70, 100 + row * 70, 70, 70)));
     }
 
     public void paint(Graphics g) {
@@ -55,12 +52,9 @@ public class App extends Canvas implements MouseListener {
             g.drawString("Click to Play", 275, 400);
         } else {
             // board
-            for (int r = 0; r < boxes.length; r++) {
-                for (int c = 0; c < boxes[0].length; c++) {
-                    g2.draw(boxes[r][c]);
-                }
-            }
-
+            IntStream.range(0, Board.BOARD_SIZE)
+                    .forEach(row -> IntStream.range(0, Board.BOARD_SIZE)
+                            .forEach(col -> g2.draw(boxes[row][col])));
 
             // pieces
 //            IntStream.range(0, Board.BOARD_SIZE).forEach(row -> {
@@ -79,57 +73,53 @@ public class App extends Canvas implements MouseListener {
 //                    });
 
 
-                // labels
-                if (showLabels) {
-                    String[] C = {"A", "B", "C", "D", "E", "F", "G", "H"};
-                    g.setFont(new Font("Arial", Font.PLAIN, 24));
-                    g.setColor(Color.black);
-                    for (int c = 0; c < boxes.length; c++) {
-                        g.drawString(C[c], boxes[0][c].x + 30, boxes[0][c].y - 5);
-                    }
-                    for (int r = 0; r < boxes[0].length; r++) {
-                        g.drawString(String.valueOf(r + 1), boxes[r][0].x - 20, boxes[r][0].y + 45);
-                    }
-                }
-
+            // labels
+            if (showLabels) {
+                String[] C = {"A", "B", "C", "D", "E", "F", "G", "H"};
+                g.setFont(new Font("Arial", Font.PLAIN, 24));
+                g.setColor(Color.black);
+                IntStream.range(0,Board.BOARD_SIZE).forEach(col->g.drawString(C[col], boxes[0][col].x + 30, boxes[0][col].y - 5));
+                IntStream.range(0,Board.BOARD_SIZE).forEach((row->g.drawString(String.valueOf(row + 1), boxes[row][0].x - 20, boxes[row][0].y + 45)));
             }
-        }
-
-
-        @Override
-        public void mouseClicked (MouseEvent e){
-
-        }
-
-        @Override
-        public void mousePressed (MouseEvent e){
-
-        }
-
-        @Override
-        public void mouseReleased (MouseEvent e){
-            int x = e.getX();
-            int y = e.getY();
-
-
-            if (!started) {
-                started = true;
-                repaint();
-                return;
-            }
-
-        }
-
-        @Override
-        public void mouseEntered (MouseEvent e){
-
-        }
-
-        @Override
-        public void mouseExited (MouseEvent e){
 
         }
     }
+
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        int x = e.getX();
+        int y = e.getY();
+
+
+        if (!started) {
+            started = true;
+            repaint();
+            return;
+        }
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+}
 
 
 
