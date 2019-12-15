@@ -1,22 +1,35 @@
 package it.fmt.games.reversi.desktop;
 
-import it.fmt.games.reversi.model.Board;
-import it.fmt.games.reversi.model.Coordinates;
-import it.fmt.games.reversi.model.Piece;
+import it.fmt.games.reversi.GameRenderer;
+import it.fmt.games.reversi.PlayerFactory;
+import it.fmt.games.reversi.Reversi;
+import it.fmt.games.reversi.UserInputReader;
+import it.fmt.games.reversi.model.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
-import static it.fmt.games.reversi.model.Coordinates.*;
-
-public class App extends Canvas implements MouseListener {
+public class App extends Canvas implements MouseListener, GameRenderer {
+    public static final int CELL_SIZE = 70;
+    public static final int BASE_X = 35;
+    public static final int BASE_Y = 105;
+    public static final int OFFSET = 25;
+    public static final Color darkGreen = new Color(0, 120, 0);
+    public static final Color brown = new Color(153,102, 0);
+    public static String WINNER = "";
+    public GameSnapshot gameSnapshot;
     private boolean started = false;
     private Rectangle[][] boxes;
     private boolean showLabels = true;
     private Board board;
+
+    private Reversi reversi;
+    private GameLogicThread gameLogic;
 
     public App(Board b) {
         this.board = b;
@@ -56,30 +69,44 @@ public class App extends Canvas implements MouseListener {
                     .forEach(row -> IntStream.range(0, Board.BOARD_SIZE)
                             .forEach(col -> g2.draw(boxes[row][col])));
 
-            // pieces
-//            IntStream.range(0, Board.BOARD_SIZE).forEach(row -> {
-//                        IntStream.range(0, Board.BOARD_SIZE).forEach(col ->
-//                        {
-//                            if (board.getCellContent(of(row, col)) != Piece.EMPTY) {
-//                                if ((board.getCellContent(of(row, col)) == Piece.PLAYER_1)) {
-//                                    g.setColor(Color.white);
-//                                } else {
-//                                    g.setColor(Color.black);
-//                                }
-//                                Rectangle box = boxes[row][col];
-//                                g.fillOval(box.x + 5, box.y + 5, box.width - 10, box.height - 10);
-//                            }
-//                        });
-//                    });
+            this.gameSnapshot.getBoard().getCellStream().forEach(item -> {
+                if (item.getPiece() != Piece.EMPTY) {
+                    if ((item.getPiece() == Piece.PLAYER_1)) {
+                        g.setColor(Color.white);
+                    } else {
+                        g.setColor(Color.black);
+                    }
+                    g.fillOval(BASE_X + item.getCoordinates().getRow() * CELL_SIZE + 5, BASE_Y + item.getCoordinates().getColumn() * CELL_SIZE + 5, CELL_SIZE - 10, CELL_SIZE - 10);
+                }
 
+            });
+            //Legal Moves
+            this.gameSnapshot.getAvailableMoves().getMovesActivePlayer().forEach(item -> {
+                g.setColor(Color.gray);
+                g.fillOval(BASE_X + item.getRow() * CELL_SIZE + 30, BASE_Y + item.getColumn() * CELL_SIZE + 30, CELL_SIZE - 60, CELL_SIZE - 60);
+            });
+
+            //Score
+            g.setColor(Color.BLACK);
+            g.setFont(new Font("Arial", Font.BOLD, 36));
+            g.drawString(" : " + gameSnapshot.getScore().getPlayer2Score(), 100, 740+OFFSET);
+            g.drawString(" : " + gameSnapshot.getScore().getPlayer1Score(), 520, 740+OFFSET);
+
+
+            g.fillOval(35, 700+OFFSET, CELL_SIZE - 10, CELL_SIZE - 10);
+            g.setColor(Color.white);
+            g.fillOval(455, 700+OFFSET, CELL_SIZE - 10, CELL_SIZE - 10);
 
             // labels
             if (showLabels) {
                 String[] C = {"A", "B", "C", "D", "E", "F", "G", "H"};
                 g.setFont(new Font("Arial", Font.PLAIN, 24));
                 g.setColor(Color.black);
-                IntStream.range(0,Board.BOARD_SIZE).forEach(col->g.drawString(C[col], boxes[0][col].x + 30, boxes[0][col].y - 5));
-                IntStream.range(0,Board.BOARD_SIZE).forEach((row->g.drawString(String.valueOf(row + 1), boxes[row][0].x - 20, boxes[row][0].y + 45)));
+                IntStream.range(0, Board.BOARD_SIZE).forEach(col -> g.drawString(C[col], BASE_X + col * 70 + 30, BASE_Y - 15));
+                IntStream.range(0, Board.BOARD_SIZE).forEach((row -> g.drawString(String.valueOf(row + 1), BASE_X - 25,  BASE_Y + row * 70+ 45)));
+                IntStream.range(0, Board.BOARD_SIZE).forEach(col -> g.drawString(C[col], BASE_X + col * 70 + 30, BASE_Y+610 - 15));
+                IntStream.range(0, Board.BOARD_SIZE).forEach((row -> g.drawString(String.valueOf(row + 1), BASE_X + 600 - 25,  BASE_Y + row * 70+ 45)));
+
             }
 
         }
@@ -98,15 +125,6 @@ public class App extends Canvas implements MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
-
-
-        if (!started) {
-            started = true;
-            repaint();
-            return;
-        }
 
     }
 
@@ -119,6 +137,13 @@ public class App extends Canvas implements MouseListener {
     public void mouseExited(MouseEvent e) {
 
     }
+
+    @Override
+    public void render(GameSnapshot gameSnapshot) {
+        this.gameSnapshot = gameSnapshot;
+        repaint();
+    }
+
 }
 
 
