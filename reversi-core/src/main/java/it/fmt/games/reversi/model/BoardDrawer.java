@@ -4,7 +4,7 @@ import java.util.stream.IntStream;
 
 public class BoardDrawer {
     private Board board;
-    private final String PREFIX = "\t";
+    static final String PREFIX = "\t";
     static final String ROW_SEPARATOR = "  +-----+-----+-----+-----+-----+-----+-----+-----+";
 
     public BoardDrawer(Board board) {
@@ -24,8 +24,12 @@ public class BoardDrawer {
         });
     }
 
-    public String getSymbol(Coordinates coords) {
-        return board.getCellContent(coords) == Piece.EMPTY ? " "
-                : board.getCellContent(coords) == Piece.PLAYER_1 ? "O" : "X";
+    public String getSymbol(Coordinates coordinates) {
+        return board.getCellContent(coordinates) == Piece.EMPTY ? " "
+                : getPlayerSymbol(coordinates);
+    }
+
+    public String getPlayerSymbol(Coordinates coordinates) {
+        return board.getCellContent(coordinates) == Piece.PLAYER_1 ? "O" : "X";
     }
 }
