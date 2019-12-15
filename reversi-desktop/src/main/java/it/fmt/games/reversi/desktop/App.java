@@ -37,7 +37,7 @@ public class App extends Canvas implements MouseListener, GameRenderer {
 
     public static void main(String[] args) {
         JFrame win = new JFrame("Reversi");
-        win.setSize(700, 800);
+        win.setSize(700, 900);
         win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         win.setResizable(false);
         win.add(new App());
