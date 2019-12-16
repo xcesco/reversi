@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class InsertPieceOperator {
+public abstract class InsertMoveOperator {
 
-    private InsertPieceOperator() {
+    private InsertMoveOperator() {
     }
 
     public static Board insertMove(Board board, PlayerMove move) {

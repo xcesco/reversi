@@ -2,7 +2,6 @@ package it.fmt.games.reversi.model;
 
 import it.fmt.games.reversi.Player1;
 import it.fmt.games.reversi.exceptions.InvalidInsertOperationException;
-import it.fmt.games.reversi.model.operators.InsertPieceOperator;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
