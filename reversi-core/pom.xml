@@ -16,7 +16,7 @@
     <name>reversi-core</name>
     <description>Reversi Core - core project</description>
 
-    <url>http://github.com/xcesco/reversi</url>
+    <url>https://github.com/xcesco/reversi</url>
 
     <build>
         <plugins>

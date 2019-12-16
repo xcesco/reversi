@@ -4,6 +4,9 @@
     <artifactId>reversi-desktop</artifactId>
     <version>0.1.0-SNAPSHOT</version>
 
+    <name>reversi-desktop</name>
+    <url>https://github.com/xcesco/reversi</url>
+
     <parent>
         <groupId>it.fmt.games.reversi</groupId>
         <artifactId>reversi-parent</artifactId>

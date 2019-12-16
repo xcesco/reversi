@@ -31,11 +31,6 @@
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>4.3.0</version>
             </plugin>
-
-            <plugin>
-                <artifactId>maven-site-plugin</artifactId>
-            </plugin>
-
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
