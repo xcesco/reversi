@@ -1,6 +1,10 @@
 package it.fmt.games.reversi.model;
 
-public class ScoreCalculator {
+public abstract class ScoreCalculator {
+
+    private ScoreCalculator() {
+
+    }
 
     public static Score computeScore(Board board) {
         int[] score = new int[Piece.values().length];

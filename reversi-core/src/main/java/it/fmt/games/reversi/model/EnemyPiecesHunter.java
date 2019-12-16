@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class EnemyPiecesHunter extends AbstractPieceOperation {
+public class EnemyPiecesHunter extends AbstractBoardOperator {
     private final Coordinates searchOrigin;
 
-    public EnemyPiecesHunter(Board board, Coordinates coords, Piece piece) {
+    private EnemyPiecesHunter(Board board, Coordinates coords, Piece piece) {
         super(board, piece);
         this.searchOrigin = coords;
     }
@@ -17,7 +17,7 @@ public class EnemyPiecesHunter extends AbstractPieceOperation {
         return hunter.find();
     }
 
-    public List<Coordinates> find() {
+    private List<Coordinates> find() {
         return Stream.of(Direction.values()).filter(this::isAnyPieceToInvertAlongDirection)
                 .map(this::rotateEnemyPieces).flatMap(x -> x).sorted()
                 .collect(Collectors.toList());

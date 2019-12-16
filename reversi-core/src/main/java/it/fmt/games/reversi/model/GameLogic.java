@@ -7,7 +7,7 @@ import java.util.List;
 
 import static it.fmt.games.reversi.model.AvailableMovesFinder.findMoves;
 import static it.fmt.games.reversi.model.Coordinates.of;
-import static it.fmt.games.reversi.model.InsertPieceOperation.insertMove;
+import static it.fmt.games.reversi.model.InsertPieceOperator.insertMove;
 import static it.fmt.games.reversi.model.ScoreCalculator.computeScore;
 
 public class GameLogic {

@@ -10,7 +10,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class InsertPieceOperationTest {
+public class InsertPieceOperatorTest {
 
     @Test
     public void execute() throws Exception {
@@ -25,17 +25,16 @@ public class InsertPieceOperationTest {
     public void insertEmpty() {
         Board board = new Board();
         assertThrows(InvalidInsertOperationException.class, () -> {
-            InsertPieceOperation.insertMove(board, null, Coordinates.of("c4"));
+            InsertPieceOperator.insertMove(board, null, Coordinates.of("c4"));
         });
     }
 
     private void checkMove(Board[] snapshots, Piece piece, String coords, int boardIndex) {
         Coordinates move = Coordinates.of(coords);
-        EnemyPiecesHunter finder = new EnemyPiecesHunter(snapshots[boardIndex - 1], move, piece);
-        List<Coordinates> positionsToInsert = finder.find();
+        List<Coordinates> positionsToInsert = EnemyPiecesHunter.find(snapshots[boardIndex - 1], move, piece);
         positionsToInsert.add(move);
 
-        Board result = InsertPieceOperation.insertMove(snapshots[boardIndex - 1], piece, positionsToInsert);
+        Board result = InsertPieceOperator.insertMove(snapshots[boardIndex - 1], piece, positionsToInsert);
 
         assertThat(result, equalTo(snapshots[boardIndex]));
     }
