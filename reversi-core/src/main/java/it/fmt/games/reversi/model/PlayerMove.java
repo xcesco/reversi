@@ -17,10 +17,6 @@ public class PlayerMove {
         this.capturedEnemyPiecesCoords = capturedEnemyPiecesCoords;
     }
 
-    public PlayerMove(Piece piece, Coordinates moveCoords) {
-        this(piece, moveCoords, new ArrayList<>());
-    }
-
     public Piece getPiece() {
         return piece;
     }

@@ -190,7 +190,7 @@ public class App extends Canvas implements MouseListener, GameRenderer {
             //reversi = new Reversi(this, this, PlayerFactory.createRoboPlayer1(new DesktopDecisionHandler()), PlayerFactory.createRoboPlayer2(new DesktopDecisionHandler()));
 
             //gameLogic = new GameLogicThread(this, PlayerFactory.createUserPlayer1(), PlayerFactory.createUserPlayer2(), this);
-            gameLogic = new GameLogicThread(this, PlayerFactory.createUserPlayer1(), PlayerFactory.createRoboPlayer2(), this);
+            gameLogic = new GameLogicThread(this, PlayerFactory.createHumanPlayer1(), PlayerFactory.createRoboPlayer2(), this);
             //gameLogic = new GameLogicThread(this, PlayerFactory.createRoboPlayer1(), PlayerFactory.createRoboPlayer2(), this);
             gameLogic.start();
             started = true;

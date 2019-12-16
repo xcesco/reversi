@@ -14,32 +14,6 @@ public abstract class Player {
         this.decisionHandler = decisionHandler;
     }
 
-    /**
-     * Player equality is based only on managed piece.
-     *
-     * @param o
-     * @return
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Player player = (Player) o;
-
-        return piece == player.piece;
-    }
-
-    /**
-     * Player hascode is based only on managed piece.
-     *
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        return piece.hashCode();
-    }
-
     public Piece getPiece() {
         return piece;
     }

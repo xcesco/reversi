@@ -23,6 +23,10 @@ public class AvailableMoves {
         return movesOtherPlayer;
     }
 
+    public boolean isAvailableMovesForActivePlayer() {
+        return !(movesCurrentPlayer.isEmpty());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -40,9 +44,4 @@ public class AvailableMoves {
         result = 31 * result + movesOtherPlayer.hashCode();
         return result;
     }
-
-    public boolean isAvailableMovesForActivePlayer() {
-        return !(movesCurrentPlayer.isEmpty());
-    }
-
 }

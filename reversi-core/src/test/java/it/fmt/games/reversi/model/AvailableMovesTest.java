@@ -44,7 +44,26 @@ public class AvailableMovesTest {
         assertThat(availableMoves.getMovesOtherPlayer().size(), is(4));
     }
 
-    public AvailableMoves checkAvailableMoves(String fileName) throws Exception {
+    @Test
+    public void testEquals() throws Exception {
+        AvailableMoves availableMoves1 = checkAvailableMoves("available_moves03");
+        AvailableMoves availableMoves2 = checkAvailableMoves("available_moves03");
+
+        assertThat(availableMoves1.equals(null), is(false));
+        assertThat(availableMoves1.equals("dummy"), is(false));
+        assertThat(availableMoves1.equals(availableMoves2), is(true));
+        assertThat(availableMoves1.hashCode() == availableMoves2.hashCode(), is(true));
+    }
+
+    @Test
+    public void testHashCode() {
+        Coordinates coords1 = Coordinates.of("A1");
+        Coordinates coords2 = Coordinates.of("a1");
+
+        assertThat(coords1.hashCode(), equalTo(coords2.hashCode()));
+    }
+
+    private AvailableMoves checkAvailableMoves(String fileName) throws Exception {
         Board board = BoardReader.read(fileName);
 
         List<Coordinates> availableMovesForPlayer1 = AvailableMovesFinder.findMoves(board, Piece.PLAYER_1);
@@ -52,4 +71,5 @@ public class AvailableMovesTest {
 
         return new AvailableMoves(availableMovesForPlayer1, availableMovesForPlayer2);
     }
+
 }
