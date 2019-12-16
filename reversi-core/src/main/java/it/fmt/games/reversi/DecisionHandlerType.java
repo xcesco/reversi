@@ -13,7 +13,7 @@ public enum DecisionHandlerType {
         this.decisionHandler = decisionHandler;
     }
 
-    public DecisionHandler createHandler() {
+    public DecisionHandler getDecisionHandler() {
         return decisionHandler;
     }
 
