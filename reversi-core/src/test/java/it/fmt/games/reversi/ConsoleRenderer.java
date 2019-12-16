@@ -1,5 +1,6 @@
 package it.fmt.games.reversi;
 
+import it.fmt.games.reversi.GameRenderer;
 import it.fmt.games.reversi.model.*;
 
 import java.util.List;

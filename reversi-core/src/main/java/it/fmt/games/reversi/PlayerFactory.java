@@ -4,11 +4,11 @@ public abstract class PlayerFactory {
     private PlayerFactory() {
 
     }
-    public static Player2 createUserPlayer2() {
+    public static Player2 createHumanPlayer2() {
         return new Player2();
     }
 
-    public static Player1 createUserPlayer1() {
+    public static Player1 createHumanPlayer1() {
         return new Player1();
     }
 

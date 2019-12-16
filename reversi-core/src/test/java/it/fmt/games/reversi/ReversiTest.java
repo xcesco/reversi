@@ -1,15 +1,12 @@
 package it.fmt.games.reversi;
 
-import it.fmt.games.reversi.model.DummyUserInputReader;
-import it.fmt.games.reversi.model.GameSnapshot;
-import it.fmt.games.reversi.model.GameStatus;
+import it.fmt.games.reversi.model.*;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class ReversiTest {
-
     @Test
     public void checkGameSnapshot() {
         Reversi reversi = new Reversi(gameSnapshot -> {
@@ -30,10 +27,25 @@ public class ReversiTest {
     }
 
     @Test
-    public void playOnConsole() {
-        Reversi reversi = new Reversi(new ConsoleRenderer(), new DummyUserInputReader(), PlayerFactory.createRoboPlayer1(), PlayerFactory.createRoboPlayer2());
+    public void playOnConsoleCpuVsCpu() throws Exception {
+        Reversi reversi = new Reversi(new DummyRenderer(), new DummyUserInputReader(), PlayerFactory.createRoboPlayer1(),
+                PlayerFactory.createRoboPlayer2());
+        GameSnapshot result = reversi.play();
+        checkEndGame(result);
+    }
+
+    @Test
+    public void playOnConsoleP1VsCpu() throws Exception {
+        Reversi reversi = new Reversi(new DummyRenderer(), new DummyUserInputReader(), PlayerFactory.createHumanPlayer1(),
+                PlayerFactory.createRoboPlayer2());
         GameSnapshot result = reversi.play();
 
+        checkEndGame(result);
+    }
+
+    private void checkEndGame(GameSnapshot result) throws Exception {
+        Board board = BoardReader.read("reversi_final_state00");
+        assertThat(result.getBoard().equals(board), is(true));
         assertThat(result.getStatus().isGameOver(), is(true));
         assertThat(result.getStatus(), is(GameStatus.PLAYER2_WIN));
         assertThat(result.getScore().getPlayer1Score(), is(19));

@@ -27,9 +27,4 @@ public abstract class InsertPieceOperator {
         coordinates.forEach(position -> boardResult.setCell(position, piece));
         return boardResult;
     }
-
-    public static Board insertMove(Board board, Piece piece, Coordinates... coordinates) {
-        return insertMove(board, piece, Arrays.asList(coordinates));
-    }
-
 }
