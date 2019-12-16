@@ -11,6 +11,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public abstract class InsertPieceOperator {
+
+    private InsertPieceOperator() {
+    }
+
     public static Board insertMove(Board board, PlayerMove move) {
         List<Coordinates> coordinateToInsert = new ArrayList<>(move.getCapturedEnemyPiecesCoords());
         coordinateToInsert.add(move.getMoveCoords());
