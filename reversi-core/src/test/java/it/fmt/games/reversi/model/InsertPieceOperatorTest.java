@@ -5,6 +5,8 @@ import it.fmt.games.reversi.model.operators.EnemyPiecesHunter;
 import it.fmt.games.reversi.model.operators.InsertPieceOperator;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static it.fmt.games.reversi.model.BoardReader.readBoards;
@@ -27,7 +29,7 @@ public class InsertPieceOperatorTest {
     public void insertEmpty() {
         Board board = new Board();
         assertThrows(InvalidInsertOperationException.class, () -> {
-            InsertPieceOperator.insertMove(board, null, Coordinates.of("c4"));
+            InsertPieceOperator.insertMove(board, null, Collections.emptyList());
         });
     }
 

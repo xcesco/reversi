@@ -17,13 +17,18 @@ public class ScoreTest {
 
     @Test
     public void playersScoresEqualsAndHashcodeTest() {
-        Score scores1 = new Score(6, 7);
-        Score scores2 = new Score(6, 7);
+        Score score1 = new Score(6, 7);
+        Score score2 = new Score(6, 7);
+        Score score3 = new Score(16, 27);
+        Score score4 = new Score(6, 27);
 
-        assertThat(scores1.equals(null), is(false));
-        assertThat(scores1.equals("dummy"), is(false));
-        assertThat(scores1.equals(scores2), is(true));
-        assertThat(scores1.hashCode() == scores2.hashCode(), is(true));
+        assertThat(score1.equals(score1), is(true));
+        assertThat(score1.equals(score3), is(false));
+        assertThat(score1.equals(score4), is(false));
+        assertThat(score1.equals(null), is(false));
+        assertThat(score1.equals("dummy"), is(false));
+        assertThat(score1.equals(score2), is(true));
+        assertThat(score1.hashCode() == score2.hashCode(), is(true));
     }
 
 }
