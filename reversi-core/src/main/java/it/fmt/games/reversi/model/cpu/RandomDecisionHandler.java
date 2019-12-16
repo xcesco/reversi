@@ -1,4 +1,4 @@
-package it.fmt.games.reversi.model;
+package it.fmt.games.reversi.model.cpu;
 
 import it.fmt.games.reversi.DecisionHandler;
 import it.fmt.games.reversi.model.Coordinates;

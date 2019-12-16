@@ -1,6 +1,9 @@
 package it.fmt.games.reversi;
 
 public abstract class PlayerFactory {
+    private PlayerFactory() {
+
+    }
     public static Player2 createUserPlayer2() {
         return new Player2();
     }

@@ -1,4 +1,9 @@
-package it.fmt.games.reversi.model;
+package it.fmt.games.reversi.model.operators;
+
+import it.fmt.games.reversi.model.Board;
+import it.fmt.games.reversi.model.Coordinates;
+import it.fmt.games.reversi.model.Direction;
+import it.fmt.games.reversi.model.Piece;
 
 import java.util.List;
 import java.util.stream.Collectors;

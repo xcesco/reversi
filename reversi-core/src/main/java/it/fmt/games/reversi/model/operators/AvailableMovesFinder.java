@@ -1,4 +1,6 @@
-package it.fmt.games.reversi.model;
+package it.fmt.games.reversi.model.operators;
+
+import it.fmt.games.reversi.model.*;
 
 import java.util.List;
 import java.util.function.Predicate;

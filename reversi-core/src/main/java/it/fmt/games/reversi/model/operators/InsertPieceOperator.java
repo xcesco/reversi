@@ -1,6 +1,10 @@
-package it.fmt.games.reversi.model;
+package it.fmt.games.reversi.model.operators;
 
 import it.fmt.games.reversi.exceptions.InvalidInsertOperationException;
+import it.fmt.games.reversi.model.Board;
+import it.fmt.games.reversi.model.Coordinates;
+import it.fmt.games.reversi.model.Piece;
+import it.fmt.games.reversi.model.PlayerMove;
 
 import java.util.ArrayList;
 import java.util.Arrays;

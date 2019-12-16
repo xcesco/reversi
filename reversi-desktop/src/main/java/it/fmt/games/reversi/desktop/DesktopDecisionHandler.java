@@ -3,7 +3,7 @@ package it.fmt.games.reversi.desktop;
 import java.util.List;
 
 import it.fmt.games.reversi.model.Coordinates;
-import it.fmt.games.reversi.model.RandomDecisionHandler;
+import it.fmt.games.reversi.model.cpu.RandomDecisionHandler;
 
 public class DesktopDecisionHandler extends RandomDecisionHandler {
         @Override
