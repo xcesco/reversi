@@ -13,16 +13,16 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 public class App extends Canvas implements MouseListener, GameRenderer {
-    public static double RESIZE = 1.3;
-    public static final int CELL_SIZE = (int) (70 / RESIZE);
-    public static final int BASE_X = (int) (35 / RESIZE);
-    public static final int BASE_Y = (int) (105 / RESIZE);
-    public static final int OFFSET = (int) (25 / RESIZE);
+    public static double RESIZE = 1;
+    public static final int CELL_SIZE =  resize(70);
+    public static final int BASE_X = resize(35);
+    public static final int BASE_Y = resize(105);
     private static final boolean SHOW_LABELS = true;
     public static final Color darkGreen = new Color(0, 120, 0);
     public static final Color brown = new Color(153, 102, 0);
-    public static final int WIDTH = (int) (650 / RESIZE);
-    public static final int HEIGHT = (int) (900 / RESIZE);
+    public static final Color lightYellow = new Color(220,220,190);
+    public static final int WIDTH = resize(900);
+    public static final int HEIGHT = resize(768);
     public static String winner = "";
     public GameSnapshot gameSnapshot;
     private boolean started = false;
@@ -34,7 +34,7 @@ public class App extends Canvas implements MouseListener, GameRenderer {
 
 
     public static void main(String[] args) {
-        JFrame win = new JFrame("Reversi");
+        JFrame win = new JFrame("FMT Reversi");
         win.setSize(WIDTH, HEIGHT);
         win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         win.setResizable(false);
@@ -51,135 +51,74 @@ public class App extends Canvas implements MouseListener, GameRenderer {
     }
 
     public void paint(Graphics g) {
-        g.setColor(Color.lightGray);
+        g.setColor(lightYellow);
         g.fillRect(0, 0, WIDTH, HEIGHT);
         g.setColor(Color.black);
         Graphics2D g2 = (Graphics2D) g;
-        g.setFont(new Font("Arial", Font.BOLD, (int) (48 / RESIZE)));
+        g.setFont(new Font("Arial", Font.BOLD, resize(48)));
 
         if (!started) {
-            g.drawString("REVERSI", (int) (225 / RESIZE), (int) (300 / RESIZE));
-            g.drawString("Click to Play", (int) (190 / RESIZE), (int) (400 / RESIZE));
+            g.drawString("REVERSI", resize(300),  resize(300));
+            g.drawString("Click to Play", resize(270), resize(400));
         } else if (this.gameSnapshot != null) {
             // board
             g.setColor(brown);
-            g.fillRect(BASE_X - (int)(10/RESIZE),
-                    BASE_Y - (int)(10/RESIZE),
-                    CELL_SIZE * 8 + (int) (20 / RESIZE),
-                    CELL_SIZE * 8 + (int) (20 / RESIZE));
+            g.fillRect(BASE_X - resize(10),
+                    BASE_Y - resize(10),
+                    CELL_SIZE * 8 +resize(20),
+                    CELL_SIZE * 8 + resize(20));
             g.setColor(darkGreen);
             g.fillRect(BASE_X, BASE_Y, CELL_SIZE * 8, CELL_SIZE * 8);
             g.setColor(Color.BLACK);
-            g.setFont(new Font("Arial", Font.BOLD, (int) (48 / RESIZE)));
-            g.drawString("REVERSI", (int) (240 / RESIZE), (int) (50 / RESIZE));
+            g.setFont(new Font("Arial", Font.BOLD, resize(48)));
+            g.drawString("REVERSI", resize(300), resize(50));
             IntStream.range(0, Board.BOARD_SIZE)
                     .forEach(row -> IntStream.range(0, Board.BOARD_SIZE)
                             .forEach(col -> g2.draw(boxes[row][col])));
 
-            this.gameSnapshot.getBoard().getCellStream().forEach(item -> {
+            gameSnapshot.getBoard().getCellStream().forEach(item -> {
                 if (item.getPiece() != Piece.EMPTY) {
-                    if ((item.getPiece() == Piece.PLAYER_1)) {
+                    if ((item.getPiece() == Piece.PLAYER_2)) {
                         g.setColor(Color.white);
                     } else {
                         g.setColor(Color.black);
                     }
-                    g.fillOval(BASE_X + item.getCoordinates().getRow() * CELL_SIZE + (int) (5 / RESIZE),
-                            BASE_Y + item.getCoordinates().getColumn() * CELL_SIZE + (int) (5 / RESIZE),
-                            CELL_SIZE - (int) (10 / RESIZE),
-                            CELL_SIZE - (int) (10 / RESIZE));
+                    g.fillOval(BASE_X + item.getCoordinates().getRow() * CELL_SIZE + resize(5),
+                            BASE_Y + item.getCoordinates().getColumn() * CELL_SIZE + resize(5),
+                            CELL_SIZE - resize(10),
+                            CELL_SIZE - resize(10));
                 }
 
             });
             //Legal Moves
-            this.gameSnapshot.getAvailableMoves().getMovesActivePlayer().forEach(item -> {
-                g.setColor(Color.gray);
-                g.fillOval(BASE_X + item.getRow() * CELL_SIZE + (int) (30 / RESIZE),
-                        BASE_Y + item.getColumn() * CELL_SIZE + (int) (30 / RESIZE),
-                        CELL_SIZE - (int) (60 / RESIZE),
-                        CELL_SIZE - (int) (60 / RESIZE));
-            });
-
+            new DrawAvailableMoves(gameSnapshot,g);
             //Score
-            g.setColor(Color.BLACK);
-            g.setFont(new Font("Arial", Font.BOLD, (int) (36 / RESIZE)));
-            g.drawString(" : " + gameSnapshot.getScore().getPlayer2Score(),
-                    (int) (100 / RESIZE), (int) (765 / RESIZE));
-            g.drawString(" : " + gameSnapshot.getScore().getPlayer1Score(),
-                    (int) (520 / RESIZE), (int) (765 / RESIZE));
-
-
-            g.fillOval((int) (35 / RESIZE), (int) (725 / RESIZE),
-                    CELL_SIZE - (int) (10 / RESIZE),
-                    CELL_SIZE - (int) (10 / RESIZE));
-            g.setColor(Color.white);
-            g.fillOval((int) (455 / RESIZE), (int) (725 / RESIZE),
-                    CELL_SIZE - (int) (10 / RESIZE),
-                    CELL_SIZE - (int) (10 / RESIZE));
-
+            new DrawScore(gameSnapshot, g);
             // labels
-            if (SHOW_LABELS) {
-                String[] Label = {"A", "B", "C", "D", "E", "F", "G", "H"};
-                g.setFont(new Font("Arial", Font.PLAIN, (int) (24 / RESIZE)));
-                g.setColor(Color.black);
-                IntStream.range(0, Board.BOARD_SIZE).forEach(col ->
-                        g.drawString(Label[col], BASE_X + col * CELL_SIZE + (int) (30 / RESIZE),
-                                BASE_Y - (int) (15 / RESIZE)));
-                IntStream.range(0, Board.BOARD_SIZE).forEach((row -> g.drawString(String.valueOf(row + 1),
-                        BASE_X - (int) (25 / RESIZE),
-                        BASE_Y + row * CELL_SIZE + (int) (45 / RESIZE))));
+            if(SHOW_LABELS){new DrawLabels(g);}
 
-                IntStream.range(0, Board.BOARD_SIZE).forEach(col -> g.drawString(Label[col],
-                        BASE_X + col * CELL_SIZE + (int) (30 / RESIZE),
-                        BASE_Y + CELL_SIZE*8 + (int) (30 / RESIZE)));
-                IntStream.range(0, Board.BOARD_SIZE).forEach((row -> g.drawString(String.valueOf(row + 1),
-                        BASE_X + CELL_SIZE*8 + (int) (10 / RESIZE),
-                        BASE_Y + row * CELL_SIZE + (int) (45 / RESIZE))));
 
-            }
+
 
             if (gameSnapshot.getStatus().isGameOver()) {
-                switch (gameSnapshot.getStatus()) {
-                    case PLAYER1_WIN:
-                        winner = "WHITE is Winner";
-                        break;
-                    case PLAYER2_WIN:
-                        winner = "BLACK is Winner";
-                        break;
-                    case DRAW:
-                    default:
-                        winner = "Draw";
-                        break;
-                }
+                winner=new PrintStatus(gameSnapshot.getStatus()).getWinner();
+
                 try {
                     TimeUnit.SECONDS.sleep(1);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                g.setColor(Color.lightGray);
-                g.fillRect(0, 0, WIDTH, HEIGHT);
-                g.setColor(Color.black);
-                g.setFont(new Font("Arial", Font.BOLD, (int) (48 / RESIZE)));
-                g.drawString(winner, (int) (125 / RESIZE), (int) (300 / RESIZE));
+                // Print Winner
+                new PrintWinner(gameSnapshot,g,winner);
 
-                g.setColor(Color.BLACK);
-                g.fillOval((int) (145 / RESIZE), (int) (360 / RESIZE),
-                        CELL_SIZE - (int) (10 / RESIZE),
-                        CELL_SIZE - (int) (10 / RESIZE));
-
-                g.setColor(Color.white);
-                g.fillOval((int) (400 / RESIZE), (int) (360 / RESIZE),
-                        CELL_SIZE - (int) (10 / RESIZE),
-                        CELL_SIZE - (int) (10 / RESIZE));
-
-                g.setColor(Color.gray);
-                g.setFont(new Font("Arial", Font.BOLD, (int) (36 / RESIZE)));
-                g.drawString("" + gameSnapshot.getScore().getPlayer2Score(),
-                        (int) (155 / RESIZE), (int) (400 / RESIZE));
-                g.drawString("" + gameSnapshot.getScore().getPlayer1Score(),
-                        (int) (410 / RESIZE), (int) (400 / RESIZE));
             }
 
         }
+    }
+
+
+    public static int resize(int i) {
+        return (int)(i / RESIZE);
     }
 
 
@@ -189,15 +128,16 @@ public class App extends Canvas implements MouseListener, GameRenderer {
 
             //reversi = new Reversi(this, this, PlayerFactory.createRoboPlayer1(new DesktopDecisionHandler()), PlayerFactory.createRoboPlayer2(new DesktopDecisionHandler()));
 
-            //gameLogic = new GameLogicThread(this, PlayerFactory.createUserPlayer1(), PlayerFactory.createUserPlayer2(), this);
-            gameLogic = new GameLogicThread(this, PlayerFactory.createUserPlayer1(), PlayerFactory.createRoboPlayer2(), this);
-            //gameLogic = new GameLogicThread(this, PlayerFactory.createRoboPlayer1(), PlayerFactory.createRoboPlayer2(), this);
+//            gameLogic = new GameLogicThread(this, PlayerFactory.createUserPlayer1(), PlayerFactory.createUserPlayer2(), this);
+            //gameLogic = new GameLogicThread(this, PlayerFactory.createUserPlayer1(), PlayerFactory.createRoboPlayer2(), this);
+            gameLogic = new GameLogicThread(this, PlayerFactory.createRoboPlayer1(), PlayerFactory.createRoboPlayer2(), this);
             gameLogic.start();
             started = true;
             repaint();
         } else {
             int col = (e.getY() - BASE_Y) / CELL_SIZE;
             int row = (e.getX() - BASE_X) / CELL_SIZE;
+            //System.out.println(String.format("%s",e.getPoint()));
             Coordinates coordinates = Coordinates.of(row, col);
 
             synchronized (gameLogic.acceptedMove) {
