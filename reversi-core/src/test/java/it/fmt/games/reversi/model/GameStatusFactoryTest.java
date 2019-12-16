@@ -10,25 +10,25 @@ import static it.fmt.games.reversi.model.Coordinates.of;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-class GameStatusFactoryTest {
+public class GameStatusFactoryTest {
 
     @Test
-    void createRunningStatus() {
+    public void createRunningStatus() {
         checkStatus(Arrays.asList(of("a1")), Collections.emptyList(), 12, 24, false, GameStatus.RUNNING);
     }
 
     @Test
-    void createPlayer1Wins() {
+    public void createPlayer1Wins() {
         checkStatus(Collections.emptyList(), Collections.emptyList(), 36, 24, true, GameStatus.PLAYER1_WIN);
     }
 
     @Test
-    void createPlayer2Wins() {
+    public void createPlayer2Wins() {
         checkStatus(Collections.emptyList(), Collections.emptyList(), 12, 24, true, GameStatus.PLAYER2_WIN);
     }
 
     @Test
-    void createDraw() {
+    public void createDraw() {
         checkStatus(Collections.emptyList(), Collections.emptyList(), 12, 12, true, GameStatus.DRAW);
     }
 
