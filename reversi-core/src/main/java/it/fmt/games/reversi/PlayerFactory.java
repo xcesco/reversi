@@ -17,7 +17,7 @@ public abstract class PlayerFactory {
     }
 
     public static Player2 createRoboPlayer2(DecisionHandlerType type) {
-        return new Player2(type.createHandler());
+        return new Player2(type.getDecisionHandler());
     }
 
     public static Player2 createRoboPlayer2(DecisionHandler handler) {
@@ -29,7 +29,7 @@ public abstract class PlayerFactory {
     }
 
     public static Player1 createRoboPlayer1(DecisionHandlerType type) {
-        return new Player1(type.createHandler());
+        return new Player1(type.getDecisionHandler());
     }
 
     public static Player1 createRoboPlayer1(DecisionHandler handler) {

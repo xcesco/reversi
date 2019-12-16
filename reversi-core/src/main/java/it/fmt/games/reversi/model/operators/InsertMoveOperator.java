@@ -7,7 +7,6 @@ import it.fmt.games.reversi.model.Piece;
 import it.fmt.games.reversi.model.PlayerMove;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public abstract class InsertMoveOperator {
