@@ -4,6 +4,12 @@ import it.fmt.games.reversi.exceptions.InvalidInsertOperationException;
 
 public class GameSnapshotBuilder {
 
+    private Piece activePiece;
+    private AvailableMoves availableMoves;
+    private Score score;
+    private Board board;
+    private PlayerMove lastMove;
+
     public GameSnapshotBuilder setActivePiece(Piece activePiece) {
         if (activePiece == Piece.EMPTY) throw new InvalidInsertOperationException();
         this.activePiece = activePiece;
@@ -29,12 +35,6 @@ public class GameSnapshotBuilder {
         this.lastMove = move;
         return this;
     }
-
-    private Piece activePiece;
-    private AvailableMoves availableMoves;
-    private Score score;
-    private Board board;
-    private PlayerMove lastMove;
 
     public GameSnapshot build() {
         return new GameSnapshot(score, lastMove, activePiece, availableMoves, board, GameStatusFactory.create(availableMoves, score));
