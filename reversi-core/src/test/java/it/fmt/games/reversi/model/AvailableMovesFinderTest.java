@@ -1,6 +1,7 @@
 package it.fmt.games.reversi.model;
 
 import it.fmt.games.reversi.exceptions.InvalidPieceSelectedException;
+import it.fmt.games.reversi.model.operators.AvailableMovesFinder;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -42,8 +43,7 @@ public class AvailableMovesFinderTest {
 
     public void checkAvailableMovesFinder(String fileName, Piece piece, Coordinates... coordinates) throws Exception {
         Board board = BoardReader.read(fileName);
-        AvailableMovesFinder availableMoves = new AvailableMovesFinder(board, piece);
-        List<Coordinates> availableMovesForPlayer = availableMoves.findMoves();
+        List<Coordinates> availableMovesForPlayer = AvailableMovesFinder.findMoves(board, piece);
         List<Coordinates> aspectedResult = Arrays.asList(coordinates);
         assertThat(availableMovesForPlayer.size(), equalTo(aspectedResult.size()));
         assertEquals(availableMovesForPlayer, aspectedResult);

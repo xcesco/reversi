@@ -1,5 +1,6 @@
 package it.fmt.games.reversi.model;
 
+import it.fmt.games.reversi.model.operators.AvailableMovesFinder;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -46,11 +47,8 @@ public class AvailableMovesTest {
     public AvailableMoves checkAvailableMoves(String fileName) throws Exception {
         Board board = BoardReader.read(fileName);
 
-        AvailableMovesFinder movesPlayer1Finder = new AvailableMovesFinder(board, Piece.PLAYER_1);
-        AvailableMovesFinder movesPlayer2Finder = new AvailableMovesFinder(board, Piece.PLAYER_2);
-
-        List<Coordinates> availableMovesForPlayer1 = movesPlayer1Finder.findMoves();
-        List<Coordinates> availableMovesForPlayer2 = movesPlayer2Finder.findMoves();
+        List<Coordinates> availableMovesForPlayer1 = AvailableMovesFinder.findMoves(board, Piece.PLAYER_1);
+        List<Coordinates> availableMovesForPlayer2 = AvailableMovesFinder.findMoves(board, Piece.PLAYER_2);
 
         return new AvailableMoves(availableMovesForPlayer1, availableMovesForPlayer2);
     }

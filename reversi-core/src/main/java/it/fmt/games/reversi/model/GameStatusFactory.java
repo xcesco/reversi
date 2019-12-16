@@ -1,6 +1,10 @@
 package it.fmt.games.reversi.model;
 
 public abstract class GameStatusFactory {
+    private GameStatusFactory() {
+
+    }
+
     public static GameStatus create(AvailableMoves availableMoves, Score score) {
         if (availableMoves == null || availableMoves.isAnyAvailableMoves()) {
             return GameStatus.RUNNING;

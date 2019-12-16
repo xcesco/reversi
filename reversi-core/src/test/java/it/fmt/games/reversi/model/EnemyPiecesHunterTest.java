@@ -1,6 +1,7 @@
 package it.fmt.games.reversi.model;
 
 import it.fmt.games.reversi.exceptions.InvalidPieceSelectedException;
+import it.fmt.games.reversi.model.operators.EnemyPiecesHunter;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -17,18 +18,18 @@ public class EnemyPiecesHunterTest {
     @Test
     public void failOnInvalidPiece() {
         assertThrows(InvalidPieceSelectedException.class, () -> {
-            new EnemyPiecesHunter(null, of("a1"), Piece.EMPTY);
+            EnemyPiecesHunter.find(null, of("a1"), Piece.EMPTY);
         });
 
         assertThrows(InvalidPieceSelectedException.class, () -> {
-            new EnemyPiecesHunter(null, of("a1"), null);
+            EnemyPiecesHunter.find(null, of("a1"), null);
         });
     }
 
     @Test
     public void find00() throws Exception {
         assertThrows(InvalidPieceSelectedException.class, () -> {
-            new EnemyPiecesHunter(null, of("a1"), Piece.EMPTY);
+            EnemyPiecesHunter.find(null, of("a1"), Piece.EMPTY);
         });
     }
 
@@ -78,8 +79,7 @@ public class EnemyPiecesHunterTest {
     private void checkEnemyPieceFinder(Piece activePiece, Coordinates newMoveCoordinate, String fileName, Coordinates... coordinates) throws Exception {
         List<Coordinates> aspectedResult0 = Arrays.asList(coordinates);
         Board board = BoardReader.read(fileName);
-        EnemyPiecesHunter finder = new EnemyPiecesHunter(board, newMoveCoordinate, activePiece);
-        List<Coordinates> capturedPiecesCoords = finder.find();
+        List<Coordinates> capturedPiecesCoords = EnemyPiecesHunter.find(board, newMoveCoordinate, activePiece);
         assertThat(capturedPiecesCoords.size(), equalTo(aspectedResult0.size()));
         assertEquals(capturedPiecesCoords, aspectedResult0);
     }

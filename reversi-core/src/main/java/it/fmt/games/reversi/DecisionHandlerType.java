@@ -1,7 +1,7 @@
 package it.fmt.games.reversi;
 
-import it.fmt.games.reversi.model.RandomDecisionHandler;
-import it.fmt.games.reversi.model.SimpleDecisionHandler;
+import it.fmt.games.reversi.model.cpu.RandomDecisionHandler;
+import it.fmt.games.reversi.model.cpu.SimpleDecisionHandler;
 
 public enum DecisionHandlerType {
     SIMPLE(new SimpleDecisionHandler()),

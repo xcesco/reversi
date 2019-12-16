@@ -1,13 +1,15 @@
-package it.fmt.games.reversi.model;
+package it.fmt.games.reversi.model.operators;
+
+import it.fmt.games.reversi.model.*;
 
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class AvailableMovesFinder extends AbstractPieceOperation {
+public class AvailableMovesFinder extends AbstractBoardOperator {
 
-    public AvailableMovesFinder(Board board, Piece piece) {
+    private AvailableMovesFinder(Board board, Piece piece) {
         super(board, piece);
     }
 
@@ -16,7 +18,7 @@ public class AvailableMovesFinder extends AbstractPieceOperation {
         return finder.findMoves();
     }
 
-    public List<Coordinates> findMoves() {
+    private List<Coordinates> findMoves() {
         return getAvailableCoordinates(this::onlyValidCell);
     }
 

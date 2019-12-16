@@ -1,12 +1,20 @@
-package it.fmt.games.reversi.model;
+package it.fmt.games.reversi.model.operators;
 
 import it.fmt.games.reversi.exceptions.InvalidInsertOperationException;
+import it.fmt.games.reversi.model.Board;
+import it.fmt.games.reversi.model.Coordinates;
+import it.fmt.games.reversi.model.Piece;
+import it.fmt.games.reversi.model.PlayerMove;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class InsertPieceOperation {
+public abstract class InsertPieceOperator {
+
+    private InsertPieceOperator() {
+    }
+
     public static Board insertMove(Board board, PlayerMove move) {
         List<Coordinates> coordinateToInsert = new ArrayList<>(move.getCapturedEnemyPiecesCoords());
         coordinateToInsert.add(move.getMoveCoords());

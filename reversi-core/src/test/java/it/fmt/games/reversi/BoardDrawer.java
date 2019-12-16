@@ -1,4 +1,8 @@
-package it.fmt.games.reversi.model;
+package it.fmt.games.reversi;
+
+import it.fmt.games.reversi.model.Board;
+import it.fmt.games.reversi.model.Coordinates;
+import it.fmt.games.reversi.model.Piece;
 
 import java.util.stream.IntStream;
 
