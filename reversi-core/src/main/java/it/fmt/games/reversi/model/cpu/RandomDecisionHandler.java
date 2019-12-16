@@ -5,7 +5,6 @@ import it.fmt.games.reversi.model.Coordinates;
 
 import java.security.SecureRandom;
 import java.util.List;
-import java.util.Random;
 
 public class RandomDecisionHandler implements DecisionHandler {
 
