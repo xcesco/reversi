@@ -79,9 +79,9 @@ public class App extends Canvas implements MouseListener, GameRenderer {
             gameSnapshot.getBoard().getCellStream().forEach(item -> {
                 if (item.getPiece() != Piece.EMPTY) {
                     if ((item.getPiece() == Piece.PLAYER_2)) {
-                        g.setColor(Color.white);
+                        g.setColor(Color.WHITE);
                     } else {
-                        g.setColor(Color.black);
+                        g.setColor(Color.BLACK);
                     }
                     g.fillOval(BASE_X + item.getCoordinates().getRow() * CELL_SIZE + resize(5),
                             BASE_Y + item.getCoordinates().getColumn() * CELL_SIZE + resize(5),
@@ -94,11 +94,10 @@ public class App extends Canvas implements MouseListener, GameRenderer {
             new DrawAvailableMoves(gameSnapshot,g);
             //Score
             new DrawScore(gameSnapshot, g);
+            //Turn
+            new DrawTurn(gameSnapshot,g);
             // labels
             if(SHOW_LABELS){new DrawLabels(g);}
-
-
-
 
             if (gameSnapshot.getStatus().isGameOver()) {
                 winner=new PrintStatus(gameSnapshot.getStatus()).getWinner();
@@ -125,12 +124,15 @@ public class App extends Canvas implements MouseListener, GameRenderer {
     @Override
     public void mouseClicked(MouseEvent e) {
         if (!started) {
+//            reversi = new Reversi(this, this, PlayerFactory.createRoboPlayer1(new DesktopDecisionHandler()), PlayerFactory.createRoboPlayer2(new DesktopDecisionHandler()));
 
-            //reversi = new Reversi(this, this, PlayerFactory.createRoboPlayer1(new DesktopDecisionHandler()), PlayerFactory.createRoboPlayer2(new DesktopDecisionHandler()));
+            // Human vs Human
+            gameLogic = new GameLogicThread(this, PlayerFactory.createHumanPlayer1(), PlayerFactory.createHumanPlayer2(), this);
+            // Human vs CPU
+//            gameLogic = new GameLogicThread(this, PlayerFactory.createHumanPlayer1(), PlayerFactory.createRoboPlayer2(), this);
+            // CPU vs CPU
+//            gameLogic = new GameLogicThread(this, PlayerFactory.createRoboPlayer1(), PlayerFactory.createRoboPlayer2(), this);
 
-//            gameLogic = new GameLogicThread(this, PlayerFactory.createUserPlayer1(), PlayerFactory.createUserPlayer2(), this);
-            //gameLogic = new GameLogicThread(this, PlayerFactory.createUserPlayer1(), PlayerFactory.createRoboPlayer2(), this);
-            gameLogic = new GameLogicThread(this, PlayerFactory.createRoboPlayer1(), PlayerFactory.createRoboPlayer2(), this);
             gameLogic.start();
             started = true;
             repaint();
