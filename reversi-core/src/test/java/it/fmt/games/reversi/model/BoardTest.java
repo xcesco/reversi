@@ -15,13 +15,6 @@ public class BoardTest {
         cellCheck(b, "a1", Piece.PLAYER_1);
     }
 
-    public void cellCheck(Board board, String coord, Piece p) {
-        Coordinates c = Coordinates.of(coord);
-        board.setCell(c, p);
-
-        assertThat(board.getCellContent(c), equalTo(p));
-    }
-
     @Test
     public void invalidCoordinates() {
         Board b = new Board();
@@ -36,14 +29,7 @@ public class BoardTest {
         boardInvalidCheck(b, "z1", Piece.PLAYER_1);
     }
 
-    public void boardInvalidCheck(Board board, String coord, Piece p) {
-        Coordinates c = Coordinates.of(coord);
 
-        assertThrows(RuntimeException.class, () -> {
-            board.setCell(c, p);
-        });
-
-    }
 
     @Test
     public void readBoardConfiguration() throws Exception {
@@ -99,6 +85,22 @@ public class BoardTest {
 
         assertThat(board1.hashCode() == board2.hashCode(), is(true));
         assertThat(board1.hashCode() == board3.hashCode(), is(false));
+    }
+
+    private void cellCheck(Board board, String coord, Piece p) {
+        Coordinates c = Coordinates.of(coord);
+        board.setCell(c, p);
+
+        assertThat(board.getCellContent(c), equalTo(p));
+    }
+
+    private void boardInvalidCheck(Board board, String coord, Piece p) {
+        Coordinates c = Coordinates.of(coord);
+
+        assertThrows(RuntimeException.class, () -> {
+            board.setCell(c, p);
+        });
+
     }
 
 }

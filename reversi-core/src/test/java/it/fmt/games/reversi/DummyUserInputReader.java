@@ -1,6 +1,5 @@
 package it.fmt.games.reversi;
 
-import it.fmt.games.reversi.UserInputReader;
 import it.fmt.games.reversi.model.Coordinates;
 import it.fmt.games.reversi.model.Player;
 
