@@ -48,10 +48,13 @@ public class AvailableMovesTest {
     public void testEquals() throws Exception {
         AvailableMoves availableMoves1 = checkAvailableMoves("available_moves03");
         AvailableMoves availableMoves2 = checkAvailableMoves("available_moves03");
+        AvailableMoves availableMoves3 = checkAvailableMoves("available_moves02");
 
+        assertThat(availableMoves1.equals(availableMoves1), is(true));
         assertThat(availableMoves1.equals(null), is(false));
         assertThat(availableMoves1.equals("dummy"), is(false));
         assertThat(availableMoves1.equals(availableMoves2), is(true));
+        assertThat(availableMoves1.equals(availableMoves3), is(false));
         assertThat(availableMoves1.hashCode() == availableMoves2.hashCode(), is(true));
     }
 

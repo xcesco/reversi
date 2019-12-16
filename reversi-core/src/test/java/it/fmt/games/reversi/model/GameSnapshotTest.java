@@ -1,6 +1,8 @@
 package it.fmt.games.reversi.model;
 
 import it.fmt.games.reversi.Player1;
+import it.fmt.games.reversi.exceptions.InvalidInsertOperationException;
+import it.fmt.games.reversi.model.operators.InsertPieceOperator;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -9,6 +11,7 @@ import static it.fmt.games.reversi.model.Coordinates.of;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.nullValue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class GameSnapshotTest {
     @Test
@@ -31,7 +34,15 @@ public class GameSnapshotTest {
         assertThat(gameSnapshot.getActivePiece(), equalTo(aspectedCurrentPlayer.getPiece()));
         assertThat(gameSnapshot.getBoard(), equalTo(aspectedBoard));
         assertThat(gameSnapshot.getStatus(), equalTo(aspectedStatus));
+    }
+    @Test
+    public void testGameSnapshotBuilder() {
+        assertThrows(InvalidInsertOperationException.class, () -> {
+            new GameSnapshotBuilder().setActivePiece(Piece.EMPTY);
+        });
+
 
     }
+
 
 }

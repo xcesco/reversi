@@ -2,7 +2,6 @@ package it.fmt.games.reversi.model;
 
 import it.fmt.games.reversi.exceptions.InvalidInsertOperationException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerMove {

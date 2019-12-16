@@ -31,6 +31,13 @@ public class GameStatusFactoryTest {
     public void createDraw() {
         checkStatus(Collections.emptyList(), Collections.emptyList(), 12, 12, true, GameStatus.DRAW);
     }
+    @Test
+    public void emptyAvailableMoves() {
+        GameStatus gameStatus = GameStatusFactory.create(null, new Score(12, 4));
+        assertThat(gameStatus.isGameOver(), is(false));
+        assertThat(gameStatus, is(GameStatus.RUNNING));
+    }
+
 
     private void checkStatus(List<Coordinates> player1AvailMoves, List<Coordinates> player2AvailMoves, int player1Score, int player2Score, boolean finished, GameStatus aspectedStatus) {
         GameStatus gameStatus = GameStatusFactory.create(new AvailableMoves(player1AvailMoves, player2AvailMoves), new Score(player1Score, player2Score));
