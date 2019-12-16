@@ -8,52 +8,52 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-class PlayerFactoryTest {
+public class PlayerFactoryTest {
 
     @Test
-    void createUserPlayer2() {
+    public void createUserPlayer2() {
         Player2 player = PlayerFactory.createHumanPlayer2();
         check(player, Piece.PLAYER_2);
     }
 
     @Test
-    void createUserPlayer1() {
+    public void createUserPlayer1() {
         Player1 player = PlayerFactory.createHumanPlayer1();
         check(player, Piece.PLAYER_1);
     }
 
     @Test
-    void createRoboPlayer2() {
+    public void createRoboPlayer2() {
         Player2 player = PlayerFactory.createRoboPlayer2();
         check(player, Piece.PLAYER_2);
     }
 
     @Test
-    void testCreateRoboPlayer2() {
+    public void testCreateRoboPlayer2() {
         Player2 player = PlayerFactory.createRoboPlayer2(DecisionHandlerType.RANDOM);
         check(player, Piece.PLAYER_2);
     }
 
     @Test
-    void testCreateRoboPlayer21() {
+    public void testCreateRoboPlayer21() {
         Player2 player = PlayerFactory.createRoboPlayer2(new RandomDecisionHandler());
         check(player, Piece.PLAYER_2);
     }
 
     @Test
-    void createRoboPlayer1() {
+    public void createRoboPlayer1() {
         Player1 player = PlayerFactory.createRoboPlayer1();
         check(player, Piece.PLAYER_1);
     }
 
     @Test
-    void testCreateRoboPlayer1() {
+    public void testCreateRoboPlayer1() {
         Player1 player = PlayerFactory.createRoboPlayer1(DecisionHandlerType.RANDOM);
         check(player, Piece.PLAYER_1);
     }
 
     @Test
-    void testCreateRoboPlayer11() {
+    public void testCreateRoboPlayer11() {
         Player1 player = PlayerFactory.createRoboPlayer1(new RandomDecisionHandler());
         check(player, Piece.PLAYER_1);
     }
