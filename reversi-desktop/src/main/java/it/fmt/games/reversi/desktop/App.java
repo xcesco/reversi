@@ -3,14 +3,12 @@ package it.fmt.games.reversi.desktop;
 import it.fmt.games.reversi.GameRenderer;
 import it.fmt.games.reversi.PlayerFactory;
 import it.fmt.games.reversi.Reversi;
-import it.fmt.games.reversi.UserInputReader;
 import it.fmt.games.reversi.model.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
@@ -19,25 +17,22 @@ public class App extends Canvas implements MouseListener, GameRenderer {
     public static final int BASE_X = 35;
     public static final int BASE_Y = 105;
     public static final int OFFSET = 25;
+    private static final boolean SHOW_LABELS = true;
     public static final Color darkGreen = new Color(0, 120, 0);
     public static final Color brown = new Color(153,102, 0);
-    public static String WINNER = "";
+    public static String winner = "";
     public GameSnapshot gameSnapshot;
     private boolean started = false;
     private Rectangle[][] boxes;
-    private boolean showLabels = true;
-    private Board board;
+
 
     private Reversi reversi;
     private GameLogicThread gameLogic;
 
-    public App(Board b) {
-        this.board = b;
-    }
 
     public static void main(String[] args) {
         JFrame win = new JFrame("Reversi");
-        win.setSize(700, 900);
+        win.setSize(650, 900);
         win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         win.setResizable(false);
         win.add(new App());
@@ -98,7 +93,7 @@ public class App extends Canvas implements MouseListener, GameRenderer {
             g.fillOval(455, 700+OFFSET, CELL_SIZE - 10, CELL_SIZE - 10);
 
             // labels
-            if (showLabels) {
+            if (SHOW_LABELS) {
                 String[] C = {"A", "B", "C", "D", "E", "F", "G", "H"};
                 g.setFont(new Font("Arial", Font.PLAIN, 24));
                 g.setColor(Color.black);
