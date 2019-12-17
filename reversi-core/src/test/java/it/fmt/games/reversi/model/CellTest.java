@@ -1,9 +1,7 @@
 package it.fmt.games.reversi.model;
 
-import it.fmt.games.reversi.model.Cell;
-import it.fmt.games.reversi.model.Coordinates;
-import it.fmt.games.reversi.model.Piece;
 import org.junit.jupiter.api.Test;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
@@ -72,7 +70,7 @@ public class CellTest {
         testCell(cell, Piece.EMPTY, row, col);
     }
 
-    public void testCell (Cell c, Piece p, int row, int col) {
+    private void testCell (Cell c, Piece p, int row, int col) {
         assertThat(c.getCoordinates().getRow(), is(row));
         assertThat(c.getCoordinates().getColumn(), is(col));
         assertThat(c.getPiece(), is(p));

@@ -1,6 +1,10 @@
-package it.fmt.games.reversi.model;
+package it.fmt.games.reversi.model.operators;
 
 import it.fmt.games.reversi.exceptions.InvalidPieceSelectedException;
+import it.fmt.games.reversi.model.Board;
+import it.fmt.games.reversi.model.BoardReader;
+import it.fmt.games.reversi.model.Coordinates;
+import it.fmt.games.reversi.model.Piece;
 import it.fmt.games.reversi.model.operators.AvailableMovesFinder;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class AvailableMovesFinderTest {
 
     @Test
-    public void invalidPieceSelected() throws Exception {
+    public void invalidPieceSelected() {
         assertThrows(InvalidPieceSelectedException.class, () -> {
             checkAvailableMovesFinder("available_moves_finder00", Piece.EMPTY, of("a1"));
         });

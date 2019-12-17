@@ -13,20 +13,29 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class GameSnapshotTest {
-    @Test
-    public void testData() {
-        Score score = new Score(20, 10);
-        Player currentPlayer = new Player1();
-        AvailableMoves moves = new AvailableMoves(Arrays.asList(of("a1")), Arrays.asList(of("a2")));
-        Board board = new Board();
-        GameStatus status = GameStatus.DRAW;
-        GameSnapshot gameSnapshot = new GameSnapshot(score, null, currentPlayer.getPiece(), moves, board, status);
 
-        Score aspectedScore = new Score(20, 10);
+    @Test
+    public void testGameSnapshotBuilder() {
+        assertThrows(InvalidInsertOperationException.class, () -> {
+            new GameSnapshotBuilder().setActivePiece(Piece.EMPTY);
+        });
+    }
+
+    @Test
+    public void checkGameSnapshot() {
+        int player1Score=20;
+        int player2Score=10;
+        String availMoveP1="a1";
+        String availMoveP2="a2";
+
+        GameSnapshot gameSnapshot = createGameSnapshot(player1Score, player2Score, availMoveP1, availMoveP2);
+
+        Score aspectedScore = new Score(player1Score, player2Score);
         Player aspectedCurrentPlayer = new Player1();
-        AvailableMoves aspectedMoves = new AvailableMoves(Arrays.asList(of("a1")), Arrays.asList(of("a2")));
+        AvailableMoves aspectedMoves = new AvailableMoves(Arrays.asList(of(availMoveP1)), Arrays.asList(of(availMoveP2)));
         Board aspectedBoard = new Board();
         GameStatus aspectedStatus = GameStatus.DRAW;
+
         assertThat(gameSnapshot.getAvailableMoves(), equalTo(aspectedMoves));
         assertThat(gameSnapshot.getScore(), equalTo(aspectedScore));
         assertThat(gameSnapshot.getLastMove(), nullValue());
@@ -34,14 +43,17 @@ public class GameSnapshotTest {
         assertThat(gameSnapshot.getBoard(), equalTo(aspectedBoard));
         assertThat(gameSnapshot.getStatus(), equalTo(aspectedStatus));
     }
-    @Test
-    public void testGameSnapshotBuilder() {
-        assertThrows(InvalidInsertOperationException.class, () -> {
-            new GameSnapshotBuilder().setActivePiece(Piece.EMPTY);
-        });
 
-
+    private GameSnapshot createGameSnapshot(int player1Score, int player2Score, String availMoveP1, String availMoveP2) {
+        Score score = new Score(player1Score, player2Score);
+        Player currentPlayer = new Player1();
+        AvailableMoves moves = new AvailableMoves(Arrays.asList(of(availMoveP1)), Arrays.asList(of(availMoveP2)));
+        Board board = new Board();
+        GameStatus status = GameStatus.DRAW;
+        return new GameSnapshot(score, null, currentPlayer.getPiece(), moves, board, status);
     }
+
+
 
 
 }
