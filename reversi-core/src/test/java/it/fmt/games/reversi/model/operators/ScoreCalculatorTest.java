@@ -1,5 +1,6 @@
-package it.fmt.games.reversi.model;
+package it.fmt.games.reversi.model.operators;
 
+import it.fmt.games.reversi.model.*;
 import it.fmt.games.reversi.model.operators.ScoreCalculator;
 import org.junit.jupiter.api.Test;
 
