@@ -5,11 +5,18 @@ import it.fmt.games.reversi.model.GameStatus;
 public class PrintStatus {
 
     public String getWinner() {
-        return winner;
+        return SetWinner();
     }
 
-    String winner="";
+    private GameStatus status;
+
+
     public PrintStatus(GameStatus status) {
+        this.status = status;
+    }
+
+    private String SetWinner(){
+        String winner = "";
         switch (status) {
             case PLAYER1_WIN:
                 winner = "BLACK is Winner";
@@ -22,6 +29,7 @@ public class PrintStatus {
                 winner = "Draw";
                 break;
         }
+        return winner;
     }
 
 }

@@ -14,13 +14,13 @@ import java.util.stream.IntStream;
 
 public class App extends Canvas implements MouseListener, GameRenderer {
     public static double RESIZE = 1;
-    public static final int CELL_SIZE =  resize(70);
+    public static final int CELL_SIZE = resize(70);
     public static final int BASE_X = resize(35);
     public static final int BASE_Y = resize(105);
     private static final boolean SHOW_LABELS = true;
     public static final Color darkGreen = new Color(0, 120, 0);
     public static final Color brown = new Color(153, 102, 0);
-    public static final Color lightYellow = new Color(220,220,190);
+    public static final Color lightYellow = new Color(220, 220, 190);
     public static final int WIDTH = resize(900);
     public static final int HEIGHT = resize(768);
     public static String winner = "";
@@ -28,18 +28,17 @@ public class App extends Canvas implements MouseListener, GameRenderer {
     private boolean started = false;
     private Rectangle[][] boxes;
 
-
     private Reversi reversi;
     private GameLogicThread gameLogic;
 
 
     public static void main(String[] args) {
-        JFrame win = new JFrame("FMT Reversi");
-        win.setSize(WIDTH, HEIGHT);
-        win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        win.setResizable(false);
-        win.add(new App());
-        win.setVisible(true);
+        JFrame frame = new JFrame("FMT Reversi");
+        frame.setSize(WIDTH, HEIGHT);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+        frame.add(new App());
+        frame.setVisible(true);
     }
 
     public App() {
@@ -51,6 +50,11 @@ public class App extends Canvas implements MouseListener, GameRenderer {
     }
 
     public void paint(Graphics g) {
+        DrawTurn drawTurn = new DrawTurn(gameSnapshot, g);
+        DrawLabels drawLabels = new DrawLabels(g);
+        DrawScore drawScore = new DrawScore(gameSnapshot, g);
+        DrawAvailableMoves drawAvailableMoves = new DrawAvailableMoves(gameSnapshot, g);
+
         g.setColor(lightYellow);
         g.fillRect(0, 0, WIDTH, HEIGHT);
         g.setColor(Color.black);
@@ -58,14 +62,14 @@ public class App extends Canvas implements MouseListener, GameRenderer {
         g.setFont(new Font("Arial", Font.BOLD, resize(48)));
 
         if (!started) {
-            g.drawString("REVERSI", resize(300),  resize(300));
+            g.drawString("REVERSI", resize(300), resize(300));
             g.drawString("Click to Play", resize(270), resize(400));
         } else if (this.gameSnapshot != null) {
             // board
             g.setColor(brown);
             g.fillRect(BASE_X - resize(10),
                     BASE_Y - resize(10),
-                    CELL_SIZE * 8 +resize(20),
+                    CELL_SIZE * 8 + resize(20),
                     CELL_SIZE * 8 + resize(20));
             g.setColor(darkGreen);
             g.fillRect(BASE_X, BASE_Y, CELL_SIZE * 8, CELL_SIZE * 8);
@@ -91,16 +95,18 @@ public class App extends Canvas implements MouseListener, GameRenderer {
 
             });
             //Legal Moves
-            new DrawAvailableMoves(gameSnapshot,g);
+            drawAvailableMoves.DraW();
             //Score
-            new DrawScore(gameSnapshot, g);
+            drawScore.DraW();
             //Turn
-            new DrawTurn(gameSnapshot,g);
+            drawTurn.DraW();
             // labels
-            if(SHOW_LABELS){new DrawLabels(g);}
+            if (SHOW_LABELS) {
+                drawLabels.DraW();
+            }
 
             if (gameSnapshot.getStatus().isGameOver()) {
-                winner=new PrintStatus(gameSnapshot.getStatus()).getWinner();
+                winner = new PrintStatus(gameSnapshot.getStatus()).getWinner();
 
                 try {
                     TimeUnit.SECONDS.sleep(1);
@@ -108,7 +114,8 @@ public class App extends Canvas implements MouseListener, GameRenderer {
                     e.printStackTrace();
                 }
                 // Print Winner
-                new PrintWinner(gameSnapshot,g,winner);
+                PrintWinner printWinner = new PrintWinner(gameSnapshot, g, winner);
+                printWinner.DraW();
 
             }
 
@@ -117,7 +124,7 @@ public class App extends Canvas implements MouseListener, GameRenderer {
 
 
     public static int resize(int i) {
-        return (int)(i / RESIZE);
+        return (int) (i / RESIZE);
     }
 
 
@@ -126,11 +133,11 @@ public class App extends Canvas implements MouseListener, GameRenderer {
         if (!started) {
 //            reversi = new Reversi(this, this, PlayerFactory.createRoboPlayer1(new DesktopDecisionHandler()), PlayerFactory.createRoboPlayer2(new DesktopDecisionHandler()));
 
-            // Human vs Human
-            gameLogic = new GameLogicThread(this, PlayerFactory.createHumanPlayer1(), PlayerFactory.createHumanPlayer2(), this);
-            // Human vs CPU
-//            gameLogic = new GameLogicThread(this, PlayerFactory.createHumanPlayer1(), PlayerFactory.createRoboPlayer2(), this);
-            // CPU vs CPU
+//----------------------> Human vs Human
+//            gameLogic = new GameLogicThread(this, PlayerFactory.createHumanPlayer1(), PlayerFactory.createHumanPlayer2(), this);
+//----------------------> Human vs CPU
+            gameLogic = new GameLogicThread(this, PlayerFactory.createHumanPlayer1(), PlayerFactory.createRoboPlayer2(), this);
+//----------------------> CPU vs CPU
 //            gameLogic = new GameLogicThread(this, PlayerFactory.createRoboPlayer1(), PlayerFactory.createRoboPlayer2(), this);
 
             gameLogic.start();

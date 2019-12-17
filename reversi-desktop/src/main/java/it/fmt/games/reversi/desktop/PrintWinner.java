@@ -6,8 +6,20 @@ import java.awt.*;
 
 import static it.fmt.games.reversi.desktop.App.*;
 
-public class PrintWinner {
+public class PrintWinner extends DrawObject{
+    private GameSnapshot gameSnapshot;
+    private Graphics g;
+    private String winner;
+
     public PrintWinner(GameSnapshot gameSnapshot, Graphics g, String winner) {
+        this.gameSnapshot = gameSnapshot;
+        this.g = g;
+        this.winner = winner;
+    }
+
+
+    @Override
+    public void DraW() {
         g.setColor(Color.gray);
         g.fillRect(2*BASE_X, 2*BASE_Y, 500, 250);
         g.setColor(new Color(255,153,0));

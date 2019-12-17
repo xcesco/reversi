@@ -7,9 +7,15 @@ import java.util.stream.IntStream;
 
 import static it.fmt.games.reversi.desktop.App.*;
 
-public class DrawLabels {
+public class DrawLabels extends DrawObject {
+    private Graphics g;
 
     public DrawLabels(Graphics g) {
+        this.g = g;
+    }
+
+    @Override
+    public void DraW() {
         String[] Label = {"A", "B", "C", "D", "E", "F", "G", "H"};
         g.setFont(new Font("Arial", Font.PLAIN, resize(24)));
         g.setColor(Color.black);
@@ -26,6 +32,7 @@ public class DrawLabels {
         IntStream.range(0, Board.BOARD_SIZE).forEach((row -> g.drawString(String.valueOf(row + 1),
                 BASE_X + CELL_SIZE * 8 + resize(10),
                 App.BASE_Y + row * CELL_SIZE + resize(45))));
-
     }
 }
+
+
