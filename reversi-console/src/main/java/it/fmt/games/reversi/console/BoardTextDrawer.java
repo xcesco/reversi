@@ -7,17 +7,25 @@ import it.fmt.games.reversi.model.Piece;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class BoardDrawer extends Drawer{
+import static it.fmt.games.reversi.console.TextDrawer.*;
+
+public class BoardTextDrawer {
     private Board board;
     private List<Coordinates> availableMoves;
+    static final String ROW_SEPARATOR = "  +-----+-----+-----+-----+-----+-----+-----+-----+";
 
-    public BoardDrawer(Board board, List<Coordinates> availableMoves) {
-        this.board = board;
+    public BoardTextDrawer(Board board, List<Coordinates> availableMoves) {
         this.availableMoves = availableMoves;
+        this.board = board;
     }
 
-    public void drawBoard() {
-        draw("  ");
+    public static void drawBoard(Board board, List<Coordinates> availableMoves) {
+        BoardTextDrawer drawer = new BoardTextDrawer(board, availableMoves);
+        drawer.draw();
+    }
+
+    private void draw() {
+        print("  ");
         IntStream.range(0, Board.BOARD_SIZE).forEach(col ->
                 System.out.print(String.format("   %s  ", (char) ('A' + col))));
         System.out.println("\n" + PREFIX + ROW_SEPARATOR);
@@ -35,12 +43,12 @@ public class BoardDrawer extends Drawer{
     }
 
     public String getMovesOnBoard(Coordinates coordinates) {
-        return isAvailableMove(coordinates) ? "?" : " ";
+        return isAvailableMove(coordinates) ? "•" : " ";
     }
 
 
     public boolean isAvailableMove(Coordinates coordinates) {
-        return availableMoves.indexOf(coordinates)!=-1;
+        return availableMoves.indexOf(coordinates) != -1;
     }
 
     private String getPlayerSymbol(Coordinates coordinates) {

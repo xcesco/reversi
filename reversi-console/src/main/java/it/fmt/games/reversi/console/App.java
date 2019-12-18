@@ -1,47 +1,82 @@
 package it.fmt.games.reversi.console;
 
-import it.fmt.games.reversi.GameRenderer;
-import it.fmt.games.reversi.PlayerFactory;
-import it.fmt.games.reversi.Reversi;
+import it.fmt.games.reversi.*;
 import it.fmt.games.reversi.model.*;
 
+import java.util.List;
 import java.util.Scanner;
 
-public class App extends Drawer{
-    final static Scanner scanner = new Scanner(System.in);
-    private static SelectGameDrawer selectGameDrawer = new SelectGameDrawer();
-    private static ConsoleRenderer consoleRenderer = new ConsoleRenderer();
-    private static Reversi reversi;
+public class App extends TextDrawer implements UserInputReader {
+    static final String FMT_REVERSI =   "****************** FMT REVERSI ******************" + NEW_LINE;
+    static final String P1_VS_P2 =      "  ************** PLAYER_1 vs PLAYER_2 *************" + NEW_LINE;
+    static final String P1_VS_CPU =     "  **************** PLAYER_1 vs CPU ****************" + NEW_LINE;
+    static final String CPU_VS_P2 =     "  **************** CPU vs PLAYER_2 ****************" + NEW_LINE;
+    static final String CPU_VS_CPU =    "  ****************** CPU vs CPU *******************" + NEW_LINE;
+    private final Scanner scanner;
+    private Player1 player1;
+    private Player2 player2;
 
+    private static Reversi reversi;
+    public App(Scanner scanner) {
+        this.scanner = scanner;
+    }
 
     public static void main(String[] args) {
-        draw("************ FMT Reversi ************"+NEW_LINE);
-        selectGameDrawer.drawSelectGame();
-        int choose = scanner.nextInt();
+        App app = new App(new Scanner(System.in));
+        app.run();
+    }
 
-        while (choose < 1 || choose > 4) {
-            draw("Invalid choose!"+NEW_LINE);
-            draw("*************************************"+NEW_LINE);
-            draw(NEW_LINE);
+    private void run() {
+        print(FMT_REVERSI);
+        int choise = GameTypeSelector.selectGameType(scanner);
 
-            selectGameDrawer.drawSelectGame();
-            choose = scanner.nextInt();
+        if (choise == 0) {
+            return;
         }
+        print(NEW_LINE);
+        definePlayers(choise);
+        Reversi reversi = new Reversi(new ConsoleRenderer(), this::readInputFor, player1, player2);
+        reversi.play();
+    }
 
-        switch (choose) {
+    private void definePlayers(int choise) {
+        switch (choise) {
             case 1:
-                draw("************ Player 1 vs Player 2 ************"+NEW_LINE);
-                //reversi = new Reversi(consoleRenderer, );
+                print(P1_VS_P2);
+                this.player1 = PlayerFactory.createHumanPlayer1();
+                this.player2 = PlayerFactory.createHumanPlayer2();
                 break;
             case 2:
-                draw("************ Player 1 vs CPU ************"+NEW_LINE);
+                print(P1_VS_CPU);
+                this.player1 = PlayerFactory.createHumanPlayer1();
+                this.player2 = PlayerFactory.createRoboPlayer2();
                 break;
             case 3:
-                draw("************ CPU vs Player 2 ************"+NEW_LINE);
+                print(CPU_VS_P2);
+                this.player1 = PlayerFactory.createRoboPlayer1();
+                this.player2 = PlayerFactory.createHumanPlayer2();
                 break;
             case 4:
-                draw("************ CPU vs CPU ************"+NEW_LINE);
+                print(CPU_VS_CPU);
+                this.player1 = PlayerFactory.createRoboPlayer1();
+                this.player2 = PlayerFactory.createRoboPlayer2();
                 break;
         }
+    }
+
+    @Override
+    public Coordinates readInputFor(Player currentPlayer, List<Coordinates> availableMoves) {
+        Coordinates coords = new Coordinates(0,0);
+        String insert = "";
+
+        do {
+            print(String.format("%s, insert move: ", currentPlayer.getPiece()));
+            insert = String.valueOf(scanner.next());
+
+            if (insert.length() == 2) {
+                coords = Coordinates.of(insert);
+            } 
+        } while ((availableMoves.indexOf(coords) == -1) || insert.length() != 2);
+        return coords;
     }
 }
