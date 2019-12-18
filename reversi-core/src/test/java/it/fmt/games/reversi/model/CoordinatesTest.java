@@ -118,7 +118,12 @@ public class CoordinatesTest {
         Coordinates coords = Coordinates.of("0");
 
         assertThat(coords.isValid(), is(false));
-        //assertThat(coords.toString(), is("A1"));
+    }
+
+    @Test
+    public void longStringCoordinates() {
+        Coordinates coords = Coordinates.of("A2E5");
+        assertThat(coords.isValid(), is(false));
     }
 
     @Test
@@ -172,13 +177,11 @@ public class CoordinatesTest {
     private void checkInvalidConversion(String label) {
         Coordinates coords1 = Coordinates.of(label);
         assertThat(coords1.isValid(), is(false));
-
     }
 
     private void checkCoordinateValidity(int row, int col, boolean valid) {
         Coordinates coords = Coordinates.of(row, col);
         assertThat(coords.isValid(), is(valid));
-
     }
 
 }
