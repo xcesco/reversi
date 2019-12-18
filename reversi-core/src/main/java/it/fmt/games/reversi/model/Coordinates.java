@@ -1,7 +1,5 @@
 package it.fmt.games.reversi.model;
 
-import it.fmt.games.reversi.exceptions.InvalidCoordinatesException;
-
 public class Coordinates implements Comparable<Coordinates> {
     private int row;
     private int column;
@@ -11,16 +9,24 @@ public class Coordinates implements Comparable<Coordinates> {
         this.column = column;
     }
 
+    public Coordinates(String value) {
+        value = value.toUpperCase();
+        if (value.length() == 2 && charInRange(value.charAt(0), 'A', 'H')
+                && charInRange(value.charAt(1), '1', '8')) {
+            row = value.charAt(1) - '0' - 1;
+            column = value.charAt(0) - 'A';
+        } else {
+            row = -1;
+            row = -1;
+        }
+    }
+
     public static Coordinates of(int row, int column) {
         return new Coordinates(row, column);
     }
 
     public static Coordinates of(String value) {
-        String v = value.toUpperCase();
-        if (value.length() == 0) {
-            throw new InvalidCoordinatesException("Invalid coordinates!");
-        }
-        return new Coordinates(v.charAt(1) - '0' - 1, v.charAt(0) - 'A');
+        return new Coordinates(value);
     }
 
     public int getRow() {
@@ -71,5 +77,9 @@ public class Coordinates implements Comparable<Coordinates> {
         int result = row;
         result = 31 * result + column;
         return result;
+    }
+
+    private boolean charInRange(char input, char lowerBound, char upperBound) {
+        return input >= lowerBound && input <= upperBound;
     }
 }

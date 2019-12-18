@@ -1,27 +1,25 @@
 package it.fmt.games.reversi.model;
 
-import it.fmt.games.reversi.exceptions.InvalidCoordinatesException;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CoordinatesTest {
 
     @Test
-    public void checkRow_1Col_1() {
+    public void checkRow1Col1() {
         checkCoordinateValidity(-1, -1, false);
     }
 
     @Test
-    public void checkRow_0Col_0() {
+    public void checkRow0Col0() {
         checkCoordinateValidity(0, 0, true);
     }
 
     @Test
-    public void checkRow_4Col_10() {
+    public void checkRow4Col10() {
         checkCoordinateValidity(4, 10, false);
     }
 
@@ -85,22 +83,42 @@ public class CoordinatesTest {
     }
 
     @Test
-    public void testConversionAA(){checkInvalidConversion("AA");}
+    public void testConversionAA() {
+        checkInvalidConversion("AA");
+    }
 
     @Test
-    public void testConversionaaa(){checkInvalidConversion("aaa");}
+    public void testConversionaaa() {
+        checkInvalidConversion("aaa");
+    }
 
     @Test
-    public void testConversionSpecialChar(){checkInvalidConversion("!!");}
+    public void testConversionSpecialChar() {
+        checkInvalidConversion("!!");
+    }
 
     @Test
-    public void testConversionSpecialA1(){checkInvalidConversion("A     1");}
+    public void testConversionSpecialA1() {
+        checkInvalidConversion("A     1");
+    }
 
     @Test
-    public void testConversion(){
-        assertThrows(InvalidCoordinatesException.class, () -> {
-            checkInvalidConversion("");
-        });
+    public void testEmptyString() {
+        checkInvalidConversion("");
+    }
+
+    @Test
+    public void testNegativeNumber() {
+        checkInvalidConversion("-1");
+        checkInvalidConversion("A-1");
+    }
+
+    @Test
+    public void zeroCoordinates() {
+        Coordinates coords = Coordinates.of("0");
+
+        assertThat(coords.isValid(), is(false));
+        //assertThat(coords.toString(), is("A1"));
     }
 
     @Test
@@ -120,11 +138,11 @@ public class CoordinatesTest {
 
     @Test
     public void testEquals() {
-        Coordinates coordinatesA1=Coordinates.of("a1");
-        Coordinates coordinatesEquals=Coordinates.of("a1");
-        Coordinates coordinatesA2=Coordinates.of("a2");
-        Coordinates coordinatesB1=Coordinates.of("b1");
-        String dummyObject="Not cooordinates";
+        Coordinates coordinatesA1 = Coordinates.of("a1");
+        Coordinates coordinatesEquals = Coordinates.of("a1");
+        Coordinates coordinatesA2 = Coordinates.of("a2");
+        Coordinates coordinatesB1 = Coordinates.of("b1");
+        String dummyObject = "Not cooordinates";
 
         assertThat(coordinatesA1.equals(coordinatesA1), is(true));
         assertThat(coordinatesA1.equals(coordinatesEquals), equalTo(true));
@@ -136,11 +154,11 @@ public class CoordinatesTest {
 
     @Test
     public void testHashcode() {
-        Coordinates coordinatesA1=Coordinates.of("a1");
-        Coordinates coordinatesA2=Coordinates.of("a2");
+        Coordinates coordinatesA1 = Coordinates.of("a1");
+        Coordinates coordinatesA2 = Coordinates.of("a2");
 
-        assertThat(coordinatesA1.hashCode()==coordinatesA1.hashCode(), is(true));
-        assertThat(coordinatesA1.hashCode()==coordinatesA2.hashCode(), is(false));
+        assertThat(coordinatesA1.hashCode() == coordinatesA1.hashCode(), is(true));
+        assertThat(coordinatesA1.hashCode() == coordinatesA2.hashCode(), is(false));
     }
 
     private void checkValidConversion(String label, int row, int col) {
