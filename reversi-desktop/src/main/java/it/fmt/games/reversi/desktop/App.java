@@ -1,5 +1,6 @@
 package it.fmt.games.reversi.desktop;
 
+import it.fmt.games.reversi.DecisionHandlerType;
 import it.fmt.games.reversi.GameRenderer;
 import it.fmt.games.reversi.PlayerFactory;
 import it.fmt.games.reversi.Reversi;
@@ -43,25 +44,29 @@ public class App extends Canvas implements MouseListener, GameRenderer {
     }
 
     public App(int game) {
+        selectPlayer(game);
+        gameLogic.start();
+        addMouseListener(this);
+        boxes = new Rectangle[8][8];
+    }
+
+    private void selectPlayer(int game) {
         switch (game){
             case 1:
                 gameLogic = new GameLogicThread(this, PlayerFactory.createHumanPlayer1(), PlayerFactory.createHumanPlayer2(), this);
                 break;
             case 2:
-                gameLogic = new GameLogicThread(this, PlayerFactory.createHumanPlayer1(), PlayerFactory.createRoboPlayer2(), this);
+                gameLogic = new GameLogicThread(this, PlayerFactory.createHumanPlayer1(), PlayerFactory.createRoboPlayer2(DecisionHandlerType.RANDOM), this);
                 break;
             case 3:
-                gameLogic = new GameLogicThread(this, PlayerFactory.createRoboPlayer1(), PlayerFactory.createRoboPlayer2(), this);
+                gameLogic = new GameLogicThread(this, PlayerFactory.createRoboPlayer1(DecisionHandlerType.RANDOM), PlayerFactory.createHumanPlayer2(), this);
+                break;
+            case 4:
+                gameLogic = new GameLogicThread(this, PlayerFactory.createRoboPlayer1(DecisionHandlerType.RANDOM), PlayerFactory.createRoboPlayer2(DecisionHandlerType.RANDOM), this);
                 break;
             default:
                 break;
         }
-        gameLogic.start();
-        addMouseListener(this);
-        boxes = new Rectangle[8][8];
-        IntStream.range(0, Board.BOARD_SIZE)
-                .forEach(row -> IntStream.range(0, Board.BOARD_SIZE)
-                        .forEach(col -> boxes[row][col] = new Rectangle(BASE_X + col * CELL_SIZE, BASE_Y + row * CELL_SIZE, CELL_SIZE, CELL_SIZE)));
     }
 
     public void paint(Graphics g) {
@@ -69,6 +74,10 @@ public class App extends Canvas implements MouseListener, GameRenderer {
         DrawLabels drawLabels = new DrawLabels(g);
         DrawScore drawScore = new DrawScore(gameSnapshot, g);
         DrawAvailableMoves drawAvailableMoves = new DrawAvailableMoves(gameSnapshot, g);
+
+        IntStream.range(0, Board.BOARD_SIZE)
+                .forEach(row -> IntStream.range(0, Board.BOARD_SIZE)
+                        .forEach(col -> boxes[row][col] = new Rectangle(BASE_X + col * CELL_SIZE, BASE_Y + row * CELL_SIZE, CELL_SIZE, CELL_SIZE)));
 
         g.setColor(lightYellow);
         g.fillRect(0, 0, WIDTH, HEIGHT);
