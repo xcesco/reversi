@@ -89,7 +89,7 @@ public class App extends Canvas implements MouseListener, GameRenderer {
 //            g.drawString("REVERSI", resize(300), resize(300));
 //            g.drawString("Click to Play", resize(270), resize(400));
 //        } else if (this.gameSnapshot != null) {
-         if (this.gameSnapshot != null){
+        if (this.gameSnapshot != null){
             // board
             g.setColor(brown);
             g.fillRect(BASE_X - resize(10),
@@ -169,16 +169,16 @@ public class App extends Canvas implements MouseListener, GameRenderer {
 //            started = true;
 //            repaint();
 //        } else {
-            repaint();
-            int col = (e.getY() - BASE_Y) / CELL_SIZE;
-            int row = (e.getX() - BASE_X) / CELL_SIZE;
-            //System.out.println(String.format("%s",e.getPoint()));
-            Coordinates coordinates = Coordinates.of(row, col);
+        repaint();
+        int col = (e.getY() - BASE_Y) / CELL_SIZE;
+        int row = (e.getX() - BASE_X) / CELL_SIZE;
+        //System.out.println(String.format("%s",e.getPoint()));
+        Coordinates coordinates = Coordinates.of(row, col);
 
-            synchronized (gameLogic.acceptedMove) {
-                gameLogic.acceptedMove.setCoordinates(coordinates);
-                gameLogic.acceptedMove.notifyAll();
-            }
+        synchronized (gameLogic.acceptedMove) {
+            gameLogic.acceptedMove.setCoordinates(coordinates);
+            gameLogic.acceptedMove.notifyAll();
+        }
 //        }
 
     }
