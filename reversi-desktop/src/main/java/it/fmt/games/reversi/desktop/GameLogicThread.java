@@ -1,16 +1,12 @@
 package it.fmt.games.reversi.desktop;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import it.fmt.games.reversi.GameRenderer;
-import it.fmt.games.reversi.Player1;
-import it.fmt.games.reversi.Player2;
-import it.fmt.games.reversi.Reversi;
-import it.fmt.games.reversi.UserInputReader;
+import it.fmt.games.reversi.*;
 import it.fmt.games.reversi.model.Coordinates;
 import it.fmt.games.reversi.model.GameSnapshot;
 import it.fmt.games.reversi.model.Player;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameLogicThread extends Thread {
     private final Reversi reversi;
@@ -20,8 +16,8 @@ public class GameLogicThread extends Thread {
     public List<Coordinates> availableMoves = new ArrayList<>();
 
     public GameLogicThread(App app, Player1 player1, Player2 player2, GameRenderer uiRenderer) {
-        this.app=app;
-        this.uiRenderer=uiRenderer;
+        this.app = app;
+        this.uiRenderer = uiRenderer;
         UserInputReader userInputReader = this::getCoordinates;
         GameRenderer gamerRenderer = this::dispatchToUiRenderer;
         this.reversi = new Reversi(gamerRenderer, userInputReader, player1, player2);

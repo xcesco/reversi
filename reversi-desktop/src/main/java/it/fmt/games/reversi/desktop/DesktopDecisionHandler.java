@@ -6,13 +6,13 @@ import it.fmt.games.reversi.model.Coordinates;
 import it.fmt.games.reversi.model.cpu.RandomDecisionHandler;
 
 public class DesktopDecisionHandler extends RandomDecisionHandler {
-        @Override
-        public Coordinates compute(List<Coordinates> availableMoves) {
-            try {
-                Thread.sleep(1200);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            return super.compute(availableMoves);
+    @Override
+    public Coordinates compute(List<Coordinates> availableMoves) {
+        try {
+            Thread.sleep(1200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+        return super.compute(availableMoves);
     }
+}

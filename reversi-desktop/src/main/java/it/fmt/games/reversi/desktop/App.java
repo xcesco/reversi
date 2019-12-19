@@ -4,13 +4,14 @@ import it.fmt.games.reversi.DecisionHandlerType;
 import it.fmt.games.reversi.GameRenderer;
 import it.fmt.games.reversi.PlayerFactory;
 import it.fmt.games.reversi.Reversi;
-import it.fmt.games.reversi.model.*;
+import it.fmt.games.reversi.model.Board;
+import it.fmt.games.reversi.model.Coordinates;
+import it.fmt.games.reversi.model.GameSnapshot;
+import it.fmt.games.reversi.model.Piece;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
@@ -52,7 +53,7 @@ public class App extends Canvas implements MouseListener, GameRenderer {
     }
 
     private void selectPlayer(int game) {
-        switch (game){
+        switch (game) {
             case 1:
                 gameLogic = new GameLogicThread(this, PlayerFactory.createHumanPlayer1(), PlayerFactory.createHumanPlayer2(), this);
                 break;
@@ -86,7 +87,7 @@ public class App extends Canvas implements MouseListener, GameRenderer {
         Graphics2D g2 = (Graphics2D) g;
         g.setFont(new Font("Arial", Font.BOLD, resize(48)));
 
-        if (this.gameSnapshot != null){
+        if (this.gameSnapshot != null) {
             // board
             g.setColor(brown);
             g.fillRect(BASE_X - resize(10),

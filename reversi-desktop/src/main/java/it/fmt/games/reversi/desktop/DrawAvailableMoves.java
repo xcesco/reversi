@@ -16,7 +16,7 @@ public class DrawAvailableMoves extends DrawObject {
     }
 
     @Override
-    public void DraW(){
+    public void DraW() {
         gameSnapshot.getAvailableMoves().getMovesActivePlayer().forEach(item -> {
             g.setColor(Color.gray);
             g.fillOval(BASE_X + item.getRow() * CELL_SIZE + resize(30),
