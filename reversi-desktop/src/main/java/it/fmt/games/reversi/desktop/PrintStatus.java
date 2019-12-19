@@ -15,7 +15,7 @@ public class PrintStatus {
         this.status = status;
     }
 
-    private String SetWinner(){
+    private String SetWinner() {
         String winner = "";
         switch (status) {
             case PLAYER1_WIN:

@@ -6,7 +6,7 @@ import java.awt.*;
 
 import static it.fmt.games.reversi.desktop.App.*;
 
-public class PrintWinner extends DrawObject{
+public class PrintWinner extends DrawObject {
     private GameSnapshot gameSnapshot;
     private Graphics g;
     private String winner;
@@ -21,11 +21,11 @@ public class PrintWinner extends DrawObject{
     @Override
     public void DraW() {
         g.setColor(Color.gray);
-        g.fillRect(2*BASE_X, 2*BASE_Y, 500, 250);
-        g.setColor(new Color(255,153,0));
+        g.fillRect(2 * BASE_X, 2 * BASE_Y, 500, 250);
+        g.setColor(new Color(255, 153, 0));
         //g.setColor(new Color(242,21,21));
         g.setFont(new Font("Arial", Font.BOLD, resize(48)));
-        g.drawString("Congratulations!!",resize(125), resize(300));
+        g.drawString("Congratulations!!", resize(125), resize(300));
         g.drawString(winner, resize(120), resize(390));
 //        g.setColor(Color.BLACK);
 //        g.fillOval(resize(145), resize(360),

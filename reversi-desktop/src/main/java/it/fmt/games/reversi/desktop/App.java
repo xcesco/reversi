@@ -4,9 +4,11 @@ import it.fmt.games.reversi.DecisionHandlerType;
 import it.fmt.games.reversi.GameRenderer;
 import it.fmt.games.reversi.PlayerFactory;
 import it.fmt.games.reversi.Reversi;
-import it.fmt.games.reversi.model.*;
+import it.fmt.games.reversi.model.Board;
+import it.fmt.games.reversi.model.Coordinates;
+import it.fmt.games.reversi.model.GameSnapshot;
+import it.fmt.games.reversi.model.Piece;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -32,16 +34,16 @@ public class App extends Canvas implements MouseListener, GameRenderer {
     private Reversi reversi;
     private GameLogicThread gameLogic;
 
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("FMT-Reversi");
-        frame.setSize(WIDTH, HEIGHT);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
-        frame.add(new App(1));
-        frame.setVisible(true);
-
-    }
+//
+//    public static void main(String[] args) {
+//        JFrame frame = new JFrame("FMT-Reversi");
+//        frame.setSize(WIDTH, HEIGHT);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.setResizable(false);
+//        frame.add(new App(1));
+//        frame.setVisible(true);
+//
+//    }
 
     public App(int game) {
         selectPlayer(game);
@@ -51,7 +53,7 @@ public class App extends Canvas implements MouseListener, GameRenderer {
     }
 
     private void selectPlayer(int game) {
-        switch (game){
+        switch (game) {
             case 1:
                 gameLogic = new GameLogicThread(this, PlayerFactory.createHumanPlayer1(), PlayerFactory.createHumanPlayer2(), this);
                 break;
@@ -85,11 +87,7 @@ public class App extends Canvas implements MouseListener, GameRenderer {
         Graphics2D g2 = (Graphics2D) g;
         g.setFont(new Font("Arial", Font.BOLD, resize(48)));
 
-//        if (!started) {
-//            g.drawString("REVERSI", resize(300), resize(300));
-//            g.drawString("Click to Play", resize(270), resize(400));
-//        } else if (this.gameSnapshot != null) {
-         if (this.gameSnapshot != null){
+        if (this.gameSnapshot != null) {
             // board
             g.setColor(brown);
             g.fillRect(BASE_X - resize(10),
@@ -141,9 +139,7 @@ public class App extends Canvas implements MouseListener, GameRenderer {
                 // Print Winner
                 PrintWinner printWinner = new PrintWinner(gameSnapshot, g, winner);
                 printWinner.DraW();
-
             }
-
         }
     }
 
@@ -155,32 +151,16 @@ public class App extends Canvas implements MouseListener, GameRenderer {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-//        if (!started) {
-////            reversi = new Reversi(this, this, PlayerFactory.createRoboPlayer1(new DesktopDecisionHandler()), PlayerFactory.createRoboPlayer2(new DesktopDecisionHandler()));
-//
-////----------------------> Human vs Human
-//            gameLogic = new GameLogicThread(this, PlayerFactory.createHumanPlayer1(), PlayerFactory.createHumanPlayer2(), this);
-////----------------------> Human vs CPU
-////            gameLogic = new GameLogicThread(this, PlayerFactory.createHumanPlayer1(), PlayerFactory.createRoboPlayer2(), this);
-////----------------------> CPU vs CPU
-////            gameLogic = new GameLogicThread(this, PlayerFactory.createRoboPlayer1(), PlayerFactory.createRoboPlayer2(), this);
-//
-//            gameLogic.start();
-//            started = true;
-//            repaint();
-//        } else {
-            repaint();
-            int col = (e.getY() - BASE_Y) / CELL_SIZE;
-            int row = (e.getX() - BASE_X) / CELL_SIZE;
-            //System.out.println(String.format("%s",e.getPoint()));
-            Coordinates coordinates = Coordinates.of(row, col);
 
-            synchronized (gameLogic.acceptedMove) {
-                gameLogic.acceptedMove.setCoordinates(coordinates);
-                gameLogic.acceptedMove.notifyAll();
-            }
-//        }
+        repaint();
+        int col = (e.getY() - BASE_Y) / CELL_SIZE;
+        int row = (e.getX() - BASE_X) / CELL_SIZE;
+        Coordinates coordinates = Coordinates.of(row, col);
 
+        synchronized (gameLogic.acceptedMove) {
+            gameLogic.acceptedMove.setCoordinates(coordinates);
+            gameLogic.acceptedMove.notifyAll();
+        }
     }
 
     @Override
