@@ -1,37 +1,34 @@
 package it.fmt.games.reversi.console;
-
 import java.util.Scanner;
 
 import static it.fmt.games.reversi.console.TextDrawer.*;
 
-public abstract class GameTypeSelector {
-
-    private GameTypeSelector() {
+public abstract class NewGame {
+    private static Scanner scanner = new Scanner(System.in);
+    private NewGame() {
 
     }
 
-    public static int selectGameType(Scanner scanner) {
+    public static boolean playAgain() {
         int value = -1;
         do {
-            print("  ••••• CHOOSE A GAME TYPE: •••••"+NEW_LINE);
-            print("  1 - PLAYER_1 vs PLAYER_2"+NEW_LINE);
-            print("  2 - PLAYER_1 vs CPU"+NEW_LINE);
-            print("  3 - CPU vs PLAYER_2"+NEW_LINE);
-            print("  4 - CPU vs CPU"+NEW_LINE);
-            print("  0 - Exit"+NEW_LINE);
-            print("  Insert the number of game type: ");
-            String input = scanner.next();
+            print(NEW_LINE);
+            print("  Do you want to play again?"+NEW_LINE);
+            print("  1 - YES"+NEW_LINE);
+            print("  0 - EXIT"+NEW_LINE);
+            print("  Insert your choice: ");
 
+            String input = scanner.next();
             value = toNumber(input);
         } while (!isValidChoice(value));
 
-        return value;
+        return value == 1 ? true : false;
     }
 
     private static boolean isValidChoice(int value) {
         boolean valid = value >= 0 && value <= 4;
         if (!valid) {
-            print("  Invalid choice!"+NEW_LINE);
+            print("Invalid choice!"+NEW_LINE);
             print(NEW_LINE);
         }
         return valid;
