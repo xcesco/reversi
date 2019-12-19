@@ -12,7 +12,7 @@ public abstract class PlayerMoveTextDrawer extends TextDrawer {
 
     public static void drawPlayerMove(PlayerMove move) {
         if (move != null) {
-            print(String.format("%s moves on %s"+NEW_LINE, move.getPiece(), move.getMoveCoords()));
+            print(String.format("  %s moves on %s"+NEW_LINE, move.getPiece(), move.getMoveCoords()));
 //            String result = move.getCapturedEnemyPiecesCoords().stream()
 //                    .map(String::valueOf)
 //                    .collect(Collectors.joining(", ", "{", "}"));
