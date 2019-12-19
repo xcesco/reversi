@@ -50,17 +50,17 @@ public class App extends TextDrawer implements UserInputReader {
             case 2:
                 print(P1_VS_CPU);
                 this.player1 = PlayerFactory.createHumanPlayer1();
-                this.player2 = PlayerFactory.createRoboPlayer2();
+                this.player2 = PlayerFactory.createRoboPlayer2(DecisionHandlerType.RANDOM);
                 break;
             case 3:
                 print(CPU_VS_P2);
-                this.player1 = PlayerFactory.createRoboPlayer1();
+                this.player1 = PlayerFactory.createRoboPlayer1(DecisionHandlerType.RANDOM);
                 this.player2 = PlayerFactory.createHumanPlayer2();
                 break;
             case 4:
                 print(CPU_VS_CPU);
-                this.player1 = PlayerFactory.createRoboPlayer1();
-                this.player2 = PlayerFactory.createRoboPlayer2();
+                this.player1 = PlayerFactory.createRoboPlayer1(DecisionHandlerType.RANDOM);
+                this.player2 = PlayerFactory.createRoboPlayer2(DecisionHandlerType.RANDOM);
                 break;
         }
     }

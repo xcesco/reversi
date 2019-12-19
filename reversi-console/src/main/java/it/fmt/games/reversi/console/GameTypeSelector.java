@@ -13,13 +13,13 @@ public abstract class GameTypeSelector {
     public static int selectGameType(Scanner scanner) {
         int value = -1;
         do {
-            print("Choose a type of game:"+NEW_LINE);
-            print("1 - Player 1 vs Player 2"+NEW_LINE);
-            print("2 - Player 1 vs CPU"+NEW_LINE);
-            print("3 - CPU vs Player 2"+NEW_LINE);
+            print("••••• CHOOSE A GAME TYPE: •••••"+NEW_LINE);
+            print("1 - PLAYER_1 vs PLAYER_2"+NEW_LINE);
+            print("2 - PLAYER_1 vs CPU"+NEW_LINE);
+            print("3 - CPU vs PLAYER_2"+NEW_LINE);
             print("4 - CPU vs CPU"+NEW_LINE);
             print("0 - Exit"+NEW_LINE);
-            print("Insert the number of one game type: ");
+            print("Insert the number of game type: ");
             String input = scanner.next();
 
             value = toNumber(input);
