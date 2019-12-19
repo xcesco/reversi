@@ -1,5 +1,6 @@
 package it.fmt.games.reversi.desktop;
 
+import it.fmt.games.reversi.DecisionHandlerType;
 import it.fmt.games.reversi.GameRenderer;
 import it.fmt.games.reversi.PlayerFactory;
 import it.fmt.games.reversi.Reversi;
@@ -43,12 +44,10 @@ public class App extends Canvas implements MouseListener, GameRenderer {
     }
 
     public App(int game) {
-
         selectPlayer(game);
         gameLogic.start();
         addMouseListener(this);
         boxes = new Rectangle[8][8];
-
     }
 
     private void selectPlayer(int game) {
@@ -57,13 +56,13 @@ public class App extends Canvas implements MouseListener, GameRenderer {
                 gameLogic = new GameLogicThread(this, PlayerFactory.createHumanPlayer1(), PlayerFactory.createHumanPlayer2(), this);
                 break;
             case 2:
-                gameLogic = new GameLogicThread(this, PlayerFactory.createHumanPlayer1(), PlayerFactory.createRoboPlayer2(), this);
+                gameLogic = new GameLogicThread(this, PlayerFactory.createHumanPlayer1(), PlayerFactory.createRoboPlayer2(DecisionHandlerType.RANDOM), this);
                 break;
             case 3:
-                gameLogic = new GameLogicThread(this, PlayerFactory.createRoboPlayer1(), PlayerFactory.createHumanPlayer2(), this);
+                gameLogic = new GameLogicThread(this, PlayerFactory.createRoboPlayer1(DecisionHandlerType.RANDOM), PlayerFactory.createHumanPlayer2(), this);
                 break;
             case 4:
-                gameLogic = new GameLogicThread(this, PlayerFactory.createRoboPlayer1(), PlayerFactory.createRoboPlayer2(), this);
+                gameLogic = new GameLogicThread(this, PlayerFactory.createRoboPlayer1(DecisionHandlerType.RANDOM), PlayerFactory.createRoboPlayer2(DecisionHandlerType.RANDOM), this);
                 break;
             default:
                 break;

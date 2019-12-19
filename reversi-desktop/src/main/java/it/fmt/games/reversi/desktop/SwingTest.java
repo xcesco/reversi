@@ -1,10 +1,11 @@
 package it.fmt.games.reversi.desktop;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
 
 public class SwingTest extends JFrame {
     private final int P1_VS_P2=1;
@@ -12,47 +13,53 @@ public class SwingTest extends JFrame {
     private final int CPU_VS_P2=3;
     private final int CPU_VS_CPU=4;
 
-    public SwingTest() {
+    public SwingTest() throws IOException {
         initUI();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         SwingTest ex = new SwingTest();
         ex.setVisible(true);
 
     }
 
-    public final void initUI() {
-        var gameLogo = new ImageIcon("src/main/resources/logo.png");
-        setIconImage(gameLogo.getImage());
+    public final void initUI() throws IOException {
+
+        var image = ImageIO.read(new File("C:\\Users\\Teo_e\\IdeaProjects\\reversi\\reversi-desktop\\src\\main\\resources\\logo.png"));
+        setIconImage(image);
+        JLabel picLabel = new JLabel(new ImageIcon(image));
+        getContentPane().add(picLabel);
+        getContentPane().repaint();
         setTitle("FMT-Reversi");
         setSize(600, 800);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        JButton player_vs_playerButton = new JButton("Player VS Player");
-        JButton player_vs_cpuButton = new JButton("Player VS CPU");
+        JButton player_vs_player = new JButton("Player VS Player");
+        JButton player_vs_cpu = new JButton("Player VS CPU");
         JButton cpu_vs_player = new JButton("CPU VS Player");
-        JButton cpu_vs_cpuButton = new JButton("CPU VS CPU");
-        player_vs_playerButton.setBounds(200, 300, 200, 50);
-        player_vs_cpuButton.setBounds(200, 400, 200, 50);
+        JButton cpu_vs_cpu = new JButton("CPU VS CPU");
+
+        player_vs_player.setBounds(200, 300, 200, 50);
+        player_vs_cpu.setBounds(200, 400, 200, 50);
         cpu_vs_player.setBounds(200, 500, 200, 50);
-        cpu_vs_cpuButton.setBounds(200, 600, 200, 50);
+        cpu_vs_cpu.setBounds(200, 600, 200, 50);
+
         getContentPane().setLayout(null);
-        getContentPane().add(player_vs_playerButton);
-        getContentPane().add(player_vs_cpuButton);
+        getContentPane().add(player_vs_player);
+        getContentPane().add(player_vs_cpu);
         getContentPane().add(cpu_vs_player);
-        getContentPane().add(cpu_vs_cpuButton);
+        getContentPane().add(cpu_vs_cpu);
 
 
 
-        player_vs_playerButton.addActionListener(new ActionListener() {
+        player_vs_player.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 initGame(P1_VS_P2);
             }
         });
-        player_vs_cpuButton.addActionListener(new ActionListener() {
+        player_vs_cpu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 initGame(P1_VS_CPU);
@@ -64,7 +71,7 @@ public class SwingTest extends JFrame {
                 initGame(CPU_VS_P2);
             }
         });
-        cpu_vs_cpuButton.addActionListener(new ActionListener() {
+        cpu_vs_cpu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 initGame(CPU_VS_CPU);
