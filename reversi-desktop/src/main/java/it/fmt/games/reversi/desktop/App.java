@@ -33,20 +33,41 @@ public class App extends Canvas implements MouseListener, GameRenderer {
 
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("FMT Reversi");
+        JFrame frame = new JFrame("FMT-Reversi");
         frame.setSize(WIDTH, HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
-        frame.add(new App());
+        frame.add(new App(1));
         frame.setVisible(true);
+
     }
 
-    public App() {
+    public App(int game) {
+
+        selectPlayer(game);
+        gameLogic.start();
         addMouseListener(this);
         boxes = new Rectangle[8][8];
-        IntStream.range(0, Board.BOARD_SIZE)
-                .forEach(row -> IntStream.range(0, Board.BOARD_SIZE)
-                        .forEach(col -> boxes[row][col] = new Rectangle(BASE_X + col * CELL_SIZE, BASE_Y + row * CELL_SIZE, CELL_SIZE, CELL_SIZE)));
+
+    }
+
+    private void selectPlayer(int game) {
+        switch (game){
+            case 1:
+                gameLogic = new GameLogicThread(this, PlayerFactory.createHumanPlayer1(), PlayerFactory.createHumanPlayer2(), this);
+                break;
+            case 2:
+                gameLogic = new GameLogicThread(this, PlayerFactory.createHumanPlayer1(), PlayerFactory.createRoboPlayer2(), this);
+                break;
+            case 3:
+                gameLogic = new GameLogicThread(this, PlayerFactory.createRoboPlayer1(), PlayerFactory.createHumanPlayer2(), this);
+                break;
+            case 4:
+                gameLogic = new GameLogicThread(this, PlayerFactory.createRoboPlayer1(), PlayerFactory.createRoboPlayer2(), this);
+                break;
+            default:
+                break;
+        }
     }
 
     public void paint(Graphics g) {
@@ -55,16 +76,21 @@ public class App extends Canvas implements MouseListener, GameRenderer {
         DrawScore drawScore = new DrawScore(gameSnapshot, g);
         DrawAvailableMoves drawAvailableMoves = new DrawAvailableMoves(gameSnapshot, g);
 
+        IntStream.range(0, Board.BOARD_SIZE)
+                .forEach(row -> IntStream.range(0, Board.BOARD_SIZE)
+                        .forEach(col -> boxes[row][col] = new Rectangle(BASE_X + col * CELL_SIZE, BASE_Y + row * CELL_SIZE, CELL_SIZE, CELL_SIZE)));
+
         g.setColor(lightYellow);
         g.fillRect(0, 0, WIDTH, HEIGHT);
         g.setColor(Color.black);
         Graphics2D g2 = (Graphics2D) g;
         g.setFont(new Font("Arial", Font.BOLD, resize(48)));
 
-        if (!started) {
-            g.drawString("REVERSI", resize(300), resize(300));
-            g.drawString("Click to Play", resize(270), resize(400));
-        } else if (this.gameSnapshot != null) {
+//        if (!started) {
+//            g.drawString("REVERSI", resize(300), resize(300));
+//            g.drawString("Click to Play", resize(270), resize(400));
+//        } else if (this.gameSnapshot != null) {
+         if (this.gameSnapshot != null){
             // board
             g.setColor(brown);
             g.fillRect(BASE_X - resize(10),
@@ -130,20 +156,21 @@ public class App extends Canvas implements MouseListener, GameRenderer {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (!started) {
-//            reversi = new Reversi(this, this, PlayerFactory.createRoboPlayer1(new DesktopDecisionHandler()), PlayerFactory.createRoboPlayer2(new DesktopDecisionHandler()));
-
-//----------------------> Human vs Human
+//        if (!started) {
+////            reversi = new Reversi(this, this, PlayerFactory.createRoboPlayer1(new DesktopDecisionHandler()), PlayerFactory.createRoboPlayer2(new DesktopDecisionHandler()));
+//
+////----------------------> Human vs Human
 //            gameLogic = new GameLogicThread(this, PlayerFactory.createHumanPlayer1(), PlayerFactory.createHumanPlayer2(), this);
-//----------------------> Human vs CPU
-            gameLogic = new GameLogicThread(this, PlayerFactory.createHumanPlayer1(), PlayerFactory.createRoboPlayer2(), this);
-//----------------------> CPU vs CPU
-//            gameLogic = new GameLogicThread(this, PlayerFactory.createRoboPlayer1(), PlayerFactory.createRoboPlayer2(), this);
-
-            gameLogic.start();
-            started = true;
+////----------------------> Human vs CPU
+////            gameLogic = new GameLogicThread(this, PlayerFactory.createHumanPlayer1(), PlayerFactory.createRoboPlayer2(), this);
+////----------------------> CPU vs CPU
+////            gameLogic = new GameLogicThread(this, PlayerFactory.createRoboPlayer1(), PlayerFactory.createRoboPlayer2(), this);
+//
+//            gameLogic.start();
+//            started = true;
+//            repaint();
+//        } else {
             repaint();
-        } else {
             int col = (e.getY() - BASE_Y) / CELL_SIZE;
             int row = (e.getX() - BASE_X) / CELL_SIZE;
             //System.out.println(String.format("%s",e.getPoint()));
@@ -153,7 +180,7 @@ public class App extends Canvas implements MouseListener, GameRenderer {
                 gameLogic.acceptedMove.setCoordinates(coordinates);
                 gameLogic.acceptedMove.notifyAll();
             }
-        }
+//        }
 
     }
 
