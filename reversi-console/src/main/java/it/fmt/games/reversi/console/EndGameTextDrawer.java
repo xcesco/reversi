@@ -11,22 +11,22 @@ public class EndGameTextDrawer {
         print(NEW_LINE);
         switch (status) {
             case DRAW:
-                print("!!!!!!!!!!!!!!!!!!!!!"+NEW_LINE);
-                print("!!!!!!! DRAW !!!!!!!!"+NEW_LINE);
-                print(String.format("!! (O) %d : %d (X) !!"+NEW_LINE, score.getPlayer1Score(), score.getPlayer2Score()));
-                print("!!!!!!!!!!!!!!!!!!!!!"+NEW_LINE);
+                print("  !!!!!!!!!!!!!!!!!!!!!"+NEW_LINE);
+                print("  !!!!!!! DRAW !!!!!!!!"+NEW_LINE);
+                print(String.format("  !! (O) %d : %d (X) !!"+NEW_LINE, score.getPlayer1Score(), score.getPlayer2Score()));
+                print("  !!!!!!!!!!!!!!!!!!!!!"+NEW_LINE);
                 break;
             case PLAYER1_WIN:
-                print("!!!!!!!!!!!!!!!!!!!!!!!!!"+NEW_LINE);
-                print("!!!!! PLAYER_1 WINS !!!!!"+NEW_LINE);
-                print(String.format("!!!! (O) %d : %d (X) !!!!"+NEW_LINE, score.getPlayer1Score(), score.getPlayer2Score()));
-                print("!!!!!!!!!!!!!!!!!!!!!!!!!"+NEW_LINE);
+                print("  !!!!!!!!!!!!!!!!!!!!!!!!!"+NEW_LINE);
+                print("  !!!!! PLAYER_1 WINS !!!!!"+NEW_LINE);
+                print(String.format("  !!!! (O) %d : %d (X) !!!!"+NEW_LINE, score.getPlayer1Score(), score.getPlayer2Score()));
+                print("  !!!!!!!!!!!!!!!!!!!!!!!!!"+NEW_LINE);
                 break;
             case PLAYER2_WIN:
-                print("!!!!!!!!!!!!!!!!!!!!!!!!!"+NEW_LINE);
-                print("!!!!! PLAYER_2 WINS !!!!!"+NEW_LINE);
-                print(String.format("!!!! (O) %d : %d (X) !!!!"+NEW_LINE, score.getPlayer1Score(), score.getPlayer2Score()));
-                print("!!!!!!!!!!!!!!!!!!!!!!!!!"+NEW_LINE);
+                print("  !!!!!!!!!!!!!!!!!!!!!!!!!"+NEW_LINE);
+                print("  !!!!! PLAYER_2 WINS !!!!!"+NEW_LINE);
+                print(String.format("  !!!! (O) %d : %d (X) !!!!"+NEW_LINE, score.getPlayer1Score(), score.getPlayer2Score()));
+                print("  !!!!!!!!!!!!!!!!!!!!!!!!!"+NEW_LINE);
                 break;
         }
     }
