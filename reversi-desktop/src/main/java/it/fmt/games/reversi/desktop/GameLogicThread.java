@@ -25,11 +25,6 @@ public class GameLogicThread extends Thread {
 
     private void dispatchToUiRenderer(GameSnapshot gameSnapshot) {
         uiRenderer.render(gameSnapshot);
-        /*app.gameSnapshot=gameSnapshot;
-        app.repaint();*/
-        /*app.runOnUiThread(() -> {
-            uiRenderer.render(gameSnapshot);
-        });*/
     }
 
     private Coordinates getCoordinates(Player player, List<Coordinates> list) {
@@ -43,7 +38,6 @@ public class GameLogicThread extends Thread {
                     e.printStackTrace();
                 }
             }
-
             return acceptedMove.getCoordinates();
         }
     }

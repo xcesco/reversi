@@ -5,8 +5,6 @@ import it.fmt.games.reversi.GameRenderer;
 import it.fmt.games.reversi.PlayerFactory;
 import it.fmt.games.reversi.model.Coordinates;
 import it.fmt.games.reversi.model.GameSnapshot;
-
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -25,20 +23,7 @@ public class GameCanvas extends Canvas implements MouseListener, GameRenderer {
     public static final int HEIGHT = resize(768);
     public static String winner = "";
     public GameSnapshot gameSnapshot;
-
-
     private GameLogicThread gameLogic;
-
-
-//    public static void main(String[] args) {
-//        JFrame frame = new JFrame("FMT-Reversi");
-//        frame.setSize(WIDTH, HEIGHT);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setResizable(false);
-//        frame.add(new GameCanvas(1));
-//        frame.setVisible(true);
-//
-//    }
 
     public GameCanvas(int game) {
         selectPlayer(game);
@@ -75,52 +60,39 @@ public class GameCanvas extends Canvas implements MouseListener, GameRenderer {
         g.setColor(lightYellow);
         g.fillRect(0, 0, WIDTH, HEIGHT);
         g.setColor(Color.black);
-
         g.setFont(new Font("Arial", Font.BOLD, resize(48)));
 
         if (this.gameSnapshot != null) {
-
             drawBoard.draw(gameSnapshot,g);
             drawAvailableMoves.draw(gameSnapshot, g);
-            //Score
             drawScore.draw(gameSnapshot, g);
-            //Turn
             drawTurn.draw(gameSnapshot, g);
-            // labels
             if (SHOW_LABELS) {
                 drawLabels.draw(gameSnapshot, g);
             }
-
             if (gameSnapshot.getStatus().isGameOver()) {
                 winner = new PrintStatus(gameSnapshot.getStatus()).getWinner();
-
                 try {
                     TimeUnit.SECONDS.sleep(1);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                // Print Winner
                 WinnerDrawer printWinner = new WinnerDrawer(winner);
                 printWinner.draw(gameSnapshot, g);
-
             }
         }
     }
-
 
     public static int resize(int i) {
         return (int) (i / RESIZE);
     }
 
-
     @Override
     public void mouseClicked(MouseEvent e) {
-
         repaint();
         int col = (e.getY() - BASE_Y) / CELL_SIZE;
         int row = (e.getX() - BASE_X) / CELL_SIZE;
         Coordinates coordinates = Coordinates.of(row, col);
-
         synchronized (gameLogic.acceptedMove) {
             gameLogic.acceptedMove.setCoordinates(coordinates);
             gameLogic.acceptedMove.notifyAll();
@@ -128,29 +100,20 @@ public class GameCanvas extends Canvas implements MouseListener, GameRenderer {
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
+    public void mousePressed(MouseEvent e) {}
 
     @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
+    public void mouseReleased(MouseEvent e) {}
 
     @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
+    public void mouseEntered(MouseEvent e) {}
 
     @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
+    public void mouseExited(MouseEvent e) {}
 
     @Override
     public void render(GameSnapshot gameSnapshot) {
         this.gameSnapshot = gameSnapshot;
         repaint();
     }
-
 }

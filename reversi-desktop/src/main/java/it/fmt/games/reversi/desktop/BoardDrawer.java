@@ -8,17 +8,17 @@ import java.awt.*;
 import java.util.stream.IntStream;
 
 import static it.fmt.games.reversi.desktop.GameCanvas.*;
+import static it.fmt.games.reversi.model.Board.BOARD_SIZE;
 
 public class BoardDrawer implements Drawer {
     private Rectangle[][] boxes;
 
     @Override
     public void draw(GameSnapshot gameSnapshot, Graphics g) {
-        boxes = new Rectangle[8][8];
-        IntStream.range(0, Board.BOARD_SIZE)
-                .forEach(row -> IntStream.range(0, Board.BOARD_SIZE)
+        boxes = new Rectangle[BOARD_SIZE][BOARD_SIZE];
+        IntStream.range(0, BOARD_SIZE)
+                .forEach(row -> IntStream.range(0, BOARD_SIZE)
                         .forEach(col -> boxes[row][col] = new Rectangle(BASE_X + col * CELL_SIZE, BASE_Y + row * CELL_SIZE, CELL_SIZE, CELL_SIZE)));
-
 
         g.setColor(lightYellow);
         g.fillRect(0, 0, WIDTH, HEIGHT);
@@ -31,15 +31,15 @@ public class BoardDrawer implements Drawer {
             g.setColor(brown);
             g.fillRect(BASE_X - resize(10),
                     BASE_Y - resize(10),
-                    CELL_SIZE * 8 + resize(20),
-                    CELL_SIZE * 8 + resize(20));
+                    CELL_SIZE * BOARD_SIZE + resize(20),
+                    CELL_SIZE * BOARD_SIZE + resize(20));
             g.setColor(darkGreen);
-            g.fillRect(BASE_X, BASE_Y, CELL_SIZE * 8, CELL_SIZE * 8);
+            g.fillRect(BASE_X, BASE_Y, CELL_SIZE * BOARD_SIZE, CELL_SIZE * BOARD_SIZE);
             g.setColor(Color.BLACK);
             g.setFont(new Font("Arial", Font.BOLD, resize(48)));
             g.drawString("REVERSI", resize(300), resize(50));
-            IntStream.range(0, Board.BOARD_SIZE)
-                    .forEach(row -> IntStream.range(0, Board.BOARD_SIZE)
+            IntStream.range(0, BOARD_SIZE)
+                    .forEach(row -> IntStream.range(0, BOARD_SIZE)
                             .forEach(col -> g2.draw(boxes[row][col])));
 
             gameSnapshot.getBoard().getCellStream().forEach(item -> {

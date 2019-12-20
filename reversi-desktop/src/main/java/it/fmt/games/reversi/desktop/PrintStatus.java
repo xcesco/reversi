@@ -3,19 +3,17 @@ package it.fmt.games.reversi.desktop;
 import it.fmt.games.reversi.model.GameStatus;
 
 public class PrintStatus {
-
-    public String getWinner() {
-        return SetWinner();
-    }
-
     private GameStatus status;
 
+    public String getWinner() {
+        return setWinner();
+    }
 
     public PrintStatus(GameStatus status) {
         this.status = status;
     }
 
-    private String SetWinner() {
+    private String setWinner() {
         String winner = "";
         switch (status) {
             case PLAYER1_WIN:
@@ -31,5 +29,4 @@ public class PrintStatus {
         }
         return winner;
     }
-
 }
