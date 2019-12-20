@@ -12,11 +12,11 @@ public abstract class AvailableMovesTextDrawer extends TextDrawer {
 
     public static void drawAvailableMoves(List<Coordinates> availableMoves) {
         if (availableMoves.size() > 0) {
-            print("  - Available moves (•):");
+            print(PREFIX+"- Available moves (?):");
             availableMoves.forEach(item -> System.out.print(" " + item));
             println("");
         } else {
-            println("  - No available moves! (Switch turn)");
+            println(PREFIX+"- No available moves! (Switch turn)");
         }
     }
 }

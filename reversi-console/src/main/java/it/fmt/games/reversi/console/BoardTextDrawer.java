@@ -30,14 +30,12 @@ public class BoardTextDrawer  {
                 System.out.print(String.format("   %s  ", (char) ('A' + col))));
         println("");
         println(ROW_SEPARATOR);
-        //System.out.println("\n" + PREFIX + ROW_SEPARATOR);
         IntStream.range(0, Board.BOARD_SIZE).forEach(row -> {
             System.out.print(String.format(PREFIX + "%s |", row + 1));
             IntStream.range(0, Board.BOARD_SIZE).forEach(col ->
                     System.out.print(String.format("  %s  |", getSymbol(Coordinates.of(row, col)))));
             println("");
             println(ROW_SEPARATOR);
-            //System.out.println("\n" + PREFIX + ROW_SEPARATOR);
         });
     }
 
@@ -49,8 +47,7 @@ public class BoardTextDrawer  {
     public String getMovesOnBoard(Coordinates coordinates) {
         return isAvailableMove(coordinates) ? "?" : " ";
     }
-
-
+    
     public boolean isAvailableMove(Coordinates coordinates) {
         return availableMoves.indexOf(coordinates) != -1;
     }

@@ -2,8 +2,6 @@ package it.fmt.games.reversi.console;
 
 import it.fmt.games.reversi.model.PlayerMove;
 
-import java.util.stream.Collectors;
-
 public abstract class PlayerMoveTextDrawer extends TextDrawer {
 
     private PlayerMoveTextDrawer() {

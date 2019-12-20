@@ -11,17 +11,18 @@ public abstract class GameTypeSelector {
     }
 
     public static int selectGameType(Scanner scanner) {
-        int value = -1;
+        int value;
         do {
-            print("  ----- CHOOSE A GAME TYPE: -----"+NEW_LINE);
-            print("  1 - PLAYER_1 vs PLAYER_2"+NEW_LINE);
-            print("  2 - PLAYER_1 vs CPU"+NEW_LINE);
-            print("  3 - CPU vs PLAYER_2"+NEW_LINE);
-            print("  4 - CPU vs CPU"+NEW_LINE);
-            print("  0 - Exit"+NEW_LINE);
+            println("");
+            println("  --------------- CHOOSE GAME TYPE ----------------");
+            println("  1 - PLAYER_1 vs PLAYER_2");
+            println("  2 - PLAYER_1 vs CPU");
+            println("  3 - CPU vs PLAYER_2");
+            println("  4 - CPU vs CPU");
+            println("  0 - Exit");
             print("  Insert the number of game type: ");
-            String input = scanner.next();
 
+            String input = scanner.nextLine().replace(" ","");
             value = toNumber(input);
         } while (!isValidChoice(value));
 
@@ -32,18 +33,16 @@ public abstract class GameTypeSelector {
         boolean valid = value >= 0 && value <= 4;
         if (!valid) {
             println("  Invalid choice!");
-            println("");
         }
         return valid;
     }
 
     private static int toNumber(String value) {
-        if (value == null) {
+        if (value == null || value.length() > 1) {
             return -1;
         }
         try {
-            int d = Integer.parseInt(value);
-            return d;
+            return Integer.parseInt(value);
         } catch (NumberFormatException nfe) {
             return -1;
         }

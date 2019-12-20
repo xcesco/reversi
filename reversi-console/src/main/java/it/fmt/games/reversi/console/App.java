@@ -73,7 +73,7 @@ public class App extends TextDrawer implements UserInputReader {
         Coordinates coords;
 
         do {
-            print(String.format("- %s, insert move: ", currentPlayer.getPiece()));
+            print(String.format(PREFIX+"- %s, insert move: ", currentPlayer.getPiece()));
             coords = Coordinates.of(scanner.next());
 
         } while ((!coords.isValid() && availableMoves.indexOf(coords) == -1));
