@@ -6,6 +6,7 @@ import it.fmt.games.reversi.PlayerFactory;
 import it.fmt.games.reversi.model.Coordinates;
 import it.fmt.games.reversi.model.GameSnapshot;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -43,7 +44,6 @@ public class GameCanvas extends Canvas implements MouseListener, GameRenderer {
         selectPlayer(game);
         gameLogic.start();
         addMouseListener(this);
-//        boxes = new Rectangle[8][8];
     }
 
     private void selectPlayer(int game) {
@@ -102,6 +102,7 @@ public class GameCanvas extends Canvas implements MouseListener, GameRenderer {
                 // Print Winner
                 WinnerDrawer printWinner = new WinnerDrawer(winner);
                 printWinner.draw(gameSnapshot, g);
+
             }
         }
     }
