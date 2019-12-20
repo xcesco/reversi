@@ -5,20 +5,13 @@ import it.fmt.games.reversi.model.Piece;
 
 import java.awt.*;
 
-import static it.fmt.games.reversi.desktop.App.*;
-import static it.fmt.games.reversi.desktop.App.resize;
+import static it.fmt.games.reversi.desktop.GameCanvas.*;
+import static it.fmt.games.reversi.desktop.GameCanvas.resize;
 
-public class DrawTurn extends DrawObject {
-    private GameSnapshot gameSnapshot;
-    private Graphics g;
-
-    public DrawTurn(GameSnapshot gameSnapshot, Graphics g) {
-        this.gameSnapshot = gameSnapshot;
-        this.g = g;
-    }
+public class TurnDrawer implements Drawer {
 
     @Override
-    public void DraW() {
+    public void draw (GameSnapshot gameSnapshot, Graphics g) {
         if (gameSnapshot.getActivePiece() == Piece.PLAYER_1) {
             g.setColor(Color.RED);
             g.fillOval(CELL_SIZE * 8 + resize(121), BASE_Y * 2 + resize(20),

@@ -11,11 +11,11 @@ import java.util.List;
 public class GameLogicThread extends Thread {
     private final Reversi reversi;
     public final Move acceptedMove = new Move();
-    private final App app;
+    private final GameCanvas app;
     private GameRenderer uiRenderer;
     public List<Coordinates> availableMoves = new ArrayList<>();
 
-    public GameLogicThread(App app, Player1 player1, Player2 player2, GameRenderer uiRenderer) {
+    public GameLogicThread(GameCanvas app, Player1 player1, Player2 player2, GameRenderer uiRenderer) {
         this.app = app;
         this.uiRenderer = uiRenderer;
         UserInputReader userInputReader = this::getCoordinates;

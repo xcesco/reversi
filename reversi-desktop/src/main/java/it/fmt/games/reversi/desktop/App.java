@@ -1,192 +1,129 @@
 package it.fmt.games.reversi.desktop;
 
-import it.fmt.games.reversi.DecisionHandlerType;
-import it.fmt.games.reversi.GameRenderer;
-import it.fmt.games.reversi.PlayerFactory;
-import it.fmt.games.reversi.Reversi;
-import it.fmt.games.reversi.model.Board;
-import it.fmt.games.reversi.model.Coordinates;
-import it.fmt.games.reversi.model.GameSnapshot;
-import it.fmt.games.reversi.model.Piece;
-
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.IntStream;
-
-public class App extends Canvas implements MouseListener, GameRenderer {
-    public static double RESIZE = 1;
-    public static final int CELL_SIZE = resize(70);
-    public static final int BASE_X = resize(35);
-    public static final int BASE_Y = resize(105);
-    private static final boolean SHOW_LABELS = true;
-    public static final Color darkGreen = new Color(0, 120, 0);
-    public static final Color brown = new Color(153, 102, 0);
-    public static final Color lightYellow = new Color(220, 220, 190);
-    public static final int WIDTH = resize(900);
-    public static final int HEIGHT = resize(768);
-    public static String winner = "";
-    public GameSnapshot gameSnapshot;
-    private boolean started = false;
-    private Rectangle[][] boxes;
-
-    private Reversi reversi;
-    private GameLogicThread gameLogic;
-
-//
-//    public static void main(String[] args) {
-//        JFrame frame = new JFrame("FMT-Reversi");
-//        frame.setSize(WIDTH, HEIGHT);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setResizable(false);
-//        frame.add(new App(1));
-//        frame.setVisible(true);
-//
-//    }
-
-    public App(int game) {
-        selectPlayer(game);
-        gameLogic.start();
-        addMouseListener(this);
-        boxes = new Rectangle[8][8];
-    }
-
-    private void selectPlayer(int game) {
-        switch (game) {
-            case 1:
-                gameLogic = new GameLogicThread(this, PlayerFactory.createHumanPlayer1(), PlayerFactory.createHumanPlayer2(), this);
-                break;
-            case 2:
-                gameLogic = new GameLogicThread(this, PlayerFactory.createHumanPlayer1(), PlayerFactory.createRoboPlayer2(DecisionHandlerType.RANDOM), this);
-                break;
-            case 3:
-                gameLogic = new GameLogicThread(this, PlayerFactory.createRoboPlayer1(DecisionHandlerType.RANDOM), PlayerFactory.createHumanPlayer2(), this);
-                break;
-            case 4:
-                gameLogic = new GameLogicThread(this, PlayerFactory.createRoboPlayer1(DecisionHandlerType.RANDOM), PlayerFactory.createRoboPlayer2(DecisionHandlerType.RANDOM), this);
-                break;
-            default:
-                break;
-        }
-    }
-
-    public void paint(Graphics g) {
-        DrawTurn drawTurn = new DrawTurn(gameSnapshot, g);
-        DrawLabels drawLabels = new DrawLabels(g);
-        DrawScore drawScore = new DrawScore(gameSnapshot, g);
-        DrawAvailableMoves drawAvailableMoves = new DrawAvailableMoves(gameSnapshot, g);
-
-        IntStream.range(0, Board.BOARD_SIZE)
-                .forEach(row -> IntStream.range(0, Board.BOARD_SIZE)
-                        .forEach(col -> boxes[row][col] = new Rectangle(BASE_X + col * CELL_SIZE, BASE_Y + row * CELL_SIZE, CELL_SIZE, CELL_SIZE)));
-
-        g.setColor(lightYellow);
-        g.fillRect(0, 0, WIDTH, HEIGHT);
-        g.setColor(Color.black);
-        Graphics2D g2 = (Graphics2D) g;
-        g.setFont(new Font("Arial", Font.BOLD, resize(48)));
-
-        if (this.gameSnapshot != null) {
-            // board
-            g.setColor(brown);
-            g.fillRect(BASE_X - resize(10),
-                    BASE_Y - resize(10),
-                    CELL_SIZE * 8 + resize(20),
-                    CELL_SIZE * 8 + resize(20));
-            g.setColor(darkGreen);
-            g.fillRect(BASE_X, BASE_Y, CELL_SIZE * 8, CELL_SIZE * 8);
-            g.setColor(Color.BLACK);
-            g.setFont(new Font("Arial", Font.BOLD, resize(48)));
-            g.drawString("REVERSI", resize(300), resize(50));
-            IntStream.range(0, Board.BOARD_SIZE)
-                    .forEach(row -> IntStream.range(0, Board.BOARD_SIZE)
-                            .forEach(col -> g2.draw(boxes[row][col])));
-
-            gameSnapshot.getBoard().getCellStream().forEach(item -> {
-                if (item.getPiece() != Piece.EMPTY) {
-                    if ((item.getPiece() == Piece.PLAYER_2)) {
-                        g.setColor(Color.WHITE);
-                    } else {
-                        g.setColor(Color.BLACK);
-                    }
-                    g.fillOval(BASE_X + item.getCoordinates().getRow() * CELL_SIZE + resize(5),
-                            BASE_Y + item.getCoordinates().getColumn() * CELL_SIZE + resize(5),
-                            CELL_SIZE - resize(10),
-                            CELL_SIZE - resize(10));
-                }
-
-            });
-            //Legal Moves
-            drawAvailableMoves.DraW();
-            //Score
-            drawScore.DraW();
-            //Turn
-            drawTurn.DraW();
-            // labels
-            if (SHOW_LABELS) {
-                drawLabels.DraW();
-            }
-
-            if (gameSnapshot.getStatus().isGameOver()) {
-                winner = new PrintStatus(gameSnapshot.getStatus()).getWinner();
-
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                // Print Winner
-                PrintWinner printWinner = new PrintWinner(gameSnapshot, g, winner);
-                printWinner.DraW();
-            }
-        }
-    }
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.Objects;
 
 
-    public static int resize(int i) {
-        return (int) (i / RESIZE);
-    }
+public class App extends JFrame {
+    private static final Color lightYellow = new Color(220, 220, 190);
+    private final int P1_VS_P2 = 1;
+    private final int P1_VS_CPU = 2;
+    private final int CPU_VS_P2 = 3;
+    private final int CPU_VS_CPU = 4;
 
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-        repaint();
-        int col = (e.getY() - BASE_Y) / CELL_SIZE;
-        int row = (e.getX() - BASE_X) / CELL_SIZE;
-        Coordinates coordinates = Coordinates.of(row, col);
-
-        synchronized (gameLogic.acceptedMove) {
-            gameLogic.acceptedMove.setCoordinates(coordinates);
-            gameLogic.acceptedMove.notifyAll();
-        }
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
+    public static void main(String[] args) throws IOException {
+        App ex = new App();
+        ex.setVisible(true);
 
     }
 
-    @Override
-    public void mouseReleased(MouseEvent e) {
+    public App() throws IOException {
+        Dimension btnDim = new Dimension(200, 30);
+
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        String path = Objects.requireNonNull(classLoader.getResource("logo.png")).getPath();
+        BufferedImage image = ImageIO.read(new File(path));
+        setIconImage(image);
+        BufferedImage resized = resize(image, 250, 250);
+
+        setTitle("FMT-Reversi");
+        setSize(300, 500);
+
+        Container container = getContentPane();
+        container.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        JLabel title = new JLabel("Welcome to FMT-Reversi");
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.anchor = GridBagConstraints.PAGE_START;
+        container.add(title, gbc);
+
+        JLabel picLabel = new JLabel(new ImageIcon(resized));
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        container.add(picLabel, gbc);
+
+        JLabel mode = new JLabel("Please select mode: ");
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        container.add(mode, gbc);
+
+        JButton playerVsPlayer = new JButton("Player VS Player");
+        playerVsPlayer.setPreferredSize(btnDim);
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        container.add(playerVsPlayer, gbc);
+
+        JButton playerVsCcpu = new JButton("Player VS CPU");
+        playerVsCcpu.setPreferredSize(btnDim);
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        container.add(playerVsCcpu, gbc);
+
+        JButton cpuVsPlayer = new JButton("CPU VS Player");
+        cpuVsPlayer.setPreferredSize(btnDim);
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        container.add(cpuVsPlayer, gbc);
+
+        JButton cpuVsCpu = new JButton("CPU VS CPU");
+        cpuVsCpu.setPreferredSize(btnDim);
+        gbc.gridx = 0;
+        gbc.gridy = 6;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        container.add(cpuVsCpu, gbc);
+
+        container.setBackground(lightYellow);
+
+        setVisible(true);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        playerVsPlayer.addActionListener(actionEvent -> initGame(P1_VS_P2));
+        playerVsCcpu.addActionListener(actionEvent -> initGame(P1_VS_CPU));
+        cpuVsPlayer.addActionListener(actionEvent -> initGame(CPU_VS_P2));
+        cpuVsCpu.addActionListener(actionEvent -> initGame(CPU_VS_CPU));
 
     }
 
-    @Override
-    public void mouseEntered(MouseEvent e) {
+    private void initGame(int gameType) {
+        setVisible(false);
+        dispose();
+        JFrame frame = new JFrame("FMT-Reversi");
+        frame.setSize(GameCanvas.WIDTH, GameCanvas.HEIGHT);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+        frame.add(new GameCanvas(gameType));
+        frame.setVisible(true);
 
     }
 
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
-
-    @Override
-    public void render(GameSnapshot gameSnapshot) {
-        this.gameSnapshot = gameSnapshot;
-        repaint();
+    private static BufferedImage resize(BufferedImage img, int height, int width) {
+        Image tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        BufferedImage resized = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = resized.createGraphics();
+        g2d.drawImage(tmp, 0, 0, null);
+        g2d.dispose();
+        return resized;
     }
 
 }

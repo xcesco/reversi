@@ -4,22 +4,17 @@ import it.fmt.games.reversi.model.GameSnapshot;
 
 import java.awt.*;
 
-import static it.fmt.games.reversi.desktop.App.*;
+import static it.fmt.games.reversi.desktop.GameCanvas.*;
 
-public class PrintWinner extends DrawObject {
-    private GameSnapshot gameSnapshot;
-    private Graphics g;
+public class WinnerDrawer implements Drawer {
     private String winner;
 
-    public PrintWinner(GameSnapshot gameSnapshot, Graphics g, String winner) {
-        this.gameSnapshot = gameSnapshot;
-        this.g = g;
+    public WinnerDrawer(String winner) {
         this.winner = winner;
     }
 
-
     @Override
-    public void DraW() {
+    public void draw(GameSnapshot gameSnapshot, Graphics g) {
         g.setColor(Color.gray);
         g.fillRect(2 * BASE_X, 2 * BASE_Y, 500, 250);
         g.setColor(new Color(255, 153, 0));

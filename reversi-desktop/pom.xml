@@ -29,7 +29,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.6.0</version>
                 <configuration>
-                    <mainClass>it.fmt.games.reversi.desktop.App</mainClass>
+                    <mainClass>it.fmt.games.reversi.desktop.GameCanvas</mainClass>
                 </configuration>
             </plugin>
 

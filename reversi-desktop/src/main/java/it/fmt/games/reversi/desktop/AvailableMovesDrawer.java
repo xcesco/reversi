@@ -4,19 +4,11 @@ import it.fmt.games.reversi.model.GameSnapshot;
 
 import java.awt.*;
 
-import static it.fmt.games.reversi.desktop.App.*;
+import static it.fmt.games.reversi.desktop.GameCanvas.*;
 
-public class DrawAvailableMoves extends DrawObject {
-    private GameSnapshot gameSnapshot;
-    private Graphics g;
-
-    public DrawAvailableMoves(GameSnapshot gameSnapshot, Graphics g) {
-        this.gameSnapshot = gameSnapshot;
-        this.g = g;
-    }
-
-    @Override
-    public void DraW() {
+public class AvailableMovesDrawer implements Drawer {
+      @Override
+    public void draw(GameSnapshot gameSnapshot, Graphics g) {
         gameSnapshot.getAvailableMoves().getMovesActivePlayer().forEach(item -> {
             g.setColor(Color.gray);
             g.fillOval(BASE_X + item.getRow() * CELL_SIZE + resize(30),

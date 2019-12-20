@@ -4,20 +4,13 @@ import it.fmt.games.reversi.model.GameSnapshot;
 
 import java.awt.*;
 
-import static it.fmt.games.reversi.desktop.App.*;
+import static it.fmt.games.reversi.desktop.GameCanvas.*;
 
-public class DrawScore extends DrawObject {
+public class ScoreDrawer implements Drawer {
     private static final int OFFSET = 55;
-    private GameSnapshot gameSnapshot;
-    private Graphics g;
-
-    public DrawScore(GameSnapshot gameSnapshot, Graphics g) {
-        this.gameSnapshot = gameSnapshot;
-        this.g = g;
-    }
 
     @Override
-    public void DraW() {
+    public void draw(GameSnapshot gameSnapshot, Graphics g) {
         g.setColor(Color.BLACK);
         g.setFont(new Font("Arial", Font.BOLD, resize(36)));
         //Score
