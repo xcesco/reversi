@@ -1,6 +1,5 @@
 package it.fmt.games.reversi.desktop;
 
-import it.fmt.games.reversi.model.Board;
 import it.fmt.games.reversi.model.GameSnapshot;
 import it.fmt.games.reversi.model.Piece;
 
@@ -54,7 +53,6 @@ public class BoardDrawer implements Drawer {
                             CELL_SIZE - resize(10),
                             CELL_SIZE - resize(10));
                 }
-
             });
         }
     }

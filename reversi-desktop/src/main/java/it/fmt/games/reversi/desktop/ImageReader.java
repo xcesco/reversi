@@ -12,8 +12,7 @@ public class ImageReader {
     public BufferedImage readImage (String fileName) throws IOException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         String path = Objects.requireNonNull(classLoader.getResource(fileName)).getPath();
-        BufferedImage image = ImageIO.read(new File(path));
-        return image;
+        return ImageIO.read(new File(path));
     }
     public BufferedImage resize(BufferedImage img, int height, int width) {
         Image tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);

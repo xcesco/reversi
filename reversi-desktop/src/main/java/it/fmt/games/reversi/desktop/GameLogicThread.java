@@ -25,7 +25,7 @@ public class GameLogicThread extends Thread {
 
     private void dispatchToUiRenderer(GameSnapshot gameSnapshot) {
         uiRenderer.render(gameSnapshot);
-    }
+     }
 
     private Coordinates getCoordinates(Player player, List<Coordinates> list) {
         availableMoves = list;
