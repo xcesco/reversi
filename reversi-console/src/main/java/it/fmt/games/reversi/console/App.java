@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class App extends TextDrawer implements UserInputReader {
-    static final String FMT_REVERSI = "  ****************** FMT REVERSI ******************" + NEW_LINE;
-    static final String P1_VS_P2 = "  ************** PLAYER_1 vs PLAYER_2 *************" + NEW_LINE;
-    static final String P1_VS_CPU = "  **************** PLAYER_1 vs CPU ****************" + NEW_LINE;
-    static final String CPU_VS_P2 = "  **************** CPU vs PLAYER_2 ****************" + NEW_LINE;
-    static final String CPU_VS_CPU = "  ****************** CPU vs CPU *******************" + NEW_LINE;
+    static final String FMT_REVERSI = "  ****************** FMT REVERSI ******************";
+    static final String P1_VS_P2 = "  ************** PLAYER_1 vs PLAYER_2 *************";
+    static final String P1_VS_CPU = "  **************** PLAYER_1 vs CPU ****************";
+    static final String CPU_VS_P2 = "  **************** CPU vs PLAYER_2 ****************";
+    static final String CPU_VS_CPU = "  ****************** CPU vs CPU *******************";
 
     private final Scanner scanner;
     private static int choise = 0;
@@ -30,38 +30,38 @@ public class App extends TextDrawer implements UserInputReader {
     }
 
     private void run() {
-        print(FMT_REVERSI);
+        println(FMT_REVERSI);
         choise = GameTypeSelector.selectGameType(scanner);
 
         if (choise == 0) {
             return;
         }
 
-        print(NEW_LINE);
+        println("");
         definePlayers(choise);
         Reversi reversi = new Reversi(new ConsoleRenderer(), this, player1, player2);
         reversi.play();
     }
 
-    private void definePlayers(int choise) {
-        switch (choise) {
+    private void definePlayers(int choice) {
+        switch (choice) {
             case 1:
-                print(P1_VS_P2);
+                println(P1_VS_P2);
                 this.player1 = PlayerFactory.createHumanPlayer1();
                 this.player2 = PlayerFactory.createHumanPlayer2();
                 break;
             case 2:
-                print(P1_VS_CPU);
+                println(P1_VS_CPU);
                 this.player1 = PlayerFactory.createHumanPlayer1();
                 this.player2 = PlayerFactory.createRoboPlayer2(DecisionHandlerType.RANDOM);
                 break;
             case 3:
-                print(CPU_VS_P2);
+                println(CPU_VS_P2);
                 this.player1 = PlayerFactory.createRoboPlayer1(DecisionHandlerType.RANDOM);
                 this.player2 = PlayerFactory.createHumanPlayer2();
                 break;
             case 4:
-                print(CPU_VS_CPU);
+                println(CPU_VS_CPU);
                 this.player1 = PlayerFactory.createRoboPlayer1(DecisionHandlerType.RANDOM);
                 this.player2 = PlayerFactory.createRoboPlayer2(DecisionHandlerType.RANDOM);
                 break;

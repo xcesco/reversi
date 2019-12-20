@@ -13,7 +13,7 @@ public abstract class GameTypeSelector {
     public static int selectGameType(Scanner scanner) {
         int value = -1;
         do {
-            print("  ••••• CHOOSE A GAME TYPE: •••••"+NEW_LINE);
+            print("  ----- CHOOSE A GAME TYPE: -----"+NEW_LINE);
             print("  1 - PLAYER_1 vs PLAYER_2"+NEW_LINE);
             print("  2 - PLAYER_1 vs CPU"+NEW_LINE);
             print("  3 - CPU vs PLAYER_2"+NEW_LINE);
@@ -31,8 +31,8 @@ public abstract class GameTypeSelector {
     private static boolean isValidChoice(int value) {
         boolean valid = value >= 0 && value <= 4;
         if (!valid) {
-            print("  Invalid choice!"+NEW_LINE);
-            print(NEW_LINE);
+            println("  Invalid choice!");
+            println("");
         }
         return valid;
     }

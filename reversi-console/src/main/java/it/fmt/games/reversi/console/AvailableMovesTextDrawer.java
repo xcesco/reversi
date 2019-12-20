@@ -14,9 +14,9 @@ public abstract class AvailableMovesTextDrawer extends TextDrawer {
         if (availableMoves.size() > 0) {
             print("  - Available moves (•):");
             availableMoves.forEach(item -> System.out.print(" " + item));
-            print(NEW_LINE);
+            println("");
         } else {
-            print("  - No available moves! (Switch turn)"+NEW_LINE);
+            println("  - No available moves! (Switch turn)");
         }
     }
 }

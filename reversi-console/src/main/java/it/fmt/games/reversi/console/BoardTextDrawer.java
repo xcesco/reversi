@@ -9,9 +9,9 @@ import java.util.stream.IntStream;
 
 import static it.fmt.games.reversi.console.TextDrawer.*;
 
-public class BoardTextDrawer {
-    private Board board;
-    private List<Coordinates> availableMoves;
+public class BoardTextDrawer  {
+    private final Board board;
+    private final List<Coordinates> availableMoves;
     static final String ROW_SEPARATOR = "  +-----+-----+-----+-----+-----+-----+-----+-----+";
 
     public BoardTextDrawer(Board board, List<Coordinates> availableMoves) {
@@ -28,12 +28,16 @@ public class BoardTextDrawer {
         print("  ");
         IntStream.range(0, Board.BOARD_SIZE).forEach(col ->
                 System.out.print(String.format("   %s  ", (char) ('A' + col))));
-        System.out.println("\n" + PREFIX + ROW_SEPARATOR);
+        println("");
+        println(ROW_SEPARATOR);
+        //System.out.println("\n" + PREFIX + ROW_SEPARATOR);
         IntStream.range(0, Board.BOARD_SIZE).forEach(row -> {
             System.out.print(String.format(PREFIX + "%s |", row + 1));
             IntStream.range(0, Board.BOARD_SIZE).forEach(col ->
                     System.out.print(String.format("  %s  |", getSymbol(Coordinates.of(row, col)))));
-            System.out.println("\n" + PREFIX + ROW_SEPARATOR);
+            println("");
+            println(ROW_SEPARATOR);
+            //System.out.println("\n" + PREFIX + ROW_SEPARATOR);
         });
     }
 
@@ -43,7 +47,7 @@ public class BoardTextDrawer {
     }
 
     public String getMovesOnBoard(Coordinates coordinates) {
-        return isAvailableMove(coordinates) ? "•" : " ";
+        return isAvailableMove(coordinates) ? "?" : " ";
     }
 
 

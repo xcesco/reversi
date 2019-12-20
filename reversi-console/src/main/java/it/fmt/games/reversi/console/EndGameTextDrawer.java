@@ -8,25 +8,25 @@ import static it.fmt.games.reversi.console.TextDrawer.*;
 public class EndGameTextDrawer {
 
     public static void drawEndGame(GameStatus status, Score score) {
-        print(NEW_LINE);
+        println("");
         switch (status) {
             case DRAW:
-                print("  !!!!!!!!!!!!!!!!!!!!!"+NEW_LINE);
-                print("  !!!!!!! DRAW !!!!!!!!"+NEW_LINE);
-                print(String.format("  !! (O) %d : %d (X) !!"+NEW_LINE, score.getPlayer1Score(), score.getPlayer2Score()));
-                print("  !!!!!!!!!!!!!!!!!!!!!"+NEW_LINE);
+                println("  !!!!!!!!!!!!!!!!!!!!!");
+                println("  !!!!!!! DRAW !!!!!!!!");
+                println(String.format("  !! (O) %d : %d (X) !!", score.getPlayer1Score(), score.getPlayer2Score()));
+                println("  !!!!!!!!!!!!!!!!!!!!!");
                 break;
             case PLAYER1_WIN:
-                print("  !!!!!!!!!!!!!!!!!!!!!!!!!"+NEW_LINE);
-                print("  !!!!! PLAYER_1 WINS !!!!!"+NEW_LINE);
-                print(String.format("  !!!! (O) %d : %d (X) !!!!"+NEW_LINE, score.getPlayer1Score(), score.getPlayer2Score()));
-                print("  !!!!!!!!!!!!!!!!!!!!!!!!!"+NEW_LINE);
+                println("  !!!!!!!!!!!!!!!!!!!!!!!!!");
+                println("  !!!!! PLAYER_1 WINS !!!!!");
+                println(String.format("  !!!! (O) %d : %d (X) !!!!", score.getPlayer1Score(), score.getPlayer2Score()));
+                println("  !!!!!!!!!!!!!!!!!!!!!!!!!");
                 break;
             case PLAYER2_WIN:
-                print("  !!!!!!!!!!!!!!!!!!!!!!!!!"+NEW_LINE);
-                print("  !!!!! PLAYER_2 WINS !!!!!"+NEW_LINE);
-                print(String.format("  !!!! (O) %d : %d (X) !!!!"+NEW_LINE, score.getPlayer1Score(), score.getPlayer2Score()));
-                print("  !!!!!!!!!!!!!!!!!!!!!!!!!"+NEW_LINE);
+                println("  !!!!!!!!!!!!!!!!!!!!!!!!!");
+                println("  !!!!! PLAYER_2 WINS !!!!!");
+                println(String.format("  !!!! (O) %d : %d (X) !!!!", score.getPlayer1Score(), score.getPlayer2Score()));
+                println("  !!!!!!!!!!!!!!!!!!!!!!!!!");
                 break;
         }
     }

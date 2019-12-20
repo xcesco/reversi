@@ -10,6 +10,7 @@
         <relativePath>../reversi-parent/pom.xml</relativePath>
     </parent>
 
+
     <artifactId>reversi-console</artifactId>
     <version>0.3.0-SNAPSHOT</version>
     <name>reversi-console</name>

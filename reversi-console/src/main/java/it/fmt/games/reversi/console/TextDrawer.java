@@ -7,4 +7,7 @@ public class TextDrawer {
     static void print(String string) {
         System.out.print(PREFIX + string);
     }
+    static void println(String string) {
+        System.out.print(PREFIX + string + NEW_LINE);
+    }
 }

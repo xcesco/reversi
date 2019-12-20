@@ -12,10 +12,10 @@ public abstract class NewGame {
     public static boolean playAgain() {
         int value = -1;
         do {
-            print(NEW_LINE);
-            print("  Do you want to play again?"+NEW_LINE);
-            print("  1 - YES"+NEW_LINE);
-            print("  0 - EXIT"+NEW_LINE);
+            println("");
+            println("  Do you want to play again?");
+            println("  1 - YES");
+            println("  0 - EXIT");
             print("  Insert your choice: ");
 
             String input = scanner.next();
@@ -28,8 +28,8 @@ public abstract class NewGame {
     private static boolean isValidChoice(int value) {
         boolean valid = value >= 0 && value <= 4;
         if (!valid) {
-            print("Invalid choice!"+NEW_LINE);
-            print(NEW_LINE);
+            println("Invalid choice!");
+            println("");
         }
         return valid;
     }

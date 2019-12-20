@@ -7,7 +7,7 @@ public class ConsoleRenderer extends TextDrawer implements GameRenderer {
 
     @Override
     public void render(GameSnapshot gameSnapshot) {
-        print(NEW_LINE);
+        println("");
         BoardTextDrawer.drawBoard(gameSnapshot.getBoard(), gameSnapshot.getAvailableMoves().getMovesActivePlayer());
         ScoreTextDrawer.drawScore(gameSnapshot.getScore());
         PlayerMoveTextDrawer.drawPlayerMove(gameSnapshot.getLastMove());

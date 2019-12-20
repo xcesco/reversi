@@ -8,6 +8,6 @@ public class CurrentPlayerTextDrawer extends TextDrawer {
     }
 
     public static void drawCurrentPlayer(Piece activePiece) {
-        print("  "+activePiece+" "+(activePiece == Piece.PLAYER_1 ? "(O)" : "(X)")+" TURN:"+NEW_LINE);
+        println("  "+activePiece+" "+(activePiece == Piece.PLAYER_1 ? "(O)" : "(X)")+" TURN:");
     }
 }
