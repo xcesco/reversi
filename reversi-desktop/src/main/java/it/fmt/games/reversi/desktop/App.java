@@ -15,7 +15,7 @@ public class App extends JFrame {
     private final int P1_VS_CPU = 2;
     private final int CPU_VS_P2 = 3;
     private final int CPU_VS_CPU = 4;
-
+    private BufferedImage image;
 
     public static void main(String[] args) throws IOException {
         App ex = new App();
@@ -25,12 +25,10 @@ public class App extends JFrame {
 
     public App() throws IOException {
         Dimension btnDim = new Dimension(200, 30);
-
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        String path = Objects.requireNonNull(classLoader.getResource("logo.png")).getPath();
-        BufferedImage image = ImageIO.read(new File(path));
+        image = new ImageReader().readImage("logo.png");
         setIconImage(image);
-        BufferedImage resized = resize(image, 250, 250);
+
+        BufferedImage resized = new ImageReader().resize(image, 250, 250);
 
         setTitle("FMT-Reversi");
         setSize(300, 500);
@@ -110,6 +108,7 @@ public class App extends JFrame {
         dispose();
         JFrame frame = new JFrame("FMT-Reversi");
         frame.setSize(GameCanvas.WIDTH, GameCanvas.HEIGHT);
+        frame.setIconImage(image);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.add(new GameCanvas(gameType));
@@ -117,13 +116,6 @@ public class App extends JFrame {
 
     }
 
-    private static BufferedImage resize(BufferedImage img, int height, int width) {
-        Image tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        BufferedImage resized = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = resized.createGraphics();
-        g2d.drawImage(tmp, 0, 0, null);
-        g2d.dispose();
-        return resized;
-    }
+
 
 }
