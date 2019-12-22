@@ -45,7 +45,7 @@ public class AvailableMovesFinderTest {
                 of("F3"), of("A4"), of("G4"), of("B5"), of("F5"), of("B6"), of("F6"));
     }
 
-    public void checkAvailableMovesFinder(String fileName, Piece piece, Coordinates... coordinates) throws Exception {
+    private void checkAvailableMovesFinder(String fileName, Piece piece, Coordinates... coordinates) throws Exception {
         Board board = BoardReader.read(fileName);
         List<Coordinates> availableMovesForPlayer = AvailableMovesFinder.findMoves(board, piece);
         List<Coordinates> aspectedResult = Arrays.asList(coordinates);

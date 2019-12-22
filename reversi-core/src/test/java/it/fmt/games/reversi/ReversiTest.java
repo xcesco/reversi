@@ -23,7 +23,6 @@ public class ReversiTest {
         GameSnapshot result = reversi.play();
 
         assertThat(result.getStatus().isGameOver(), is(true));
-        assertThat(result.getStatus().isGameOver(), is(true));
     }
 
     @Test

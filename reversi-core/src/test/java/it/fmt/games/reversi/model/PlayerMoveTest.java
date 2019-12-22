@@ -17,7 +17,5 @@ public class PlayerMoveTest {
         assertThrows(InvalidInsertOperationException.class, () -> {
             PlayerMove playerMove = new PlayerMove(null, of("a4"), Collections.emptyList());
         });
-
-
     }
 }

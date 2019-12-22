@@ -29,13 +29,13 @@ public class PlayerFactoryTest {
     }
 
     @Test
-    public void testCreateRoboPlayer2() {
+    public void createRoboPlayer2WithDecisionHandler() {
         Player2 player = PlayerFactory.createRoboPlayer2(DecisionHandlerType.RANDOM);
         check(player, Piece.PLAYER_2);
     }
 
     @Test
-    public void testCreateRoboPlayer21() {
+    public void createRoboPlayer21() {
         Player2 player = PlayerFactory.createRoboPlayer2(new RandomDecisionHandler());
         check(player, Piece.PLAYER_2);
     }
@@ -47,13 +47,13 @@ public class PlayerFactoryTest {
     }
 
     @Test
-    public void testCreateRoboPlayer1() {
+    public void createRoboPlayer1WithDecisionHandler() {
         Player1 player = PlayerFactory.createRoboPlayer1(DecisionHandlerType.RANDOM);
         check(player, Piece.PLAYER_1);
     }
 
     @Test
-    public void testCreateRoboPlayer11() {
+    public void createRoboPlayer1WithDecisionHandler2() {
         Player1 player = PlayerFactory.createRoboPlayer1(new RandomDecisionHandler());
         check(player, Piece.PLAYER_1);
     }
