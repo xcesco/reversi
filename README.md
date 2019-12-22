@@ -58,12 +58,12 @@ Once you compile the entire project, you can execute the desktop and the console
 From your preferred IDE simply execute the main method of the class `it.fmt.games.reversi.console.App`. If you want to
  execute it from a command line go to the folder `<PROJECT-ROOT>\reversi-console\target` and execute the command 
  ```
-java reversi-console-1.0.0-jar-with-dependencies.jar
+java -jar reversi-console-1.0.0-jar-with-dependencies.jar
  ```
 
 ### Execute the desktop version
 From your preferred IDE simply execute the main method of the class `it.fmt.games.reversi.desktop.App`. If you want to
  execute it from a command line go to the folder `<PROJECT-ROOT>\reversi-desktop\target` and execute the command 
  ```
-java reversi-desktop-1.0.0-jar-with-dependencies.jar
+java -jar reversi-desktop-1.0.0-jar-with-dependencies.jar
  ```
