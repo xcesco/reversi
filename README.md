@@ -40,7 +40,16 @@ the project root folder and using the command:
 
 Otherwise you can simply import the project in your preferred IDE and build it there.
 
-### Android maven package
+### Prepare the Android maven artifact
+The Android platform supports Java 7 & 8. Reversi is written with OpenJDK 11. The
+ [reversi-android](https://github.com/xcesco/reversi-android) project need the `reversi-core` jar in its dependencies.
+ To create the jdk8 edition of the core module, you can use the profile `jdk8` in the `reversi-core` project:
+ 
+ `mvn clean install -Pjdk8`
+ 
+ This command store the specialized jar in maven local repository. Once it was build, you can open the Android project and build
+ the app.
+ 
 
 ## How to execute the programs
 Once you compile the entire project, you can execute the desktop and the console version of the game.
