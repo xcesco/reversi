@@ -40,6 +40,8 @@ the project root folder and using the command:
 
 Otherwise you can simply import the project in your preferred IDE and build it there.
 
+### Android maven package
+
 ## How to execute the programs
 Once you compile the entire project, you can execute the desktop and the console version of the game.
 
