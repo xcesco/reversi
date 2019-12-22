@@ -13,7 +13,7 @@ By [Francesco Benincasa](https://github.com/xcesco), [Tiziano Bonifazi](https://
 The Reversi project is our collaborative work repository for [Software Development Methods](https://github.com/software-development-methods-19-20) exam of DSSC MSc @ UniTS/SISSA. Our goal is realize a Java implementation of Reversi game following the knowledge acquired during the course about Java, Functional programing, Agile and Test Driven Development.
 
 ### Project organization
-The project is composed by 4 modules:
+The project is composed by 4 modules (plus the main project):
 
  - **reversi-core**: it is the module that contains all the game logic. It's used by the other modules.
  - **reversi-console**: it is the reversi console implementation. It allows to play the game using a command line.
