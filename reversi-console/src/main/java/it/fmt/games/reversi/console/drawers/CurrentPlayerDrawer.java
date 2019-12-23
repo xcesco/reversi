@@ -1,9 +1,9 @@
-package it.fmt.games.reversi.console;
+package it.fmt.games.reversi.console.drawers;
 
 import it.fmt.games.reversi.model.Piece;
 
-public class CurrentPlayerTextDrawer extends TextDrawer {
-    private CurrentPlayerTextDrawer() {
+public class CurrentPlayerDrawer extends TextDrawer {
+    private CurrentPlayerDrawer() {
 
     }
 

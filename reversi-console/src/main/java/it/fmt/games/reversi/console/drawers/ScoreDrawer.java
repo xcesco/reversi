@@ -1,12 +1,12 @@
-package it.fmt.games.reversi.console;
+package it.fmt.games.reversi.console.drawers;
 
 import it.fmt.games.reversi.model.Score;
 
-import static it.fmt.games.reversi.console.TextDrawer.*;
+import static it.fmt.games.reversi.console.drawers.TextDrawer.*;
 
-public abstract class ScoreTextDrawer {
+public abstract class ScoreDrawer {
 
-    private ScoreTextDrawer() {
+    private ScoreDrawer() {
 
     }
 

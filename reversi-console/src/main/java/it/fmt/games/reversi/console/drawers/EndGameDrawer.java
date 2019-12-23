@@ -1,11 +1,11 @@
-package it.fmt.games.reversi.console;
+package it.fmt.games.reversi.console.drawers;
 
 import it.fmt.games.reversi.model.GameStatus;
 import it.fmt.games.reversi.model.Score;
 
-import static it.fmt.games.reversi.console.TextDrawer.*;
+import static it.fmt.games.reversi.console.drawers.TextDrawer.*;
 
-public class EndGameTextDrawer {
+public class EndGameDrawer {
 
     public static void drawEndGame(GameStatus status, Score score) {
         println("");
