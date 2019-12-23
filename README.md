@@ -67,3 +67,14 @@ From your preferred IDE simply execute the main method of the class `it.fmt.game
  ```
 java -jar reversi-desktop-1.0.0-jar-with-dependencies.jar
  ```
+ 
+ ## Some screnshoots
+ It's quite easy to build the project, but if you want simply see the results, here there are some screenshots about Android, desktop (swing) and console reversi implementation.
+ 
+ <table>
+ <row>
+ <td><img src="https://github.com/xcesco/reversi/blob/master/docs/android_screenshot.png" alt="logo" width="300"/></td>
+ <td><img src="https://github.com/xcesco/reversi/blob/master/docs/desktop_screenshot.png" alt="logo" width="400"/></td>
+ <td><img src="https://github.com/xcesco/reversi/blob/master/docs/console_screenshot.png" alt="logo" width="400"/></td>
+ </row>
+ </table>
