@@ -12,11 +12,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class GameLogicImplTest {
+public class GameLogicTest {
 
     @Test
     public void initBoard() throws Exception {
-        GameLogicImpl gameLogic = createAndInitializeGameLogic();
+        GameLogic gameLogic = createAndInitializeGameLogic();
 
         Board aspectedBoard = BoardReader.read("gameLogicTest");
 
@@ -31,7 +31,7 @@ public class GameLogicImplTest {
         List<Coordinates> aspectedMovesForPlayer1 = Arrays.asList(of("d3"), of("c4"), of("f5"), of("e6"));
         List<Coordinates> aspectedMovesForPlayer2 = Arrays.asList(of("e3"), of("f4"), of("c5"), of("d6"));
 
-        GameLogicImpl gameLogic = createAndInitializeGameLogic();
+        GameLogic gameLogic = createAndInitializeGameLogic();
 
         AvailableMoves availableMoves = gameLogic.findMovesForPlayers();
         checkAvailableMovesFinder(availableMoves.getMovesActivePlayer(), aspectedMovesForPlayer1);
@@ -40,7 +40,7 @@ public class GameLogicImplTest {
 
     @Test
     public void insertSelectedMove() throws Exception {
-        GameLogicImpl gameLogic = createAndInitializeGameLogic();
+        GameLogic gameLogic = createAndInitializeGameLogic();
 
         AvailableMoves availableMoves = gameLogic.findMovesForPlayers();
         Coordinates player1Move = availableMoves.getMovesActivePlayer().get(0);
@@ -53,7 +53,7 @@ public class GameLogicImplTest {
 
     @Test
     public void switchPlayer() {
-        GameLogicImpl gameLogic = createAndInitializeGameLogic();
+        GameLogic gameLogic = createAndInitializeGameLogic();
 
         gameLogic.switchPlayer();
         GameSnapshot gameSnapshot = gameLogic.getGameSnapshot();
@@ -66,8 +66,8 @@ public class GameLogicImplTest {
         assertEquals(coordinates, aspectedCoordinates);
     }
 
-    private GameLogicImpl createAndInitializeGameLogic() {
-        GameLogicImpl gameLogic = new GameLogicImpl(PlayerFactory.createRoboPlayer1(), PlayerFactory.createRoboPlayer2(), new DummyUserInputReader());
+    private GameLogic createAndInitializeGameLogic() {
+        GameLogic gameLogic = new GameLogic(PlayerFactory.createRoboPlayer1(), PlayerFactory.createRoboPlayer2(), new DummyUserInputReader());
         gameLogic.initialize();
         return gameLogic;
     }
