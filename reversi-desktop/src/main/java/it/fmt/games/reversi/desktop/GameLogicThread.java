@@ -61,7 +61,7 @@ public class GameLogicThread extends Thread {
         try {
             SwingUtilities.invokeAndWait(()-> {
                 try {
-                    TimeUnit.SECONDS.sleep(1);
+                    TimeUnit.SECONDS.sleep(2);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
