@@ -12,10 +12,10 @@ import static it.fmt.games.reversi.model.operators.InsertMoveOperator.insertMove
 import static it.fmt.games.reversi.model.operators.ScoreCalculator.computeScore;
 
 public class GameLogic {
-    private final GameSnapshotBuilder gameSnapshotBuilder;
+    protected final GameSnapshotBuilder gameSnapshotBuilder;
     private final UserInputReader userInputReader;
-    private Board board;
-    private Player currentPlayer;
+    protected Board board;
+    protected Player currentPlayer;
     private Player otherPlayer;
 
     public GameLogic(Player player1, Player player2, UserInputReader userInputReader) {
@@ -71,9 +71,18 @@ public class GameLogic {
 
     public Coordinates readActivePlayeMove(List<Coordinates> availableMoves) {
         if (currentPlayer.isHumanPlayer()) {
-            return userInputReader.readInputFor(currentPlayer, availableMoves);
+            Coordinates move;
+            do {
+                move = userInputReader.readInputFor(currentPlayer, availableMoves);
+            } while(isInvalidMove(move, availableMoves));
+
+            return move;
         } else {
             return currentPlayer.computeNextMove(availableMoves);
         }
+    }
+
+    private boolean isInvalidMove(Coordinates move, List<Coordinates> availableMoves) {
+        return availableMoves.indexOf(move) == -1;
     }
 }

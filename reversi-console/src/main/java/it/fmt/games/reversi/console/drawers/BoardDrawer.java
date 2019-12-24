@@ -1,4 +1,4 @@
-package it.fmt.games.reversi.console;
+package it.fmt.games.reversi.console.drawers;
 
 import it.fmt.games.reversi.model.Board;
 import it.fmt.games.reversi.model.Coordinates;
@@ -7,20 +7,20 @@ import it.fmt.games.reversi.model.Piece;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static it.fmt.games.reversi.console.TextDrawer.*;
+import static it.fmt.games.reversi.console.drawers.TextDrawer.*;
 
-public class BoardTextDrawer  {
+public class BoardDrawer {
     private final Board board;
     private final List<Coordinates> availableMoves;
     static final String ROW_SEPARATOR = "  +-----+-----+-----+-----+-----+-----+-----+-----+";
 
-    public BoardTextDrawer(Board board, List<Coordinates> availableMoves) {
+    public BoardDrawer(Board board, List<Coordinates> availableMoves) {
         this.availableMoves = availableMoves;
         this.board = board;
     }
 
     public static void drawBoard(Board board, List<Coordinates> availableMoves) {
-        BoardTextDrawer drawer = new BoardTextDrawer(board, availableMoves);
+        BoardDrawer drawer = new BoardDrawer(board, availableMoves);
         drawer.draw();
     }
 
@@ -30,14 +30,12 @@ public class BoardTextDrawer  {
                 System.out.print(String.format("   %s  ", (char) ('A' + col))));
         println("");
         println(ROW_SEPARATOR);
-        //System.out.println("\n" + PREFIX + ROW_SEPARATOR);
         IntStream.range(0, Board.BOARD_SIZE).forEach(row -> {
             System.out.print(String.format(PREFIX + "%s |", row + 1));
             IntStream.range(0, Board.BOARD_SIZE).forEach(col ->
                     System.out.print(String.format("  %s  |", getSymbol(Coordinates.of(row, col)))));
             println("");
             println(ROW_SEPARATOR);
-            //System.out.println("\n" + PREFIX + ROW_SEPARATOR);
         });
     }
 
@@ -49,8 +47,7 @@ public class BoardTextDrawer  {
     public String getMovesOnBoard(Coordinates coordinates) {
         return isAvailableMove(coordinates) ? "?" : " ";
     }
-
-
+    
     public boolean isAvailableMove(Coordinates coordinates) {
         return availableMoves.indexOf(coordinates) != -1;
     }

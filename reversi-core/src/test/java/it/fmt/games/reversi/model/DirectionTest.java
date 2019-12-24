@@ -1,7 +1,5 @@
 package it.fmt.games.reversi.model;
 
-import it.fmt.games.reversi.model.Coordinates;
-import it.fmt.games.reversi.model.Direction;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;

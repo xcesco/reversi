@@ -1,6 +1,7 @@
 package it.fmt.games.reversi.console;
 
 import it.fmt.games.reversi.GameRenderer;
+import it.fmt.games.reversi.console.drawers.*;
 import it.fmt.games.reversi.model.*;
 
 public class ConsoleRenderer extends TextDrawer implements GameRenderer {
@@ -8,14 +9,14 @@ public class ConsoleRenderer extends TextDrawer implements GameRenderer {
     @Override
     public void render(GameSnapshot gameSnapshot) {
         println("");
-        BoardTextDrawer.drawBoard(gameSnapshot.getBoard(), gameSnapshot.getAvailableMoves().getMovesActivePlayer());
-        ScoreTextDrawer.drawScore(gameSnapshot.getScore());
-        PlayerMoveTextDrawer.drawPlayerMove(gameSnapshot.getLastMove());
+        BoardDrawer.drawBoard(gameSnapshot.getBoard(), gameSnapshot.getAvailableMoves().getMovesActivePlayer());
+        ScoreDrawer.drawScore(gameSnapshot.getScore());
+        PlayerMoveDrawer.drawPlayerMove(gameSnapshot.getLastMove());
         if (gameSnapshot.getStatus().isGameOver()) {
-            EndGameTextDrawer.drawEndGame(gameSnapshot.getStatus(), gameSnapshot.getScore());
+            EndGameDrawer.drawEndGame(gameSnapshot.getStatus(), gameSnapshot.getScore());
         } else {
-            CurrentPlayerTextDrawer.drawCurrentPlayer(gameSnapshot.getActivePiece());
-            AvailableMovesTextDrawer.drawAvailableMoves(gameSnapshot.getAvailableMoves().getMovesActivePlayer());
+            CurrentPlayerDrawer.drawCurrentPlayer(gameSnapshot.getActivePiece());
+            AvailableMovesDrawer.drawAvailableMoves(gameSnapshot.getAvailableMoves().getMovesActivePlayer());
         }
     }
 }
