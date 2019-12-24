@@ -71,9 +71,18 @@ public class GameLogic {
 
     public Coordinates readActivePlayeMove(List<Coordinates> availableMoves) {
         if (currentPlayer.isHumanPlayer()) {
-            return userInputReader.readInputFor(currentPlayer, availableMoves);
+            Coordinates move;
+            do {
+                move = userInputReader.readInputFor(currentPlayer, availableMoves);
+            } while(isInvalidMove(move, availableMoves));
+
+            return move;
         } else {
             return currentPlayer.computeNextMove(availableMoves);
         }
+    }
+
+    private boolean isInvalidMove(Coordinates move, List<Coordinates> availableMoves) {
+        return availableMoves.indexOf(move) == -1;
     }
 }
