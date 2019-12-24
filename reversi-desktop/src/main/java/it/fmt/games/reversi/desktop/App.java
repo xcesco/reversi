@@ -5,18 +5,16 @@ import it.fmt.games.reversi.desktop.pages.StartPage;
 
 import javax.swing.*;
 import java.awt.image.BufferedImage;
-import java.util.Objects;
 
 public class App extends JFrame {
 
-
     public static void main(String[] args) {
-        App reversiGame = new App();
-        reversiGame.setVisible(true);
+        App app = new App();
+        app.setVisible(true);
     }
 
     public App() {
-        BufferedImage logoImage = ImageReader.resize(Objects.requireNonNull(ImageReader.readImage("logo.png")), 250, 250);
+        BufferedImage logoImage = ImageResources.getInstance().getLogoImage();
         setIconImage(logoImage);
 
         setTitle("FMT-Reversi");

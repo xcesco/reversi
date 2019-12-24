@@ -4,6 +4,7 @@ import it.fmt.games.reversi.*;
 import it.fmt.games.reversi.desktop.pages.EndPage;
 import it.fmt.games.reversi.desktop.pages.GamePage;
 import it.fmt.games.reversi.desktop.pages.StartPage;
+import it.fmt.games.reversi.desktop.pages.SwingUtils;
 import it.fmt.games.reversi.model.Coordinates;
 import it.fmt.games.reversi.model.GameSnapshot;
 import it.fmt.games.reversi.model.Player;
@@ -25,7 +26,7 @@ public class GameLogicThread extends Thread {
 
     public GameLogicThread(JFrame jFrame, GamePage gamePage, Player1 player1, Player2 player2, GameRenderer uiRenderer) {
         this.jFrame = jFrame;
-        this.gamePage=gamePage;
+        this.gamePage = gamePage;
         this.uiRenderer = uiRenderer;
         UserInputReader userInputReader = this::getCoordinates;
         GameRenderer gamerRenderer = this::dispatchToUiRenderer;
@@ -33,8 +34,9 @@ public class GameLogicThread extends Thread {
     }
 
     private void dispatchToUiRenderer(GameSnapshot gameSnapshot) {
-        uiRenderer.render(gameSnapshot);
-     }
+        SwingUtilities.invokeLater(() ->
+                uiRenderer.render(gameSnapshot));
+    }
 
     private Coordinates getCoordinates(Player player, List<Coordinates> list) {
         availableMoves = list;
@@ -59,20 +61,16 @@ public class GameLogicThread extends Thread {
     public void run() {
         GameSnapshot gameSnapshot = reversi.play();
         try {
-            SwingUtilities.invokeAndWait(()-> {
-                try {
-                    TimeUnit.SECONDS.sleep(2);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                this.gamePage.setVisible(false);
-                jFrame.getContentPane().removeAll();
-                jFrame.getContentPane().add(new EndPage(jFrame, gameSnapshot));
-                jFrame.validate();
-            });
-        } catch (InterruptedException | InvocationTargetException e) {
+            TimeUnit.MILLISECONDS.sleep(1500);
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        SwingUtilities.invokeLater(() -> {
+            gamePage.setVisible(false);
+            jFrame.getContentPane().removeAll();
+            jFrame.getContentPane().add(new EndPage(jFrame, gameSnapshot));
+            jFrame.validate();
+        });
 
     }
 }

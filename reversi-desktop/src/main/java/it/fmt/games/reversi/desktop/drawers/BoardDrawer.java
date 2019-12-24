@@ -2,14 +2,12 @@ package it.fmt.games.reversi.desktop.drawers;
 
 import it.fmt.games.reversi.Player1;
 import it.fmt.games.reversi.Player2;
-import it.fmt.games.reversi.desktop.ImageReader;
 import it.fmt.games.reversi.desktop.ImageResources;
 import it.fmt.games.reversi.model.GameSnapshot;
 import it.fmt.games.reversi.model.Piece;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Objects;
 
 import static it.fmt.games.reversi.desktop.pages.GamePage.*;
 import static it.fmt.games.reversi.model.Board.BOARD_SIZE;

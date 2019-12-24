@@ -6,7 +6,10 @@ import it.fmt.games.reversi.Player2;
 import it.fmt.games.reversi.PlayerFactory;
 import it.fmt.games.reversi.desktop.DesktopDecisionHandler;
 import it.fmt.games.reversi.desktop.GameLogicThread;
-import it.fmt.games.reversi.desktop.drawers.*;
+import it.fmt.games.reversi.desktop.drawers.BoardDrawer;
+import it.fmt.games.reversi.desktop.drawers.LabelsDrawer;
+import it.fmt.games.reversi.desktop.drawers.ScoreDrawer;
+import it.fmt.games.reversi.desktop.drawers.TurnDrawer;
 import it.fmt.games.reversi.model.Coordinates;
 import it.fmt.games.reversi.model.GameSnapshot;
 
@@ -14,9 +17,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.concurrent.TimeUnit;
-
-import static java.lang.StrictMath.abs;
 
 public class GamePage extends Canvas implements MouseListener, GameRenderer {
     public static double RESIZE = 0.9;
@@ -27,7 +27,6 @@ public class GamePage extends Canvas implements MouseListener, GameRenderer {
     public static final Color lightYellow = new Color(220, 220, 190);
     public static final int WIDTH = calculateSize(900);
     public static final int HEIGHT = calculateSize(768);
-    public static String winner = "";
     private final JFrame jFrame;
     private  TurnDrawer turnDrawer;
     private  LabelsDrawer labelsDrawer;
