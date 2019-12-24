@@ -3,18 +3,23 @@ package it.fmt.games.reversi.desktop;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
+import java.io.InputStream;
 
 public class ImageReader {
 
-    public BufferedImage readImage (String fileName) throws IOException {
+    public static BufferedImage readImage(String fileName) {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        String path = Objects.requireNonNull(classLoader.getResource(fileName)).getPath();
-        return ImageIO.read(new File(path));
+        InputStream inputStream = classLoader.getResourceAsStream(fileName);
+        try {
+            return ImageIO.read(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
-    public BufferedImage resize(BufferedImage img, int height, int width) {
+
+    public static BufferedImage resize(BufferedImage img, int height, int width) {
         Image tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
         BufferedImage resized = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = resized.createGraphics();

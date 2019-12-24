@@ -1,4 +1,4 @@
-package it.fmt.games.reversi.desktop;
+package it.fmt.games.reversi.desktop.drawers;
 
 import it.fmt.games.reversi.model.GameSnapshot;
 

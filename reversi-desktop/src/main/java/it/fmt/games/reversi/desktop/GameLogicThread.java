@@ -1,22 +1,31 @@
 package it.fmt.games.reversi.desktop;
 
 import it.fmt.games.reversi.*;
+import it.fmt.games.reversi.desktop.pages.EndPage;
+import it.fmt.games.reversi.desktop.pages.GamePage;
+import it.fmt.games.reversi.desktop.pages.StartPage;
 import it.fmt.games.reversi.model.Coordinates;
 import it.fmt.games.reversi.model.GameSnapshot;
 import it.fmt.games.reversi.model.Player;
 
+import javax.swing.*;
+import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class GameLogicThread extends Thread {
     private final Reversi reversi;
     public final Move acceptedMove = new Move();
-    private final GameCanvas app;
+    private final JFrame jFrame;
+    private final GamePage gamePage;
     private GameRenderer uiRenderer;
     public List<Coordinates> availableMoves = new ArrayList<>();
 
-    public GameLogicThread(GameCanvas app, Player1 player1, Player2 player2, GameRenderer uiRenderer) {
-        this.app = app;
+    public GameLogicThread(JFrame jFrame, GamePage gamePage, Player1 player1, Player2 player2, GameRenderer uiRenderer) {
+        this.jFrame = jFrame;
+        this.gamePage=gamePage;
         this.uiRenderer = uiRenderer;
         UserInputReader userInputReader = this::getCoordinates;
         GameRenderer gamerRenderer = this::dispatchToUiRenderer;
@@ -48,6 +57,22 @@ public class GameLogicThread extends Thread {
 
     @Override
     public void run() {
-        reversi.play();
+        GameSnapshot gameSnapshot = reversi.play();
+        try {
+            SwingUtilities.invokeAndWait(()-> {
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                this.gamePage.setVisible(false);
+                jFrame.getContentPane().removeAll();
+                jFrame.getContentPane().add(new EndPage(jFrame, gameSnapshot));
+                jFrame.validate();
+            });
+        } catch (InterruptedException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
     }
 }
