@@ -64,6 +64,16 @@ public class ReversiTest {
     }
 
     @Test
+    public void sometimesUserInsertBadInput() throws Exception {
+        GameLogic gameLogic = new DummyGameLogic(BoardReader.read("reversi_player1_wins_start"), PlayerFactory.createHumanPlayer1(),
+                PlayerFactory.createRoboPlayer2(), new DummyBadUserInputReader());
+        Reversi reversi = new Reversi(new DummyRenderer(), gameLogic);
+        GameSnapshot result = reversi.play();
+
+        checkEndGame(result, "reversi_player1_wins_end", GameStatus.PLAYER1_WIN, 3, 0);
+    }
+
+    @Test
     public void player2Wins() throws Exception {
         GameLogic gameLogic = new DummyGameLogic(BoardReader.read("reversi_player2_wins_start"), PlayerFactory.createHumanPlayer1(),
                 PlayerFactory.createRoboPlayer2(), new DummyUserInputReader());
