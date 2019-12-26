@@ -55,7 +55,7 @@ public class GameLogicTest {
     public void switchPlayer() {
         GameLogic gameLogic = createAndInitializeGameLogic();
 
-        gameLogic.switchPlayer();
+        gameLogic.switchPlayers();
         GameSnapshot gameSnapshot = gameLogic.getGameSnapshot();
         assertThat(gameSnapshot.getActivePiece(), is(Piece.PLAYER_2));
         assertThat(gameSnapshot.getOtherPlayer(), is(Piece.PLAYER_1));
