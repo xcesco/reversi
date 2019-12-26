@@ -26,7 +26,7 @@ public class Reversi {
                 gameLogic.insertSelectedMove(nextMove);
             }
 
-            gameLogic.switchPlayer();
+            gameLogic.switchPlayers();
             availableMoves = gameLogic.findMovesForPlayers();
         }
 

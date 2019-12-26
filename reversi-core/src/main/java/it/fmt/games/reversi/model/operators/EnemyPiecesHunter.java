@@ -24,7 +24,7 @@ public class EnemyPiecesHunter extends AbstractBoardOperator {
 
     private List<Coordinates> find() {
         return Stream.of(Direction.values()).filter(this::isAnyPieceToInvertAlongDirection)
-                .map(this::rotateEnemyPieces).flatMap(x -> x).sorted()
+                .map(this::findEnemyPiecesAlongDirection).flatMap(x -> x).sorted()
                 .collect(Collectors.toList());
     }
 
@@ -32,7 +32,7 @@ public class EnemyPiecesHunter extends AbstractBoardOperator {
         return isAnyPieceToInvert(searchOrigin, direction);
     }
 
-    private Stream<Coordinates> rotateEnemyPieces(Direction direction) {
+    private Stream<Coordinates> findEnemyPiecesAlongDirection(Direction direction) {
         return findEnemyPiecesAlongDirection(searchOrigin, direction);
     }
 }

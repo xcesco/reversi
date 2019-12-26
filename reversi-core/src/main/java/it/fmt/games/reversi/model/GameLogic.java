@@ -57,7 +57,7 @@ public class GameLogic {
         gameSnapshotBuilder.setLastMove(playerMove).setBoard(board.copy()).setScore(computeScore(board));
     }
 
-    public void switchPlayer() {
+    public void switchPlayers() {
         Player temp = currentPlayer;
         currentPlayer = otherPlayer;
         otherPlayer = temp;
