@@ -6,12 +6,10 @@ import it.fmt.games.reversi.Player2;
 import it.fmt.games.reversi.PlayerFactory;
 import it.fmt.games.reversi.desktop.DesktopDecisionHandler;
 import it.fmt.games.reversi.desktop.GameLogicThread;
-import it.fmt.games.reversi.desktop.drawers.BoardDrawer;
-import it.fmt.games.reversi.desktop.drawers.LabelsDrawer;
-import it.fmt.games.reversi.desktop.drawers.ScoreDrawer;
-import it.fmt.games.reversi.desktop.drawers.TurnDrawer;
+import it.fmt.games.reversi.desktop.drawers.*;
 import it.fmt.games.reversi.model.Coordinates;
 import it.fmt.games.reversi.model.GameSnapshot;
+import it.fmt.games.reversi.model.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,29 +30,33 @@ public class GamePage extends Canvas implements MouseListener, GameRenderer {
     private  LabelsDrawer labelsDrawer;
     private  ScoreDrawer scoreDrawer;
     private  BoardDrawer boardDrawer;
+    private PlayerDrawer playerDrawer;
     private  Font arialFont;
 
     public GameSnapshot gameSnapshot;
     private GameLogicThread gameLogic;
     private Player1 player1;
     private Player2 player2;
+    private String player1string;
+    private String player2string;
 
     public GamePage(JFrame jFrame, int game) {
         this.jFrame = jFrame;
         preparePlayers(game);
         addMouseListener(this);
 
-        prepareResources();
+        prepareResources(game);
 
         runGame();
     }
 
-    private void prepareResources() {
+    private void prepareResources(int game) {
         arialFont=new Font("Verdana", Font.BOLD, calculateSize(48));
         turnDrawer = new TurnDrawer();
         labelsDrawer = new LabelsDrawer();
         scoreDrawer = new ScoreDrawer();
         boardDrawer = new BoardDrawer(player1, player2);
+        playerDrawer = new PlayerDrawer(player1string,player2string);
     }
 
     private void runGame() {
@@ -67,18 +69,27 @@ public class GamePage extends Canvas implements MouseListener, GameRenderer {
             case 1:
                 player1 = PlayerFactory.createHumanPlayer1();
                 player2 = PlayerFactory.createHumanPlayer2();
+                player1string = "Player 1";
+                player2string = "Player 2";
                 break;
             case 2:
                 player1 = PlayerFactory.createHumanPlayer1();
                 player2 = PlayerFactory.createRoboPlayer2(new DesktopDecisionHandler());
+                player1string = "Player 1";
+                player2string = "CPU";
+
                 break;
             case 3:
                 player1 = PlayerFactory.createRoboPlayer1(new DesktopDecisionHandler());
                 player2 = PlayerFactory.createHumanPlayer2();
+                player1string = "CPU";
+                player2string = "Player 2";
                 break;
             case 4:
                 player1 = PlayerFactory.createRoboPlayer1(new DesktopDecisionHandler());
                 player2 = PlayerFactory.createRoboPlayer2(new DesktopDecisionHandler());
+                player1string = "CPU 1";
+                player2string = "CPU 2";
                 break;
             default:
                 break;
@@ -96,6 +107,7 @@ public class GamePage extends Canvas implements MouseListener, GameRenderer {
             scoreDrawer.draw(gameSnapshot, g);
             turnDrawer.draw(gameSnapshot, g);
             labelsDrawer.draw(gameSnapshot, g);
+            playerDrawer.draw(gameSnapshot,g);
         }
     }
 
