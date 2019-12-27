@@ -1,6 +1,6 @@
 package it.fmt.games.reversi.model;
 
-import it.fmt.games.reversi.DummyUserInputReader;
+import it.fmt.games.reversi.TakeFirstUserInputReader;
 import it.fmt.games.reversi.PlayerFactory;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ public class GameLogicTest {
 
     @Test
     public void initBoard() throws Exception {
-        GameLogic gameLogic = createAndInitializeGameLogic();
+        GameLogicImpl gameLogic = createAndInitializeGameLogic();
 
         Board aspectedBoard = BoardReader.read("gameLogicTest");
 
@@ -31,7 +31,7 @@ public class GameLogicTest {
         List<Coordinates> aspectedMovesForPlayer1 = Arrays.asList(of("d3"), of("c4"), of("f5"), of("e6"));
         List<Coordinates> aspectedMovesForPlayer2 = Arrays.asList(of("e3"), of("f4"), of("c5"), of("d6"));
 
-        GameLogic gameLogic = createAndInitializeGameLogic();
+        GameLogicImpl gameLogic = createAndInitializeGameLogic();
 
         AvailableMoves availableMoves = gameLogic.findMovesForPlayers();
         checkAvailableMovesFinder(availableMoves.getMovesActivePlayer(), aspectedMovesForPlayer1);
@@ -40,7 +40,7 @@ public class GameLogicTest {
 
     @Test
     public void insertSelectedMove() throws Exception {
-        GameLogic gameLogic = createAndInitializeGameLogic();
+        GameLogicImpl gameLogic = createAndInitializeGameLogic();
 
         AvailableMoves availableMoves = gameLogic.findMovesForPlayers();
         Coordinates player1Move = availableMoves.getMovesActivePlayer().get(0);
@@ -53,7 +53,7 @@ public class GameLogicTest {
 
     @Test
     public void switchPlayer() {
-        GameLogic gameLogic = createAndInitializeGameLogic();
+        GameLogicImpl gameLogic = createAndInitializeGameLogic();
 
         gameLogic.switchPlayers();
         GameSnapshot gameSnapshot = gameLogic.getGameSnapshot();
@@ -66,8 +66,8 @@ public class GameLogicTest {
         assertEquals(coordinates, aspectedCoordinates);
     }
 
-    private GameLogic createAndInitializeGameLogic() {
-        GameLogic gameLogic = new GameLogic(PlayerFactory.createRoboPlayer1(), PlayerFactory.createRoboPlayer2(), new DummyUserInputReader());
+    private GameLogicImpl createAndInitializeGameLogic() {
+        GameLogicImpl gameLogic = new GameLogicImpl(PlayerFactory.createRoboPlayer1(), PlayerFactory.createRoboPlayer2(), new TakeFirstUserInputReader());
         gameLogic.initialize();
         return gameLogic;
     }

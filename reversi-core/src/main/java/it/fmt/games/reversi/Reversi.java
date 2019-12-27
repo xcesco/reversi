@@ -7,7 +7,7 @@ public class Reversi {
     private final GameLogic gameLogic;
 
     public Reversi(GameRenderer renderer, UserInputReader userInputReader, Player1 player1, Player2 player2) {
-        this.gameLogic = new GameLogic(player1, player2, userInputReader);
+        this.gameLogic = new GameLogicImpl(player1, player2, userInputReader);
         this.renderer = renderer;
     }
 

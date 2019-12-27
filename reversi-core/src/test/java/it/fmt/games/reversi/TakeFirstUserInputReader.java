@@ -5,7 +5,7 @@ import it.fmt.games.reversi.model.Player;
 
 import java.util.List;
 
-public class DummyUserInputReader implements UserInputReader {
+public class TakeFirstUserInputReader implements UserInputReader {
     @Override
     public Coordinates readInputFor(Player currentPlayer, List<Coordinates> availableMoves) {
         return availableMoves.get(0);

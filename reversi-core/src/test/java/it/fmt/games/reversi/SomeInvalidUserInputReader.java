@@ -7,7 +7,7 @@ import java.util.List;
 
 import static it.fmt.games.reversi.model.Coordinates.of;
 
-public class DummyBadUserInputReader implements UserInputReader {
+public class SomeInvalidUserInputReader implements UserInputReader {
     private int counter = 0;
 
     @Override

@@ -20,23 +20,23 @@ public class ReversiTest {
             assertThat(gameSnapshot.getAvailableMoves().getMovesOtherPlayer(), notNullValue());
             assertThat(gameSnapshot.getBoard(), notNullValue());
             assertThat(gameSnapshot.getStatus(), notNullValue());
-        }, new DummyUserInputReader(), PlayerFactory.createRoboPlayer1(), PlayerFactory.createRoboPlayer2());
+        }, new TakeFirstUserInputReader(), PlayerFactory.createRoboPlayer1(), PlayerFactory.createRoboPlayer2());
         GameSnapshot result = reversi.play();
 
         assertThat(result.getStatus().isGameOver(), is(true));
     }
 
     @Test
-    public void playOnConsoleCpuVsCpu() throws Exception {
-        Reversi reversi = new Reversi(new DummyRenderer(), new DummyUserInputReader(), PlayerFactory.createRoboPlayer1(),
+    public void playCpuVsCpu() throws Exception {
+        Reversi reversi = new Reversi(new DummyRenderer(), new TakeFirstUserInputReader(), PlayerFactory.createRoboPlayer1(),
                 PlayerFactory.createRoboPlayer2());
         GameSnapshot result = reversi.play();
         checkEndGame(result, "reversi_final_state00", GameStatus.PLAYER2_WIN, 19, 45);
     }
 
     @Test
-    public void playOnConsoleP1VsCpu() throws Exception {
-        Reversi reversi = new Reversi(new DummyRenderer(), new DummyUserInputReader(), PlayerFactory.createHumanPlayer1(),
+    public void playP1VsCpu() throws Exception {
+        Reversi reversi = new Reversi(new DummyRenderer(), new TakeFirstUserInputReader(), PlayerFactory.createHumanPlayer1(),
                 PlayerFactory.createRoboPlayer2());
         GameSnapshot result = reversi.play();
 
@@ -45,8 +45,8 @@ public class ReversiTest {
 
     @Test
     public void draw() throws Exception {
-        GameLogic gameLogic = new DummyGameLogic(BoardReader.read("reversi_draw"), PlayerFactory.createHumanPlayer1(),
-                PlayerFactory.createRoboPlayer2(), new DummyUserInputReader());
+        GameLogic gameLogic = new GameLogicForTest(BoardReader.read("reversi_draw"), PlayerFactory.createHumanPlayer1(),
+                PlayerFactory.createRoboPlayer2(), new TakeFirstUserInputReader());
         Reversi reversi = new Reversi(new DummyRenderer(), gameLogic);
         GameSnapshot result = reversi.play();
 
@@ -55,8 +55,8 @@ public class ReversiTest {
 
     @Test
     public void player1Wins() throws Exception {
-        GameLogic gameLogic = new DummyGameLogic(BoardReader.read("reversi_player1_wins_start"), PlayerFactory.createHumanPlayer1(),
-                PlayerFactory.createRoboPlayer2(), new DummyUserInputReader());
+        GameLogic gameLogic = new GameLogicForTest(BoardReader.read("reversi_player1_wins_start"), PlayerFactory.createHumanPlayer1(),
+                PlayerFactory.createRoboPlayer2(), new TakeFirstUserInputReader());
         Reversi reversi = new Reversi(new DummyRenderer(), gameLogic);
         GameSnapshot result = reversi.play();
 
@@ -65,8 +65,8 @@ public class ReversiTest {
 
     @Test
     public void sometimesUserInsertBadInput() throws Exception {
-        GameLogic gameLogic = new DummyGameLogic(BoardReader.read("reversi_player1_wins_start"), PlayerFactory.createHumanPlayer1(),
-                PlayerFactory.createRoboPlayer2(), new DummyBadUserInputReader());
+        GameLogic gameLogic = new GameLogicForTest(BoardReader.read("reversi_player1_wins_start"), PlayerFactory.createHumanPlayer1(),
+                PlayerFactory.createRoboPlayer2(), new SomeInvalidUserInputReader());
         Reversi reversi = new Reversi(new DummyRenderer(), gameLogic);
         GameSnapshot result = reversi.play();
 
@@ -75,8 +75,8 @@ public class ReversiTest {
 
     @Test
     public void player2Wins() throws Exception {
-        GameLogic gameLogic = new DummyGameLogic(BoardReader.read("reversi_player2_wins_start"), PlayerFactory.createHumanPlayer1(),
-                PlayerFactory.createRoboPlayer2(), new DummyUserInputReader());
+        GameLogic gameLogic = new GameLogicForTest(BoardReader.read("reversi_player2_wins_start"), PlayerFactory.createHumanPlayer1(),
+                PlayerFactory.createRoboPlayer2(), new TakeFirstUserInputReader());
         Reversi reversi = new Reversi(new DummyRenderer(), gameLogic);
         GameSnapshot result = reversi.play();
 
