@@ -69,7 +69,7 @@ public class GameLogic {
         return gameSnapshotBuilder.build();
     }
 
-    public Coordinates readActivePlayeMove(List<Coordinates> availableMoves) {
+    public Coordinates readActivePlayerMove(List<Coordinates> availableMoves) {
         if (currentPlayer.isHumanPlayer()) {
             Coordinates move;
             do {

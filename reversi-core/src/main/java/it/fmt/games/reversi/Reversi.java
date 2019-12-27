@@ -22,7 +22,7 @@ public class Reversi {
             renderer.render(gameLogic.getGameSnapshot());
 
             if (availableMoves.isAvailableMovesForActivePlayer()) {
-                Coordinates nextMove = gameLogic.readActivePlayeMove(availableMoves.getMovesActivePlayer());
+                Coordinates nextMove = gameLogic.readActivePlayerMove(availableMoves.getMovesActivePlayer());
                 gameLogic.insertSelectedMove(nextMove);
             }
 
