@@ -12,7 +12,7 @@ public abstract class ScoreDrawer {
 
     public static void drawScore(Score score) {
         println("  SCORE:");
-        println(String.format(PREFIX+"- PLAYER_1 (O) : %d", score.getPlayer1Score()));
-        println(String.format(PREFIX+"- PLAYER_2 (X) : %d", score.getPlayer2Score()));
+        println(2,String.format("- "+TextDrawer.player1AsString+" (O) : %d", score.getPlayer1Score()));
+        println(2,String.format("- "+TextDrawer.player2AsString+" (X) : %d", score.getPlayer2Score()));
     }
 }

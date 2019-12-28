@@ -11,22 +11,28 @@ public class EndGameDrawer {
         println("");
         switch (status) {
             case DRAW:
-                println("  !!!!!!!!!!!!!!!!!!!!!");
-                println("  !!!!!!! DRAW !!!!!!!!");
-                println(String.format("  !! (O) %d : %d (X) !!", score.getPlayer1Score(), score.getPlayer2Score()));
-                println("  !!!!!!!!!!!!!!!!!!!!!");
+                println(3,"!!!!!!!!!!!!!!!!!!!!!");
+                println(3,"!!!!!!! DRAW !!!!!!!!");
+                println(3,String.format("!! (O) %d : %d (X) !!", score.getPlayer1Score(), score.getPlayer2Score()));
+                println(3,"!!!!!!!!!!!!!!!!!!!!!");
                 break;
             case PLAYER1_WIN:
-                println("  !!!!!!!!!!!!!!!!!!!!!!!!!");
-                println("  !!!!! PLAYER_1 WINS !!!!!");
-                println(String.format("  !!!! (O) %d : %d (X) !!!!", score.getPlayer1Score(), score.getPlayer2Score()));
-                println("  !!!!!!!!!!!!!!!!!!!!!!!!!");
+                println(3,"!!!!!!!!!!!!!!!!!!!!!!!!!");
+                if (player1AsString == "CPU_1")
+                    println(3,"!!!!!! "+player1AsString+"  WINS !!!!!!");
+                else
+                    println(3,"!!!!! "+player1AsString+" WINS !!!!!");
+                println(3,String.format("!!!! (O) %d : %d (X) !!!!", score.getPlayer1Score(), score.getPlayer2Score()));
+                println(3,"!!!!!!!!!!!!!!!!!!!!!!!!!");
                 break;
             case PLAYER2_WIN:
-                println("  !!!!!!!!!!!!!!!!!!!!!!!!!");
-                println("  !!!!! PLAYER_2 WINS !!!!!");
-                println(String.format("  !!!! (O) %d : %d (X) !!!!", score.getPlayer1Score(), score.getPlayer2Score()));
-                println("  !!!!!!!!!!!!!!!!!!!!!!!!!");
+                println(3,"!!!!!!!!!!!!!!!!!!!!!!!!!");
+                if (player2AsString == "CPU_2")
+                    println(3,"!!!!!! "+player2AsString+"  WINS !!!!!!");
+                else
+                    println(3,"!!!!! "+player2AsString+" WINS !!!!!");
+                println(3,String.format("!!!! (O) %d : %d (X) !!!!", score.getPlayer1Score(), score.getPlayer2Score()));
+                println(3,"!!!!!!!!!!!!!!!!!!!!!!!!!");
                 break;
         }
     }

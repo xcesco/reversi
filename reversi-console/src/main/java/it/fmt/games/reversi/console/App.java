@@ -18,16 +18,17 @@ public class App implements UserInputReader {
     private final Scanner scanner;
     private static int choice;
 
+    private Player1 player1;
+    private Player2 player2;
+
     public void setPlayer1(Player1 player1) {
         this.player1 = player1;
     }
-
     public void setPlayer2(Player2 player2) {
         this.player2 = player2;
     }
 
-    private Player1 player1;
-    private Player2 player2;
+
 
     public App(Scanner scanner) {
         this.scanner = scanner;
@@ -59,8 +60,8 @@ public class App implements UserInputReader {
         Coordinates coords;
 
         do {
-            print(String.format("\t- %s, insert move: ", currentPlayer.getPiece()));
-            coords = Coordinates.of(scanner.next());
+            print(2,String.format("- %s, insert move: ", currentPlayer.getPiece()));
+            coords = Coordinates.of(scanner.nextLine().trim());
 
         } while (!isValidMoves(coords, availableMoves));
         return coords;

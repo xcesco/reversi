@@ -4,15 +4,14 @@ import it.fmt.games.reversi.DecisionHandlerType;
 import it.fmt.games.reversi.Player1;
 import it.fmt.games.reversi.Player2;
 import it.fmt.games.reversi.PlayerFactory;
+import it.fmt.games.reversi.console.drawers.TextDrawer;
 
 import java.util.Scanner;
 
 import static it.fmt.games.reversi.console.NumberUtility.isInInterval;
 import static it.fmt.games.reversi.console.NumberUtility.toNumber;
-import static it.fmt.games.reversi.console.drawers.TextDrawer.print;
-import static it.fmt.games.reversi.console.drawers.TextDrawer.println;
 
-public abstract class PlayersSelector {
+public abstract class PlayersSelector extends TextDrawer {
 
     static final String P1_VS_P2 = "  ************** PLAYER_1 vs PLAYER_2 *************";
     static final String P1_VS_CPU = "  **************** PLAYER_1 vs CPU ****************";
@@ -48,15 +47,19 @@ public abstract class PlayersSelector {
         switch (choice) {
             case 1:
                 setPlayers(app, P1_VS_P2, PlayerFactory.createHumanPlayer1(), PlayerFactory.createHumanPlayer2());
+                setPlayersAsString("PLAYER_1", "PLAYER_2");
                 break;
             case 2:
                 setPlayers(app, P1_VS_CPU, PlayerFactory.createHumanPlayer1(), PlayerFactory.createRoboPlayer2(DecisionHandlerType.RANDOM));
+                setPlayersAsString("PLAYER_1", "CPU_2");
                 break;
             case 3:
                 setPlayers(app, CPU_VS_P2, PlayerFactory.createRoboPlayer1(DecisionHandlerType.RANDOM), PlayerFactory.createHumanPlayer2());
+                setPlayersAsString("CPU_1", "PLAYER_2");
                 break;
             case 4:
                 setPlayers(app, CPU_VS_CPU, PlayerFactory.createRoboPlayer1(DecisionHandlerType.RANDOM), PlayerFactory.createRoboPlayer2(DecisionHandlerType.RANDOM));
+                setPlayersAsString("CPU_1", "CPU_2");
                 break;
             default:
                 break;

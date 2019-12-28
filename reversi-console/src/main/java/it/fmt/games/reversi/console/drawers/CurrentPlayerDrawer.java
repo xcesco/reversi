@@ -2,12 +2,14 @@ package it.fmt.games.reversi.console.drawers;
 
 import it.fmt.games.reversi.model.Piece;
 
-public class CurrentPlayerDrawer extends TextDrawer {
-    private CurrentPlayerDrawer() {
+import static it.fmt.games.reversi.console.drawers.TextDrawer.*;
 
+public class CurrentPlayerDrawer {
+    private CurrentPlayerDrawer() {
     }
 
     public static void drawCurrentPlayer(Piece activePiece) {
-        println("  "+activePiece+" "+(activePiece == Piece.PLAYER_1 ? "(O)" : "(X)")+" TURN:");
+        println("  "+(activePiece == Piece.PLAYER_1 ? TextDrawer.player1AsString+" (O)"
+                : TextDrawer.player2AsString+" (X)")+" TURN:");
     }
 }
