@@ -1,6 +1,7 @@
 package it.fmt.games.reversi.model;
 
 import it.fmt.games.reversi.model.operators.AvailableMovesFinder;
+import it.fmt.games.reversi.support.BoardReader;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

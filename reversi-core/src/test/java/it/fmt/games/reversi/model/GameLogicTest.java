@@ -1,6 +1,7 @@
 package it.fmt.games.reversi.model;
 
-import it.fmt.games.reversi.TakeFirstUserInputReader;
+import it.fmt.games.reversi.support.BoardReader;
+import it.fmt.games.reversi.support.TakeFirstUserInputReader;
 import it.fmt.games.reversi.PlayerFactory;
 import org.junit.jupiter.api.Test;
 

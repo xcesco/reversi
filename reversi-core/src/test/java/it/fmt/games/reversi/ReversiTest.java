@@ -1,6 +1,10 @@
 package it.fmt.games.reversi;
 
 import it.fmt.games.reversi.model.*;
+import it.fmt.games.reversi.support.BoardReader;
+import it.fmt.games.reversi.support.DummyRenderer;
+import it.fmt.games.reversi.support.SomeInvalidUserInputReader;
+import it.fmt.games.reversi.support.TakeFirstUserInputReader;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;

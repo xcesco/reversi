@@ -1,6 +1,10 @@
-package it.fmt.games.reversi.model;
+package it.fmt.games.reversi.support;
 
 import it.fmt.games.reversi.exceptions.InvalidBoardReaderException;
+import it.fmt.games.reversi.model.Board;
+import it.fmt.games.reversi.model.Cell;
+import it.fmt.games.reversi.model.Coordinates;
+import it.fmt.games.reversi.model.Piece;
 
 import java.net.URL;
 import java.nio.file.Files;
