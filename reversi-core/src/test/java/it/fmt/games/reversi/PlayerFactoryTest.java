@@ -23,37 +23,37 @@ public class PlayerFactoryTest {
     }
 
     @Test
-    public void createRoboPlayer2() {
+    public void createCpuPlayer2() {
         Player2 player = PlayerFactory.createCpuPlayer2();
         check(player, Piece.PLAYER_2);
     }
 
     @Test
-    public void createRoboPlayer2WithDecisionHandler() {
+    public void createCpuPlayer2WithDecisionHandler() {
         Player2 player = PlayerFactory.createCpuPlayer2(DecisionHandlerType.RANDOM);
         check(player, Piece.PLAYER_2);
     }
 
     @Test
-    public void createRoboPlayer21() {
+    public void createCpuPlayer21() {
         Player2 player = PlayerFactory.createCpuPlayer2(new RandomDecisionHandler());
         check(player, Piece.PLAYER_2);
     }
 
     @Test
-    public void createRoboPlayer1() {
+    public void createCpuPlayer1() {
         Player1 player = PlayerFactory.createCpuPlayer1();
         check(player, Piece.PLAYER_1);
     }
 
     @Test
-    public void createRoboPlayer1WithDecisionHandler() {
+    public void createCpuPlayer1WithDecisionHandler() {
         Player1 player = PlayerFactory.createCpuPlayer1(DecisionHandlerType.RANDOM);
         check(player, Piece.PLAYER_1);
     }
 
     @Test
-    public void createRoboPlayer1WithDecisionHandler2() {
+    public void createCpuPlayer1WithDecisionHandler2() {
         Player1 player = PlayerFactory.createCpuPlayer1(new RandomDecisionHandler());
         check(player, Piece.PLAYER_1);
     }
