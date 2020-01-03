@@ -1,5 +1,6 @@
-package it.fmt.games.reversi;
+package it.fmt.games.reversi.support;
 
+import it.fmt.games.reversi.UserInputReader;
 import it.fmt.games.reversi.model.AvailableMoves;
 import it.fmt.games.reversi.model.Board;
 import it.fmt.games.reversi.model.GameLogicImpl;

@@ -9,7 +9,6 @@ import it.fmt.games.reversi.desktop.GameLogicThread;
 import it.fmt.games.reversi.desktop.drawers.*;
 import it.fmt.games.reversi.model.Coordinates;
 import it.fmt.games.reversi.model.GameSnapshot;
-import it.fmt.games.reversi.model.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -74,20 +73,20 @@ public class GamePage extends Canvas implements MouseListener, GameRenderer {
                 break;
             case 2:
                 player1 = PlayerFactory.createHumanPlayer1();
-                player2 = PlayerFactory.createRoboPlayer2(new DesktopDecisionHandler());
+                player2 = PlayerFactory.createCpuPlayer2(new DesktopDecisionHandler());
                 player1string = "Player 1";
                 player2string = "CPU";
 
                 break;
             case 3:
-                player1 = PlayerFactory.createRoboPlayer1(new DesktopDecisionHandler());
+                player1 = PlayerFactory.createCpuPlayer1(new DesktopDecisionHandler());
                 player2 = PlayerFactory.createHumanPlayer2();
                 player1string = "CPU";
                 player2string = "Player 2";
                 break;
             case 4:
-                player1 = PlayerFactory.createRoboPlayer1(new DesktopDecisionHandler());
-                player2 = PlayerFactory.createRoboPlayer2(new DesktopDecisionHandler());
+                player1 = PlayerFactory.createCpuPlayer1(new DesktopDecisionHandler());
+                player2 = PlayerFactory.createCpuPlayer2(new DesktopDecisionHandler());
                 player1string = "CPU 1";
                 player2string = "CPU 2";
                 break;

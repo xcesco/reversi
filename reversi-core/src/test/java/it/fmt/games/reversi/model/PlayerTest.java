@@ -8,6 +8,7 @@ import it.fmt.games.reversi.exceptions.HumanPlayerNeedUserInputException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static it.fmt.games.reversi.model.Coordinates.of;
@@ -43,15 +44,15 @@ public class PlayerTest {
         assertThrows(HumanPlayerNeedUserInputException.class, () -> {
             Player1 player1 = PlayerFactory.createHumanPlayer1();
 
-            player1.computeNextMove(Arrays.asList(of("a2")));
+            player1.computeNextMove(Collections.singletonList(of("a2")));
         });
     }
 
     @Test
     public void randomCpuPlayer() {
-        Player2 player2 = PlayerFactory.createRoboPlayer2(DecisionHandlerType.RANDOM);
+        Player2 player2 = PlayerFactory.createCpuPlayer2(DecisionHandlerType.RANDOM);
 
-        Coordinates move=player2.computeNextMove(Arrays.asList(of("a2")));
+        Coordinates move=player2.computeNextMove(Collections.singletonList(of("a2")));
         assertThat(move, is(of("a2")));
 
         List<Coordinates> availMoves = Arrays.asList(of("a2"), of("a3"));

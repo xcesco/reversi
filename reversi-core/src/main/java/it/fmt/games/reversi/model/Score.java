@@ -1,8 +1,8 @@
 package it.fmt.games.reversi.model;
 
 public class Score {
-    private int player1Scores;
-    private int player2Scores;
+    private final int player1Scores;
+    private final int player2Scores;
 
     public Score(int player1Scores, int player2Scores) {
         this.player1Scores=player1Scores;

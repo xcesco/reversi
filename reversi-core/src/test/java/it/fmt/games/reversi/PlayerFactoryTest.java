@@ -24,37 +24,37 @@ public class PlayerFactoryTest {
 
     @Test
     public void createRoboPlayer2() {
-        Player2 player = PlayerFactory.createRoboPlayer2();
+        Player2 player = PlayerFactory.createCpuPlayer2();
         check(player, Piece.PLAYER_2);
     }
 
     @Test
     public void createRoboPlayer2WithDecisionHandler() {
-        Player2 player = PlayerFactory.createRoboPlayer2(DecisionHandlerType.RANDOM);
+        Player2 player = PlayerFactory.createCpuPlayer2(DecisionHandlerType.RANDOM);
         check(player, Piece.PLAYER_2);
     }
 
     @Test
     public void createRoboPlayer21() {
-        Player2 player = PlayerFactory.createRoboPlayer2(new RandomDecisionHandler());
+        Player2 player = PlayerFactory.createCpuPlayer2(new RandomDecisionHandler());
         check(player, Piece.PLAYER_2);
     }
 
     @Test
     public void createRoboPlayer1() {
-        Player1 player = PlayerFactory.createRoboPlayer1();
+        Player1 player = PlayerFactory.createCpuPlayer1();
         check(player, Piece.PLAYER_1);
     }
 
     @Test
     public void createRoboPlayer1WithDecisionHandler() {
-        Player1 player = PlayerFactory.createRoboPlayer1(DecisionHandlerType.RANDOM);
+        Player1 player = PlayerFactory.createCpuPlayer1(DecisionHandlerType.RANDOM);
         check(player, Piece.PLAYER_1);
     }
 
     @Test
     public void createRoboPlayer1WithDecisionHandler2() {
-        Player1 player = PlayerFactory.createRoboPlayer1(new RandomDecisionHandler());
+        Player1 player = PlayerFactory.createCpuPlayer1(new RandomDecisionHandler());
         check(player, Piece.PLAYER_1);
     }
 

@@ -50,15 +50,15 @@ public abstract class PlayersSelector extends TextDrawer {
                 setPlayersAsString("PLAYER_1", "PLAYER_2");
                 break;
             case 2:
-                setPlayers(app, P1_VS_CPU, PlayerFactory.createHumanPlayer1(), PlayerFactory.createRoboPlayer2(DecisionHandlerType.RANDOM));
+                setPlayers(app, P1_VS_CPU, PlayerFactory.createHumanPlayer1(), PlayerFactory.createCpuPlayer2(DecisionHandlerType.RANDOM));
                 setPlayersAsString("PLAYER_1", "CPU_2");
                 break;
             case 3:
-                setPlayers(app, CPU_VS_P2, PlayerFactory.createRoboPlayer1(DecisionHandlerType.RANDOM), PlayerFactory.createHumanPlayer2());
+                setPlayers(app, CPU_VS_P2, PlayerFactory.createCpuPlayer1(DecisionHandlerType.RANDOM), PlayerFactory.createHumanPlayer2());
                 setPlayersAsString("CPU_1", "PLAYER_2");
                 break;
             case 4:
-                setPlayers(app, CPU_VS_CPU, PlayerFactory.createRoboPlayer1(DecisionHandlerType.RANDOM), PlayerFactory.createRoboPlayer2(DecisionHandlerType.RANDOM));
+                setPlayers(app, CPU_VS_CPU, PlayerFactory.createCpuPlayer1(DecisionHandlerType.RANDOM), PlayerFactory.createCpuPlayer2(DecisionHandlerType.RANDOM));
                 setPlayersAsString("CPU_1", "CPU_2");
                 break;
             default:

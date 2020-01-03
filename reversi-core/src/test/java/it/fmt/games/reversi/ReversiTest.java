@@ -1,10 +1,7 @@
 package it.fmt.games.reversi;
 
 import it.fmt.games.reversi.model.*;
-import it.fmt.games.reversi.support.BoardReader;
-import it.fmt.games.reversi.support.DummyRenderer;
-import it.fmt.games.reversi.support.SomeInvalidUserInputReader;
-import it.fmt.games.reversi.support.TakeFirstUserInputReader;
+import it.fmt.games.reversi.support.*;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -24,7 +21,7 @@ public class ReversiTest {
             assertThat(gameSnapshot.getAvailableMoves().getMovesOtherPlayer(), notNullValue());
             assertThat(gameSnapshot.getBoard(), notNullValue());
             assertThat(gameSnapshot.getStatus(), notNullValue());
-        }, new TakeFirstUserInputReader(), PlayerFactory.createRoboPlayer1(), PlayerFactory.createRoboPlayer2());
+        }, new TakeFirstUserInputReader(), PlayerFactory.createCpuPlayer1(), PlayerFactory.createCpuPlayer2());
         GameSnapshot result = reversi.play();
 
         assertThat(result.getStatus().isGameOver(), is(true));
@@ -32,8 +29,8 @@ public class ReversiTest {
 
     @Test
     public void playCpuVsCpu() throws Exception {
-        Reversi reversi = new Reversi(new DummyRenderer(), new TakeFirstUserInputReader(), PlayerFactory.createRoboPlayer1(),
-                PlayerFactory.createRoboPlayer2());
+        Reversi reversi = new Reversi(new DummyRenderer(), new TakeFirstUserInputReader(), PlayerFactory.createCpuPlayer1(),
+                PlayerFactory.createCpuPlayer2());
         GameSnapshot result = reversi.play();
         checkEndGame(result, "reversi_final_state00", GameStatus.PLAYER2_WIN, 19, 45);
     }
@@ -41,7 +38,7 @@ public class ReversiTest {
     @Test
     public void playP1VsCpu() throws Exception {
         Reversi reversi = new Reversi(new DummyRenderer(), new TakeFirstUserInputReader(), PlayerFactory.createHumanPlayer1(),
-                PlayerFactory.createRoboPlayer2());
+                PlayerFactory.createCpuPlayer2());
         GameSnapshot result = reversi.play();
 
         checkEndGame(result, "reversi_final_state00", GameStatus.PLAYER2_WIN, 19, 45);
@@ -50,7 +47,7 @@ public class ReversiTest {
     @Test
     public void draw() throws Exception {
         GameLogic gameLogic = new GameLogicForTest(BoardReader.read("reversi_draw"), PlayerFactory.createHumanPlayer1(),
-                PlayerFactory.createRoboPlayer2(), new TakeFirstUserInputReader());
+                PlayerFactory.createCpuPlayer2(), new TakeFirstUserInputReader());
         Reversi reversi = new Reversi(new DummyRenderer(), gameLogic);
         GameSnapshot result = reversi.play();
 
@@ -60,7 +57,7 @@ public class ReversiTest {
     @Test
     public void player1Wins() throws Exception {
         GameLogic gameLogic = new GameLogicForTest(BoardReader.read("reversi_player1_wins_start"), PlayerFactory.createHumanPlayer1(),
-                PlayerFactory.createRoboPlayer2(), new TakeFirstUserInputReader());
+                PlayerFactory.createCpuPlayer2(), new TakeFirstUserInputReader());
         Reversi reversi = new Reversi(new DummyRenderer(), gameLogic);
         GameSnapshot result = reversi.play();
 
@@ -70,7 +67,7 @@ public class ReversiTest {
     @Test
     public void sometimesUserInsertBadInput() throws Exception {
         GameLogic gameLogic = new GameLogicForTest(BoardReader.read("reversi_player1_wins_start"), PlayerFactory.createHumanPlayer1(),
-                PlayerFactory.createRoboPlayer2(), new SomeInvalidUserInputReader());
+                PlayerFactory.createCpuPlayer2(), new SomeInvalidUserInputReader());
         Reversi reversi = new Reversi(new DummyRenderer(), gameLogic);
         GameSnapshot result = reversi.play();
 
@@ -80,15 +77,15 @@ public class ReversiTest {
     @Test
     public void player2Wins() throws Exception {
         GameLogic gameLogic = new GameLogicForTest(BoardReader.read("reversi_player2_wins_start"), PlayerFactory.createHumanPlayer1(),
-                PlayerFactory.createRoboPlayer2(), new TakeFirstUserInputReader());
+                PlayerFactory.createCpuPlayer2(), new TakeFirstUserInputReader());
         Reversi reversi = new Reversi(new DummyRenderer(), gameLogic);
         GameSnapshot result = reversi.play();
 
         checkEndGame(result, "reversi_player2_wins_end", GameStatus.PLAYER2_WIN, 0, 3);
     }
 
-    private void checkEndGame(GameSnapshot result, String finalState, GameStatus gameStatus, int scorePlayer1, int scorePlayer2) throws Exception {
-        Board board = BoardReader.read(finalState);
+    private void checkEndGame(GameSnapshot result, String finalStateFilename, GameStatus gameStatus, int scorePlayer1, int scorePlayer2) throws Exception {
+        Board board = BoardReader.read(finalStateFilename);
         assertThat(result.getBoard().equals(board), is(true));
         assertThat(result.getStatus().isGameOver(), is(true));
         assertThat(result.getStatus(), is(gameStatus));

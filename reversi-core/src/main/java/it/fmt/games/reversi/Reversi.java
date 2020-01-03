@@ -11,7 +11,7 @@ public class Reversi {
         this.renderer = renderer;
     }
 
-    public Reversi(GameRenderer renderer, GameLogic gameLogic) {
+    Reversi(GameRenderer renderer, GameLogic gameLogic) {
         this.gameLogic = gameLogic;
         this.renderer = renderer;
     }

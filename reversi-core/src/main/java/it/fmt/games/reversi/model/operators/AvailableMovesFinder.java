@@ -19,7 +19,7 @@ public class AvailableMovesFinder extends AbstractBoardOperator {
     }
 
     private List<Coordinates> findMoves() {
-        return getAvailableCoordinates(this::onlyValidCell);
+        return getAvailableCoordinates(this::isValidCellForInsert);
     }
 
     private List<Coordinates> getAvailableCoordinates(Predicate<Cell> isCellValid) {
@@ -30,7 +30,7 @@ public class AvailableMovesFinder extends AbstractBoardOperator {
                 .collect(Collectors.toList());
     }
 
-    private boolean onlyValidCell(Cell cell) {
+    private boolean isValidCellForInsert(Cell cell) {
         return board.isCellContentEqualsTo(cell.getCoordinates(), Piece.EMPTY) &&
                 Stream.of(Direction.values()).anyMatch(direction -> isAnyPieceToInvert(cell.getCoordinates(), direction));
     }

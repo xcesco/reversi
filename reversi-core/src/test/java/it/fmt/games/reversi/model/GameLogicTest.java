@@ -68,7 +68,7 @@ public class GameLogicTest {
     }
 
     private GameLogicImpl createAndInitializeGameLogic() {
-        GameLogicImpl gameLogic = new GameLogicImpl(PlayerFactory.createRoboPlayer1(), PlayerFactory.createRoboPlayer2(), new TakeFirstUserInputReader());
+        GameLogicImpl gameLogic = new GameLogicImpl(PlayerFactory.createCpuPlayer1(), PlayerFactory.createCpuPlayer2(), new TakeFirstUserInputReader());
         gameLogic.initialize();
         return gameLogic;
     }
