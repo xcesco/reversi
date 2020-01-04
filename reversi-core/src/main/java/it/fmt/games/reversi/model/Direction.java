@@ -24,7 +24,7 @@ public enum Direction {
     private final int offsetCol;
 
     Direction(int offsetRow, int offsetCol) {
-        this.offsetRow=offsetRow;
-        this.offsetCol=offsetCol;
+        this.offsetRow = offsetRow;
+        this.offsetCol = offsetCol;
     }
 }

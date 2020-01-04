@@ -6,8 +6,8 @@ import it.fmt.games.reversi.model.operators.EnemyPiecesHunter;
 import java.util.Arrays;
 import java.util.List;
 
-import static it.fmt.games.reversi.model.operators.AvailableMovesFinder.findMoves;
 import static it.fmt.games.reversi.model.Coordinates.of;
+import static it.fmt.games.reversi.model.operators.AvailableMovesFinder.findMoves;
 import static it.fmt.games.reversi.model.operators.InsertMoveOperator.insertMove;
 import static it.fmt.games.reversi.model.operators.ScoreCalculator.computeScore;
 
@@ -80,7 +80,7 @@ public class GameLogicImpl implements GameLogic {
             Coordinates move;
             do {
                 move = userInputReader.readInputFor(currentPlayer, availableMoves);
-            } while(isInvalidMove(move, availableMoves));
+            } while (isInvalidMove(move, availableMoves));
 
             return move;
         } else {

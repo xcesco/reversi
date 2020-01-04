@@ -3,7 +3,7 @@ package it.fmt.games.reversi.console.drawers;
 import it.fmt.games.reversi.model.Piece;
 import it.fmt.games.reversi.model.PlayerMove;
 
-import static it.fmt.games.reversi.console.drawers.TextDrawer.*;
+import static it.fmt.games.reversi.console.drawers.TextDrawer.println;
 
 public abstract class PlayerMoveDrawer {
 

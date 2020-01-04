@@ -1,12 +1,17 @@
 package it.fmt.games.reversi.console;
 
-import it.fmt.games.reversi.*;
-import it.fmt.games.reversi.model.*;
+import it.fmt.games.reversi.Player1;
+import it.fmt.games.reversi.Player2;
+import it.fmt.games.reversi.Reversi;
+import it.fmt.games.reversi.UserInputReader;
+import it.fmt.games.reversi.model.Coordinates;
+import it.fmt.games.reversi.model.Player;
 
 import java.util.List;
 import java.util.Scanner;
 
-import static it.fmt.games.reversi.console.drawers.TextDrawer.*;
+import static it.fmt.games.reversi.console.drawers.TextDrawer.print;
+import static it.fmt.games.reversi.console.drawers.TextDrawer.println;
 
 public class App implements UserInputReader {
     static final String FMT_REVERSI = "  ****************** FMT REVERSI ******************";

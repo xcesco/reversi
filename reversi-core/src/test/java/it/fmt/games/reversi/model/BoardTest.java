@@ -1,14 +1,21 @@
 package it.fmt.games.reversi.model;
 
+import it.fmt.games.reversi.exceptions.InvalidCoordinatesException;
 import it.fmt.games.reversi.support.BoardReader;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BoardTest {
+
+    @Test
+    public void boardSize() {
+        Board b = new Board();
+        assertThat(b.cells.length, is(Board.BOARD_SIZE * Board.BOARD_SIZE));
+    }
 
     @Test
     public void setCell() {
@@ -19,7 +26,7 @@ public class BoardTest {
     @Test
     public void invalidCoordinates() {
         Board b = new Board();
-        assertThrows(RuntimeException.class, () -> {
+        assertThrows(InvalidCoordinatesException.class, () -> {
             b.setCell(Coordinates.of(99, 99), Piece.PLAYER_1);
         });
     }
@@ -31,11 +38,10 @@ public class BoardTest {
     }
 
 
-
     @Test
     public void readBoardConfiguration() throws Exception {
         Board board = BoardReader.read("boardConfig");
-        assertThrows(RuntimeException.class, () -> {
+        assertThrows(InvalidCoordinatesException.class, () -> {
             board.getCellContent(Coordinates.of(0, 10));
         });
     }
@@ -64,7 +70,7 @@ public class BoardTest {
 
     @Test
     public void testEquals() {
-        String dummyObject = "Not cooordinates";
+        String dummyObject = "No cooordinates";
 
         Board board1 = new Board();
         Board board2 = board1.copy();
@@ -77,6 +83,7 @@ public class BoardTest {
         assertThat(board1.equals(board2), is(true));
         assertThat(board1.equals(board3), is(false));
     }
+
     @Test
     public void testHashcode() {
         Board board1 = new Board();
@@ -98,7 +105,7 @@ public class BoardTest {
     private void boardInvalidCheck(Board board, String coord, Piece p) {
         Coordinates c = Coordinates.of(coord);
 
-        assertThrows(RuntimeException.class, () -> {
+        assertThrows(InvalidCoordinatesException.class, () -> {
             board.setCell(c, p);
         });
 

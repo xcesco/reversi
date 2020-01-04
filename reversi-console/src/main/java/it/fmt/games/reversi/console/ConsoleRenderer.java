@@ -2,7 +2,7 @@ package it.fmt.games.reversi.console;
 
 import it.fmt.games.reversi.GameRenderer;
 import it.fmt.games.reversi.console.drawers.*;
-import it.fmt.games.reversi.model.*;
+import it.fmt.games.reversi.model.GameSnapshot;
 
 public class ConsoleRenderer extends TextDrawer implements GameRenderer {
 

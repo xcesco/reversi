@@ -4,7 +4,8 @@ import java.util.Scanner;
 
 import static it.fmt.games.reversi.console.NumberUtility.isInInterval;
 import static it.fmt.games.reversi.console.NumberUtility.toNumber;
-import static it.fmt.games.reversi.console.drawers.TextDrawer.*;
+import static it.fmt.games.reversi.console.drawers.TextDrawer.print;
+import static it.fmt.games.reversi.console.drawers.TextDrawer.println;
 
 public abstract class PlayAgainOrExitSelector {
     private PlayAgainOrExitSelector() {

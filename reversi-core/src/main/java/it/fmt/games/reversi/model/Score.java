@@ -5,8 +5,8 @@ public class Score {
     private final int player2Scores;
 
     public Score(int player1Scores, int player2Scores) {
-        this.player1Scores=player1Scores;
-        this.player2Scores=player2Scores;
+        this.player1Scores = player1Scores;
+        this.player2Scores = player2Scores;
     }
 
     public int getPlayer1Score() {

@@ -52,11 +52,11 @@ public class PlayerTest {
     public void randomCpuPlayer() {
         Player2 player2 = PlayerFactory.createCpuPlayer2(DecisionHandlerType.RANDOM);
 
-        Coordinates move=player2.computeNextMove(Collections.singletonList(of("a2")));
+        Coordinates move = player2.computeNextMove(Collections.singletonList(of("a2")));
         assertThat(move, is(of("a2")));
 
         List<Coordinates> availMoves = Arrays.asList(of("a2"), of("a3"));
-        Coordinates move2=player2.computeNextMove(availMoves);
+        Coordinates move2 = player2.computeNextMove(availMoves);
         assertThat(availMoves, hasItem(move2));
     }
 }

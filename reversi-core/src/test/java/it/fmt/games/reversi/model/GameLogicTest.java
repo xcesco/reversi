@@ -1,8 +1,8 @@
 package it.fmt.games.reversi.model;
 
+import it.fmt.games.reversi.PlayerFactory;
 import it.fmt.games.reversi.support.BoardReader;
 import it.fmt.games.reversi.support.TakeFirstUserInputReader;
-import it.fmt.games.reversi.PlayerFactory;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -10,7 +10,8 @@ import java.util.List;
 
 import static it.fmt.games.reversi.model.Coordinates.of;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GameLogicTest {

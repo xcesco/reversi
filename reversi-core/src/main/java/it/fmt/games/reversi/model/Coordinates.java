@@ -17,7 +17,7 @@ public class Coordinates implements Comparable<Coordinates> {
             column = value.charAt(0) - 'A';
         } else {
             row = -1;
-            row = -1;
+            column = -1;
         }
     }
 
@@ -38,7 +38,7 @@ public class Coordinates implements Comparable<Coordinates> {
     }
 
     public boolean isValid() {
-        return (row >= 0 && row <= 7 && column >= 0 && column <= 7);
+        return (row >= 0 && row < Board.BOARD_SIZE && column >= 0 && column < Board.BOARD_SIZE);
     }
 
     public Coordinates translate(Direction direction) {

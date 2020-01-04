@@ -1,6 +1,9 @@
 package it.fmt.games.reversi.model.operators;
 
-import it.fmt.games.reversi.model.*;
+import it.fmt.games.reversi.model.Board;
+import it.fmt.games.reversi.model.Coordinates;
+import it.fmt.games.reversi.model.Piece;
+import it.fmt.games.reversi.model.Score;
 import it.fmt.games.reversi.support.BoardReader;
 import org.junit.jupiter.api.Test;
 

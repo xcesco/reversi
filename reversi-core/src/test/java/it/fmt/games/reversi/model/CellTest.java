@@ -10,13 +10,13 @@ public class CellTest {
     public void testEquals() {
         int row = 1;
         int col = 1;
-        Coordinates cor = new Coordinates(row,col);
+        Coordinates cor = new Coordinates(row, col);
         Coordinates cor2 = new Coordinates(++row, ++col);
 
         Cell cell = new Cell(cor, Piece.PLAYER_1);
-        Cell cellEqual = new Cell(cor,Piece.PLAYER_1);
-        Cell cellNotEqual = new Cell(cor,Piece.PLAYER_2);
-        Cell cellNotEqual2 = new Cell(cor2,Piece.PLAYER_1);
+        Cell cellEqual = new Cell(cor, Piece.PLAYER_1);
+        Cell cellNotEqual = new Cell(cor, Piece.PLAYER_2);
+        Cell cellNotEqual2 = new Cell(cor2, Piece.PLAYER_1);
         String dummyObject = "Not cell";
 
         assertThat(cell, equalTo(cell));
@@ -31,11 +31,11 @@ public class CellTest {
     public void testHashCode() {
         int row = 1;
         int col = 1;
-        Coordinates cor = new Coordinates(row,col);
+        Coordinates cor = new Coordinates(row, col);
         Coordinates cor2 = new Coordinates(++row, ++col);
 
-        Cell cell1 = new Cell(cor,Piece.PLAYER_1);
-        Cell cell2 = new Cell(cor2,Piece.PLAYER_2);
+        Cell cell1 = new Cell(cor, Piece.PLAYER_1);
+        Cell cell2 = new Cell(cor2, Piece.PLAYER_2);
         Cell cellEmpty = new Cell(null, null);
 
         assertThat(cell1.hashCode() == cell1.hashCode(), is(true));
@@ -47,8 +47,8 @@ public class CellTest {
     public void player1CellTest() {
         int row = 1;
         int col = 1;
-        Coordinates cor = new Coordinates(row,col);
-        Cell cell = new Cell(cor,Piece.PLAYER_1);
+        Coordinates cor = new Coordinates(row, col);
+        Cell cell = new Cell(cor, Piece.PLAYER_1);
         testCell(cell, Piece.PLAYER_1, cor.getRow(), cor.getColumn());
     }
 
@@ -56,8 +56,8 @@ public class CellTest {
     public void player2CellTest() {
         int row = 1;
         int col = 1;
-        Coordinates cor = new Coordinates(row,col);
-        Cell cell = new Cell(cor,Piece.PLAYER_2);
+        Coordinates cor = new Coordinates(row, col);
+        Cell cell = new Cell(cor, Piece.PLAYER_2);
         testCell(cell, Piece.PLAYER_2, row, col);
     }
 
@@ -65,12 +65,12 @@ public class CellTest {
     public void emptyCellTest() {
         int row = 1;
         int col = 1;
-        Coordinates cor = new Coordinates(row,col);
-        Cell cell = new Cell(cor,Piece.EMPTY);
+        Coordinates cor = new Coordinates(row, col);
+        Cell cell = new Cell(cor, Piece.EMPTY);
         testCell(cell, Piece.EMPTY, row, col);
     }
 
-    private void testCell (Cell c, Piece p, int row, int col) {
+    private void testCell(Cell c, Piece p, int row, int col) {
         assertThat(c.getCoordinates().getRow(), is(row));
         assertThat(c.getCoordinates().getColumn(), is(col));
         assertThat(c.getPiece(), is(p));

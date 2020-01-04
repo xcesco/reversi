@@ -2,7 +2,7 @@ package it.fmt.games.reversi.console.drawers;
 
 import it.fmt.games.reversi.model.Score;
 
-import static it.fmt.games.reversi.console.drawers.TextDrawer.*;
+import static it.fmt.games.reversi.console.drawers.TextDrawer.println;
 
 public abstract class ScoreDrawer {
 

@@ -1,6 +1,9 @@
 package it.fmt.games.reversi;
 
-import it.fmt.games.reversi.model.*;
+import it.fmt.games.reversi.model.Board;
+import it.fmt.games.reversi.model.GameLogic;
+import it.fmt.games.reversi.model.GameSnapshot;
+import it.fmt.games.reversi.model.GameStatus;
 import it.fmt.games.reversi.support.*;
 import org.junit.jupiter.api.Test;
 

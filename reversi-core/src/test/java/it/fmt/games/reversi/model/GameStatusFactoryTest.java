@@ -31,6 +31,7 @@ public class GameStatusFactoryTest {
     public void createDraw() {
         checkStatus(Collections.emptyList(), Collections.emptyList(), 12, 12, true, GameStatus.DRAW);
     }
+
     @Test
     public void emptyAvailableMoves() {
         GameStatus gameStatus = GameStatusFactory.create(null, new Score(12, 4));

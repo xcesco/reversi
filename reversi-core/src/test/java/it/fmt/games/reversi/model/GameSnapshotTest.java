@@ -23,10 +23,10 @@ public class GameSnapshotTest {
 
     @Test
     public void checkGameSnapshot() {
-        int player1Score=20;
-        int player2Score=10;
-        String availMoveP1="a1";
-        String availMoveP2="a2";
+        int player1Score = 20;
+        int player2Score = 10;
+        String availMoveP1 = "a1";
+        String availMoveP2 = "a2";
 
         GameSnapshot gameSnapshot = createGameSnapshot(player1Score, player2Score, availMoveP1, availMoveP2);
 
@@ -52,8 +52,6 @@ public class GameSnapshotTest {
         GameStatus status = GameStatus.DRAW;
         return new GameSnapshot(score, null, currentPlayer.getPiece(), moves, board, status);
     }
-
-
 
 
 }

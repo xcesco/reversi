@@ -4,6 +4,7 @@ public abstract class PlayerFactory {
     private PlayerFactory() {
 
     }
+
     public static Player2 createHumanPlayer2() {
         return new Player2();
     }

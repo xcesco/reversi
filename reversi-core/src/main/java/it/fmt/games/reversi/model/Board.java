@@ -3,18 +3,18 @@ package it.fmt.games.reversi.model;
 import it.fmt.games.reversi.exceptions.InvalidCoordinatesException;
 
 import java.util.Arrays;
+import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
+import static it.fmt.games.reversi.model.Coordinates.of;
 
 public class Board {
     public static final int BOARD_SIZE = 8;
     final Cell[] cells;
 
     public Board() {
-        this.cells = new Cell[BOARD_SIZE * BOARD_SIZE];
-        IntStream.range(0, BOARD_SIZE)
-                .forEach(row -> IntStream.range(0, BOARD_SIZE)
-                        .forEach(col -> setCell(Coordinates.of(row, col), Piece.EMPTY)));
+        this.cells = init(coordinates -> new Cell(coordinates, Piece.EMPTY));
     }
 
     public Board(Cell[] cells) {
@@ -22,12 +22,7 @@ public class Board {
     }
 
     public Board copy() {
-        Board board = new Board();
-        IntStream.range(0, BOARD_SIZE)
-                .forEach(row -> IntStream.range(0, BOARD_SIZE)
-                        .forEach(col -> board.setCell(Coordinates.of(row, col), getCellContent(Coordinates.of(row, col)))));
-
-        return board;
+        return new Board(init(coordinates -> new Cell(coordinates, getCellContent(coordinates))));
     }
 
     public Stream<Cell> getCellStream() {
@@ -36,12 +31,24 @@ public class Board {
 
     public void setCell(Coordinates coordinates, Piece content) {
         if (!coordinates.isValid()) throw new InvalidCoordinatesException();
-        cells[coordinates.getRow() * BOARD_SIZE + coordinates.getColumn()] = new Cell(coordinates, content);
+        cells[flatIndex(coordinates)] = new Cell(coordinates, content);
+    }
+
+    private Cell[] init(Function<Coordinates, Cell> filler) {
+        return IntStream.range(0, BOARD_SIZE * BOARD_SIZE).mapToObj(this::asCoords).map(filler).toArray(Cell[]::new);
+    }
+
+    private int flatIndex(Coordinates coordinates) {
+        return coordinates.getRow() * BOARD_SIZE + coordinates.getColumn();
+    }
+
+    private Coordinates asCoords(int flatIndex) {
+        return of(flatIndex / BOARD_SIZE, flatIndex % BOARD_SIZE);
     }
 
     public Piece getCellContent(Coordinates coordinates) {
         if (!coordinates.isValid()) throw new InvalidCoordinatesException();
-        return cells[coordinates.getRow() * BOARD_SIZE + coordinates.getColumn()].getPiece();
+        return cells[flatIndex(coordinates)].getPiece();
     }
 
     public boolean isCellContentEqualsTo(Coordinates coordinates, Piece currentPlayer) {
