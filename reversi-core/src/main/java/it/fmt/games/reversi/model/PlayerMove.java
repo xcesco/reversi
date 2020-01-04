@@ -10,7 +10,7 @@ public class PlayerMove {
     private final List<Coordinates> capturedEnemyPiecesCoords;
 
     public PlayerMove(Piece piece, Coordinates moveCoords, List<Coordinates> capturedEnemyPiecesCoords) {
-        if (piece == null) throw new InvalidInsertOperationException();
+        if (piece==null || Piece.EMPTY==piece) throw new InvalidInsertOperationException();
         this.piece = piece;
         this.moveCoords = moveCoords;
         this.capturedEnemyPiecesCoords = capturedEnemyPiecesCoords;

@@ -11,7 +11,7 @@ public class Coordinates implements Comparable<Coordinates> {
 
     public Coordinates(String value) {
         value = value.toUpperCase();
-        if (value.length() == 2 && charInRange(value.charAt(0), 'A', 'H')
+        if ((value.length() == 2) && charInRange(value.charAt(0), 'A', 'H')
                 && charInRange(value.charAt(1), '1', '8')) {
             row = value.charAt(1) - '0' - 1;
             column = value.charAt(0) - 'A';
