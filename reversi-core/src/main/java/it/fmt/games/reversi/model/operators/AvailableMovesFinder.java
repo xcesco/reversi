@@ -3,7 +3,6 @@ package it.fmt.games.reversi.model.operators;
 import it.fmt.games.reversi.model.*;
 
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -19,13 +18,9 @@ public class AvailableMovesFinder extends AbstractBoardOperator {
     }
 
     private List<Coordinates> findMoves() {
-        return getAvailableCoordinates(this::isValidCellForInsert);
-    }
-
-    private List<Coordinates> getAvailableCoordinates(Predicate<Cell> isCellValid) {
         return board.getCellStream()
                 .parallel()
-                .filter(isCellValid)
+                .filter(this::isValidCellForInsert)
                 .map(Cell::getCoordinates)
                 .collect(Collectors.toList());
     }
