@@ -11,14 +11,18 @@ public class Coordinates implements Comparable<Coordinates> {
 
     public Coordinates(String value) {
         value = value.toUpperCase();
-        if ((value.length() == 2) && charInRange(value.charAt(0), 'A', 'H')
-                && charInRange(value.charAt(1), '1', '8')) {
+        if (isValidString(value)) {
             row = value.charAt(1) - '0' - 1;
             column = value.charAt(0) - 'A';
         } else {
             row = -1;
             column = -1;
         }
+    }
+
+    private boolean isValidString(String value) {
+        return (value.length() == 2) && charInRange(value.charAt(0), 'A', 'H')
+                && charInRange(value.charAt(1), '1', '8');
     }
 
     public static Coordinates of(int row, int column) {
