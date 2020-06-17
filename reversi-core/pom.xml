@@ -11,7 +11,7 @@
 
     <artifactId>reversi-core</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <name>reversi-core</name>
     <description>Reversi Core - core project</description>
