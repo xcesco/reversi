@@ -89,6 +89,6 @@ public class GameLogicImpl implements GameLogic {
     }
 
     private boolean isInvalidMove(Coordinates move, List<Coordinates> availableMoves) {
-        return availableMoves.indexOf(move) == -1;
+        return !availableMoves.contains(move);
     }
 }

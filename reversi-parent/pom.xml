@@ -37,6 +37,14 @@
         <url>https://github.com/xcesco/reversi</url>
     </scm>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub tvcsantos Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/xcesco/reversi</url>
+        </repository>
+    </distributionManagement>
+
     <developers>
 
         <developer>

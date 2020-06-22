@@ -1,5 +1,7 @@
 package it.fmt.games.reversi.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import it.fmt.games.reversi.exceptions.InvalidCoordinatesException;
 
 import java.util.Arrays;
@@ -17,7 +19,8 @@ public class Board {
         this.cells = init(coordinates -> new Cell(coordinates, Piece.EMPTY));
     }
 
-    public Board(Cell[] cells) {
+    @JsonCreator
+    public Board(@JsonProperty("cells") Cell[] cells) {
         this.cells = cells;
     }
 

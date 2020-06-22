@@ -12,7 +12,7 @@
 
 
     <artifactId>reversi-console</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <name>reversi-console</name>
 
     <url>https://github.com/xcesco/reversi</url>
