@@ -1,12 +1,17 @@
 package it.fmt.games.reversi.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class AvailableMoves {
     private final List<Coordinates> movesCurrentPlayer;
     private final List<Coordinates> movesOtherPlayer;
 
-    public AvailableMoves(List<Coordinates> availableMovesCurrentPlayer, List<Coordinates> availableMovesOtherPlayer) {
+    @JsonCreator
+    public AvailableMoves(@JsonProperty("availableMovesCurrentPlayer") List<Coordinates> availableMovesCurrentPlayer,
+                          @JsonProperty("availableMovesOtherPlayer") List<Coordinates> availableMovesOtherPlayer) {
         this.movesCurrentPlayer = availableMovesCurrentPlayer;
         this.movesOtherPlayer = availableMovesOtherPlayer;
     }

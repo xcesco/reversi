@@ -1,5 +1,8 @@
 package it.fmt.games.reversi.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
 public class Cell {
@@ -15,7 +18,9 @@ public class Cell {
     private final Coordinates coordinates;
     private final Piece piece;
 
-    public Cell(Coordinates c, Piece p) {
+    @JsonCreator
+    public Cell(@JsonProperty("coordinates") Coordinates c,
+                @JsonProperty("piece")Piece p) {
         this.coordinates = c;
         this.piece = p;
     }

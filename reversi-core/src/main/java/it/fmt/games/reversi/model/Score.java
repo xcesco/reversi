@@ -1,10 +1,15 @@
 package it.fmt.games.reversi.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Score {
     private final int player1Scores;
     private final int player2Scores;
 
-    public Score(int player1Scores, int player2Scores) {
+    @JsonCreator
+    public Score(@JsonProperty("player1Scores") int player1Scores,
+                 @JsonProperty("player2Scores") int player2Scores) {
         this.player1Scores = player1Scores;
         this.player2Scores = player2Scores;
     }

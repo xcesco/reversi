@@ -1,5 +1,8 @@
 package it.fmt.games.reversi.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class GameSnapshot {
     private final Score score;
     private final Piece activePiece;
@@ -8,7 +11,13 @@ public class GameSnapshot {
     private final GameStatus status;
     private final PlayerMove lastMove;
 
-    public GameSnapshot(Score score, PlayerMove lastMove, Piece activePiece, AvailableMoves availableMoves, Board board, GameStatus status) {
+    @JsonCreator
+    public GameSnapshot(@JsonProperty("score") Score score,
+                        @JsonProperty("lastMove") PlayerMove lastMove,
+                        @JsonProperty("activePiece") Piece activePiece,
+                        @JsonProperty("availableMoves") AvailableMoves availableMoves,
+                        @JsonProperty("board") Board board,
+                        @JsonProperty("status") GameStatus status) {
         this.score = score;
         this.activePiece = activePiece;
         this.availableMoves = availableMoves;
