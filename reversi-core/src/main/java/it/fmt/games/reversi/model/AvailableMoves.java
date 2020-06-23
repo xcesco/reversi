@@ -10,8 +10,8 @@ public class AvailableMoves {
     private final List<Coordinates> movesOtherPlayer;
 
     @JsonCreator
-    public AvailableMoves(@JsonProperty("availableMovesCurrentPlayer") List<Coordinates> availableMovesCurrentPlayer,
-                          @JsonProperty("availableMovesOtherPlayer") List<Coordinates> availableMovesOtherPlayer) {
+    public AvailableMoves(@JsonProperty("movesCurrentPlayer") List<Coordinates> availableMovesCurrentPlayer,
+                          @JsonProperty("movesOtherPlayer") List<Coordinates> availableMovesOtherPlayer) {
         this.movesCurrentPlayer = availableMovesCurrentPlayer;
         this.movesOtherPlayer = availableMovesOtherPlayer;
     }
