@@ -1,5 +1,7 @@
 package it.fmt.games.reversi.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 public class Coordinates implements Comparable<Coordinates> {
     private int row;
     private int column;
@@ -9,6 +11,7 @@ public class Coordinates implements Comparable<Coordinates> {
         this.column = column;
     }
 
+    @JsonCreator
     public Coordinates(String value) {
         value = value.toUpperCase();
         if (isValidString(value)) {
